@@ -9,7 +9,7 @@ tags:
   - AI生成
   - 街拍摄影
   - 专业摄影
-cover: /images/jianying/gongfu1.webp
+cover: /images/poe-gen/professional_stree_image_9.jpg
 ---
 
 # 专业街拍摄影作品：FLUX AI模型生成艺术

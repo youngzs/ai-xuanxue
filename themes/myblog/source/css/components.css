@@ -210,6 +210,394 @@
     border-color: #3498db;
 }
 
+/* ===== 深色模式支持 ===== */
+@media (prefers-color-scheme: dark) {
+    .section-title {
+        color: #e2e8f0;
+    }
+    
+    .section-subtitle {
+        color: #a0aec0;
+    }
+    
+    .post-card {
+        background: #2d3748;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    
+    .post-card:hover {
+        box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    
+    .post-title a {
+        color: #e2e8f0;
+    }
+    
+    .post-title a:hover {
+        color: #63b3ed;
+    }
+    
+    .post-excerpt {
+        color: #a0aec0;
+    }
+    
+    .post-meta {
+        color: #9ca3af;
+    }
+    
+    .category-link {
+        color: #63b3ed;
+    }
+    
+    .category-link:hover {
+        color: #90cdf4;
+    }
+    
+    .tag {
+        background: #374151;
+        color: #a0aec0;
+    }
+    
+    .tag:hover {
+        background: #63b3ed;
+        color: #1a202c;
+    }
+    
+    .read-more {
+        color: #63b3ed;
+    }
+    
+    .read-more:hover {
+        color: #90cdf4;
+    }
+    
+    .no-posts {
+        color: #a0aec0;
+    }
+    
+    .no-posts-icon {
+        color: #718096;
+    }
+    
+    .no-posts h3 {
+        color: #e2e8f0;
+    }
+    
+    .pagination .page-number,
+    .pagination .prev,
+    .pagination .next {
+        background: #2d3748;
+        color: #a0aec0;
+        border-color: #4a5568;
+    }
+    
+    .pagination .page-number:hover,
+    .pagination .prev:hover,
+    .pagination .next:hover,
+    .pagination .current {
+        background: #63b3ed;
+        color: #1a202c;
+        border-color: #63b3ed;
+    }
+    
+    /* 文章页面深色模式 */
+    .post {
+        background: #1a202c;
+        color: #e2e8f0;
+    }
+    
+    .post-header {
+        background: #2d3748;
+    }
+    
+    .post .post-title {
+        color: #e2e8f0;
+    }
+    
+    .post .post-content {
+        background: #1a202c;
+        color: #e2e8f0;
+    }
+    
+    .post .post-content h1,
+    .post .post-content h2,
+    .post .post-content h3,
+    .post .post-content h4,
+    .post .post-content h5,
+    .post .post-content h6 {
+        color: #63b3ed;
+    }
+    
+    .post .post-content blockquote {
+        background: #2d3748;
+        border-left-color: #63b3ed;
+        color: #e2e8f0;
+    }
+    
+    .post .post-content code {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .post .post-content pre {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .post .post-content table th,
+    .post .post-content table td {
+        border-color: #4a5568;
+    }
+    
+    .post .post-content table th {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .post .post-content table tr:hover {
+        background: #374151;
+    }
+    
+    .post-footer {
+        background: #2d3748;
+    }
+    
+    .post-copyright {
+        background: #374151;
+    }
+    
+    .post-copyright a {
+        color: #63b3ed;
+    }
+    
+    .share-btn {
+        background: #374151;
+        color: #e2e8f0;
+        border-color: #4a5568;
+    }
+    
+    .share-btn:hover {
+        background: #4a5568;
+        color: #90cdf4;
+    }
+    
+    .post-nav-link {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .post-nav-link:hover {
+        background: #374151;
+        color: #63b3ed;
+    }
+    
+    /* 侧边栏深色模式 */
+    .widget {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .widget-title {
+        color: #e2e8f0;
+    }
+    
+    .profile-name {
+        color: #e2e8f0;
+    }
+    
+    .profile-desc {
+        color: #a0aec0;
+    }
+    
+    .recent-post-link {
+        color: #a0aec0;
+    }
+    
+    .recent-post-link:hover {
+        color: #63b3ed;
+    }
+    
+    .recent-post-date {
+        color: #718096;
+    }
+    
+    .category-link,
+    .tag-link {
+        color: #a0aec0;
+    }
+    
+    .category-link:hover,
+    .tag-link:hover {
+        color: #63b3ed;
+    }
+    
+    /* 页脚深色模式 */
+    #footer {
+        background: #2d3748;
+        color: #a0aec0;
+    }
+    
+    .social-link {
+        color: #a0aec0;
+        background: #374151;
+    }
+    
+    .social-link:hover {
+        color: #63b3ed;
+        background: #4a5568;
+    }
+    
+    .copyright a,
+    .powered-by a,
+    .beian a {
+        color: #63b3ed;
+    }
+    
+    /* 分类和标签页面深色模式 */
+    .categories-container,
+    .tags-list-section {
+        background: #1a202c;
+    }
+    
+    .category-card,
+    .tag-card {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .category-card:hover,
+    .tag-card:hover {
+        background: #374151;
+    }
+    
+    .category-name a,
+    .tag-link {
+        color: #e2e8f0;
+    }
+    
+    .category-name a:hover,
+    .tag-link:hover {
+        color: #63b3ed;
+    }
+    
+    .category-count,
+    .tag-posts-count {
+        color: #a0aec0;
+    }
+    
+    .preview-title {
+        color: #a0aec0;
+    }
+    
+    .preview-title:hover {
+        color: #63b3ed;
+    }
+    
+    /* 归档页面深色模式 */
+    .archive-timeline {
+        background: #1a202c;
+    }
+    
+    .year-header,
+    .month-header {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .archive-post {
+        border-color: #4a5568;
+    }
+    
+    .archive-post:hover {
+        background: #2d3748;
+    }
+    
+    .post-date {
+        background: #374151;
+        color: #e2e8f0;
+    }
+    
+    .archive-post .post-title a {
+        color: #e2e8f0;
+    }
+    
+    .archive-post .post-title a:hover {
+        color: #63b3ed;
+    }
+    
+    .post-category a {
+        color: #63b3ed;
+    }
+    
+    /* 搜索页面深色模式 */
+    .search-input-wrapper {
+        background: #2d3748;
+    }
+    
+    #search-input-main {
+        background: #374151;
+        color: #e2e8f0;
+        border-color: #4a5568;
+    }
+    
+    #search-input-main:focus {
+        border-color: #63b3ed;
+    }
+    
+    #search-btn-main {
+        background: #63b3ed;
+        color: #1a202c;
+    }
+    
+    #search-btn-main:hover {
+        background: #90cdf4;
+    }
+    
+    .search-result-item {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+    
+    .search-result-item:hover {
+        background: #374151;
+    }
+    
+    .result-title a {
+        color: #e2e8f0;
+    }
+    
+    .result-title a:hover {
+        color: #63b3ed;
+    }
+    
+    .result-date,
+    .result-excerpt {
+        color: #a0aec0;
+    }
+    
+    .result-excerpt mark {
+        background: #63b3ed;
+        color: #1a202c;
+    }
+    
+    .result-tag {
+        background: #374151;
+        color: #a0aec0;
+    }
+    
+    /* 回到顶部按钮深色模式 */
+    #back-to-top {
+        background: #2d3748;
+        color: #e2e8f0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    #back-to-top:hover {
+        background: #374151;
+        color: #63b3ed;
+    }
+}
+
 /* ===== 特色内容区域 ===== */
 .featured-section {
     background: #fff;
