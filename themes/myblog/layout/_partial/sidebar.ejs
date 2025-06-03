@@ -72,8 +72,7 @@
                             <% site.categories.each(function(category) { %>
                                 <li class="category-item">
                                     <a href="<%- url_for(category.path) %>" class="category-link">
-                                        <%= category.name %>
-                                        <span class="category-count">(<%= category.posts.length %>)</span>
+                                        <%= category.name %><span class="category-count">(<%= category.posts.length %>)</span>
                                     </a>
                                 </li>
                             <% }); %>

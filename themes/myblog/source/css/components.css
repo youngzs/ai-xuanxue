@@ -1246,30 +1246,40 @@
 .category-list,
 .archive-list {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .category-item,
 .archive-item {
-    margin-bottom: 0.5rem;
+    margin: 0;
+    padding: 0;
 }
 
 .category-link,
 .archive-link {
     color: #2c3e50;
-    padding: 0.5rem 0;
+    padding: 0.05rem 0;
     display: block;
+    width: 100%;
     transition: color 0.3s ease;
+    line-height: 1.1;
+    font-size: 0.9rem;
+    text-decoration: none;
+    background: transparent;
 }
 
 .category-link:hover,
 .archive-link:hover {
     color: #3498db;
+    background: transparent;
 }
 
 .category-count,
 .archive-count {
     color: #95a5a6;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
 }
 
 .tag-cloud {
@@ -2359,4 +2369,92 @@
     .recent-post-date {
         margin-left: 0;
     }
+}
+
+/* 专门为分类widget减少内边距 */
+.widget-categories .widget-content {
+    padding: 0.5rem 1.5rem;
+}
+
+.widget-archive .widget-content {
+    padding: 0.5rem 1.5rem;
+}
+
+/* 侧边栏分类专用样式 - 使用更高的优先级 */
+.widget-categories .category-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.widget-categories .category-item {
+    margin: 0;
+    padding: 0;
+}
+
+.widget-categories .category-link {
+    color: #2c3e50 !important; /* 强制覆盖其他样式 */
+    padding: 0.05rem 0;
+    display: block;
+    width: 100%;
+    transition: color 0.3s ease;
+    line-height: 1.1;
+    font-size: 0.9rem;
+    text-decoration: none;
+    background: transparent !important;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.widget-categories .category-link:hover {
+    color: #3498db !important;
+    background: transparent !important;
+}
+
+.widget-categories .category-link:focus {
+    outline: none;
+    box-shadow: none;
+    background: transparent !important;
+}
+
+.widget-categories .category-count {
+    color: #95a5a6;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+}
+
+/* 归档样式 */
+.widget-archive .archive-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.widget-archive .archive-item {
+    margin: 0;
+    padding: 0;
+}
+
+.widget-archive .archive-link {
+    color: #2c3e50 !important;
+    padding: 0.05rem 0;
+    display: block;
+    width: 100%;
+    transition: color 0.3s ease;
+    line-height: 1.1;
+    font-size: 0.9rem;
+    text-decoration: none;
+    background: transparent !important;
+}
+
+.widget-archive .archive-link:hover {
+    color: #3498db !important;
+    background: transparent !important;
+}
+
+.widget-archive .archive-count {
+    color: #95a5a6;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
 } 

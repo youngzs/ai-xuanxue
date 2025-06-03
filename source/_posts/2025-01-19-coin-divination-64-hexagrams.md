@@ -34,12 +34,12 @@ cover: /images/xuanxue/bagua-cover.webp
 
 三枚硬币的组合，根据菊花出现的次数，对应不同的爻：
 
-| 菊花数量 | 总和 | 爻象 | 名称 | 含义 |
+| 菊花数量 | 变卦 | 爻象 | 名称 | 含义 |
 |---------|------|------|------|------|
-| 0个 | 6 | **⚋** | 老阴 | 阴极转阳，会变卦 |
-| 1个 | 5 | **⚊** | 少阳 | 稳定的阳爻 |
-| 2个 | 4 | **⚋** | 少阴 | 稳定的阴爻 |
-| 3个 | 3 | **⚊** | 老阳 | 阳极转阴，会变卦 |
+| 0个 | X | **⚋** | 老阴 | 阴极转阳，会变卦 |
+| 1个 | - | **⚊** | 少阳 | 稳定的阳爻 |
+| 2个 | - | **⚋** | 少阴 | 稳定的阴爻 |
+| 3个 | O | **⚊** | 老阳 | 阳极转阴，会变卦 |
 
 ### 第二步：摇卦六次
 
@@ -65,19 +65,16 @@ cover: /images/xuanxue/bagua-cover.webp
     <div class="tool-header">
         <h3>🪙 三币占卜工具</h3>
         <p>诚心求问，投掷三币，获得六十四卦指引</p>
-    </div>
-    
+    </div>  
     <div class="question-input">
         <label for="question">🤔 请输入您要占问的事情：</label>
         <textarea id="question" placeholder="例如：我这次求职能否成功？"></textarea>
-    </div>
-    
+    </div>    
     <div class="divination-process">
         <button id="start-divination" class="btn-primary">开始占卜</button>
         <button id="throw-coins" class="btn-secondary" style="display:none;">投掷硬币</button>
         <button id="reset-divination" class="btn-reset" style="display:none;">重新占卜</button>
-    </div>
-    
+    </div>    
     <div id="throwing-area" class="throwing-area" style="display:none;">
         <div class="throw-info">
             <span id="throw-count">第 1 次投掷</span>
@@ -92,8 +89,7 @@ cover: /images/xuanxue/bagua-cover.webp
             <span id="throw-details"></span>
             <span id="yao-result"></span>
         </div>
-    </div>
-    
+    </div>    
     <div id="hexagram-display" class="hexagram-display" style="display:none;">
         <h4>📜 卦象结果</h4>
         <div class="hexagram-visual">
@@ -105,12 +101,10 @@ cover: /images/xuanxue/bagua-cover.webp
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>    
     <div id="interpretation" class="interpretation" style="display:none;">
         <h4>🔍 卦象解读</h4>
-        <div class="interpretation-content" id="interpretation-content"></div>
-        
+        <div class="interpretation-content" id="interpretation-content"></div>        
         <div id="change-hexagram" class="change-hexagram" style="display:none;">
             <h5>🔄 变卦</h5>
             <div class="change-info" id="change-info"></div>

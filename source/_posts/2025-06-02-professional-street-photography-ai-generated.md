@@ -15,7 +15,22 @@ cover: /images/poe-gen/professional_stree_image_9.jpg
 # 专业街拍摄影作品：FLUX AI模型生成艺术
 
 这是一组使用最新FLUX-pro-1.1 AI模型生成的专业街拍摄影作品，展现了人工智能在艺术创作领域的突破性进展。
-[查看FLUX AI工具](/tools)
+
+### 🔗 访问工具
+
+<div class="tool-link-container">
+    <a href="/tools/photography-prompt-generator.html" class="tool-link" target="_blank">
+        <div class="tool-card">
+            <div class="tool-icon">📸</div>
+            <div class="tool-info">
+                <h3>专业人像摄影提示生成器</h3>
+                <p>生成精准的人像摄影提示语，支持多种风格和参数设置</p>
+            </div>
+            <div class="tool-arrow">→</div>
+        </div>
+    </a>
+</div>
+
 ## 创作背景
 
 在图书馆这个知识的殿堂中，模特以戏剧性的动作姿态，在低调光线的映衬下，呈现出纪实风格的专业摄影效果。这组作品完美融合了街拍的自然感与商业摄影的专业度。
@@ -85,3 +100,68 @@ FLUX-pro-1.1模型的出现，标志着AI在视觉艺术生成方面又向前迈
 - 更高质量的图像生成
 [查看FLUX AI工具](/tools/)
 **关键词**: 专业摄影、街拍艺术、AI生成、FLUX模型、创意摄影、图书馆、纪实风格
+
+<style>
+/* ========================================
+   工具页面样式
+   ======================================== */
+
+/* 工具链接卡片 */
+.tool-link-container {
+    margin: 2rem 0;
+}
+
+.tool-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.tool-card {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.tool-icon {
+    font-size: 3rem;
+    margin-right: 2rem;
+}
+
+.tool-info {
+    flex: 1;
+}
+
+.tool-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.tool-info p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+.tool-arrow {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.tool-card:hover .tool-arrow {
+    transform: translateX(5px);
+}
+</style>

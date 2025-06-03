@@ -1,0 +1,170 @@
+/* 侧边栏所有模块统一样式 */
+/* 使用最高优先级来覆盖所有可能的冲突样式 */
+
+/* 分类模块样式 */
+.widget.widget-categories .widget-content {
+    padding: 0.8rem 1.5rem !important;
+}
+
+.widget.widget-categories .category-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.widget.widget-categories .category-item {
+    margin: 0 0 0.3rem 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+}
+
+.widget.widget-categories .category-link {
+    color: #2c3e50 !important;
+    padding: 0.2rem 0 !important;
+    display: block !important;
+    width: 100% !important;
+    transition: color 0.3s ease !important;
+    line-height: 1.3 !important;
+    font-size: 0.9rem !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+}
+
+.widget.widget-categories .category-link:hover {
+    color: #3498db !important;
+    background: transparent !important;
+    text-decoration: none !important;
+}
+
+.widget.widget-categories .category-link:focus,
+.widget.widget-categories .category-link:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #3498db !important;
+}
+
+.widget.widget-categories .category-count {
+    color: #95a5a6 !important;
+    font-size: 0.8rem !important;
+    margin-left: 0.3rem !important;
+    display: inline !important;
+}
+
+/* 最新文章模块样式 */
+.widget.widget-recent .widget-content {
+    padding: 0.8rem 1.5rem !important;
+}
+
+.widget.widget-recent .recent-posts-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.widget.widget-recent .recent-post-item {
+    margin: 0 0 0.3rem 0 !important;
+    padding: 0.2rem 0 !important;
+    border-bottom: 1px solid #ecf0f1 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+}
+
+.widget.widget-recent .recent-post-item:last-child {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+}
+
+.widget.widget-recent .recent-post-link {
+    color: #2c3e50 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.3 !important;
+    flex: 1 !important;
+    transition: color 0.3s ease !important;
+    text-decoration: none !important;
+}
+
+.widget.widget-recent .recent-post-link:hover {
+    color: #3498db !important;
+    text-decoration: none !important;
+}
+
+.widget.widget-recent .recent-post-date {
+    color: #95a5a6 !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap !important;
+}
+
+/* 标签模块样式 */
+.widget.widget-tags .widget-content {
+    padding: 0.8rem 1.5rem !important;
+}
+
+.widget.widget-tags .tag-cloud {
+    line-height: 1.8 !important;
+}
+
+.widget.widget-tags .tag-link {
+    display: inline-block !important;
+    background: #ecf0f1 !important;
+    color: #7f8c8d !important;
+    padding: 0.25rem 0.6rem !important;
+    margin: 0.15rem !important;
+    border-radius: 12px !important;
+    font-size: 0.8rem !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+}
+
+.widget.widget-tags .tag-link:hover {
+    background: #3498db !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+/* 归档模块样式 */
+.widget.widget-archive .widget-content {
+    padding: 0.8rem 1.5rem !important;
+}
+
+.widget.widget-archive .archive-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.widget.widget-archive .archive-item {
+    margin: 0 0 0.3rem 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+}
+
+.widget.widget-archive .archive-link {
+    color: #2c3e50 !important;
+    padding: 0.2rem 0 !important;
+    display: block !important;
+    width: 100% !important;
+    transition: color 0.3s ease !important;
+    line-height: 1.3 !important;
+    font-size: 0.9rem !important;
+    text-decoration: none !important;
+    background: transparent !important;
+}
+
+.widget.widget-archive .archive-link:hover {
+    color: #3498db !important;
+    background: transparent !important;
+    text-decoration: none !important;
+}
+
+.widget.widget-archive .archive-count {
+    color: #95a5a6 !important;
+    font-size: 0.8rem !important;
+    margin-left: 0.3rem !important;
+} 
