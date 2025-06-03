@@ -1,0 +1,76 @@
+<!-- Utterances评论系统 -->
+<% if (theme.comments && theme.comments.enable) { %>
+<div class="comments-section">
+    <div class="comments-title">
+        <h3>💬 评论讨论</h3>
+        <p class="comments-description">
+            使用GitHub账号登录即可参与讨论。评论内容将保存在GitHub Issues中。
+        </p>
+    </div>
+    
+    <div class="comments-widget">
+        <script src="https://utteranc.es/client.js"
+                repo="youngzs/ai-xuanxue"
+                issue-term="pathname"
+                label="💬 评论"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+</div>
+
+<!-- 评论样式 -->
+<style>
+.comments-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #f1f3f4;
+}
+
+.comments-title h3 {
+    color: #1f2937;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.comments-description {
+    color: #6b7280;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.comments-widget {
+    min-height: 200px;
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+    .comments-section {
+        border-top-color: #374151;
+    }
+    
+    .comments-title h3 {
+        color: #f9fafb;
+    }
+    
+    .comments-description {
+        color: #9ca3af;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .comments-section {
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+    
+    .comments-title h3 {
+        font-size: 1.3rem;
+    }
+}
+</style>
+<% } %> 

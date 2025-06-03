@@ -74,4 +74,14 @@ images:
 brand:
   name: "AI与玄学研究院"
   slogan: "探索人工智能与古老智慧的奥秘"
-  description: "融合前沿科技与传统哲学，用现代AI解读古老智慧" 
+  description: "融合前沿科技与传统哲学，用现代AI解读古老智慧"
+
+# 评论系统配置
+comments:
+  enable: true
+  type: "utterances"  # 使用 utterances 评论系统
+  repo: "youngzs/ai-xuanxue"  # GitHub仓库
+  issue_term: "pathname"      # Issue标题映射方式
+  label: "💬 评论"            # Issue标签
+  theme: "github-light"       # 主题样式
+  # 可选的其他主题: github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark 
