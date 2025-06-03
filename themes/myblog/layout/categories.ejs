@@ -1,0 +1,100 @@
+<div class="page-header">
+    <div class="page-title-wrapper">
+        <h1 class="page-title">
+            <i class="fas fa-folder-open"></i>
+            分类目录
+        </h1>
+        <p class="page-subtitle">共 <%= site.categories.length %> 个分类，<%= site.posts.length %> 篇文章</p>
+    </div>
+</div>
+
+<div class="categories-container">
+    <% if (site.categories.length > 0) { %>
+        <div class="categories-grid">
+            <% site.categories.sort('name').each(function(category) { %>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3 class="category-name">
+                            <a href="<%- url_for(category.path) %>">
+                                <%= category.name %>
+                            </a>
+                        </h3>
+                        <p class="category-count">
+                            <i class="fas fa-file-alt"></i>
+                            <%= category.posts.length %> 篇文章
+                        </p>
+                        <div class="category-posts-preview">
+                            <% category.posts.sort('date', -1).limit(3).each(function(post) { %>
+                                <div class="preview-post">
+                                    <a href="<%- url_for(post.path) %>" class="preview-title">
+                                        <%= post.title %>
+                                    </a>
+                                    <time class="preview-date">
+                                        <%= date(post.date, 'MM-DD') %>
+                                    </time>
+                                </div>
+                            <% }); %>
+                            <% if (category.posts.length > 3) { %>
+                                <div class="preview-more">
+                                    <a href="<%- url_for(category.path) %>">
+                                        还有 <%= category.posts.length - 3 %> 篇文章...
+                                    </a>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="category-action">
+                        <a href="<%- url_for(category.path) %>" class="btn btn-primary">
+                            查看全部
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <div class="no-categories">
+            <div class="no-categories-icon">
+                <i class="fas fa-folder-open"></i>
+            </div>
+            <h3>暂无分类</h3>
+            <p>还没有创建任何分类，快去写第一篇文章吧！</p>
+        </div>
+    <% } %>
+</div>
+
+<!-- 分类统计 -->
+<div class="categories-stats">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i class="fas fa-folder"></i>
+            </div>
+            <div class="stat-info">
+                <div class="stat-number"><%= site.categories.length %></div>
+                <div class="stat-label">个分类</div>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-info">
+                <div class="stat-number"><%= site.posts.length %></div>
+                <div class="stat-label">篇文章</div>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i class="fas fa-tags"></i>
+            </div>
+            <div class="stat-info">
+                <div class="stat-number"><%= site.tags.length %></div>
+                <div class="stat-label">个标签</div>
+            </div>
+        </div>
+    </div>
+</div> 

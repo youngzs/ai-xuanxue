@@ -1,0 +1,160 @@
+<!-- 首页头部横幅 -->
+<section class="hero-banner">
+    <div class="hero-content">
+        <h1 class="hero-title">欢迎来到 <%= config.title %></h1>
+        <p class="hero-subtitle"><%= config.description %></p>
+        <div class="hero-actions">
+            <a href="#posts" class="btn btn-primary">开始阅读</a>
+            <a href="<%- url_for('/about/') %>" class="btn btn-outline">关于我们</a>
+        </div>
+    </div>
+    <div class="hero-bg"></div>
+</section>
+
+<!-- 文章列表区域 -->
+<section id="posts" class="posts-section">
+    <div class="section-header">
+        <h2 class="section-title">最新文章</h2>
+        <p class="section-subtitle">分享技术见解，记录成长历程</p>
+    </div>
+    
+    <div class="posts-grid">
+        <% if (page.posts && page.posts.length > 0) { %>
+            <% page.posts.each(function(post) { %>
+                <article class="post-card">
+                    <!-- 文章缩略图 -->
+                    <% if (post.cover) { %>
+                        <div class="post-cover">
+                            <a href="<%- url_for(post.path) %>">
+                                <img src="<%- url_for(post.cover) %>" alt="<%= post.title %>">
+                            </a>
+                        </div>
+                    <% } %>
+                    
+                    <div class="post-content">
+                        <!-- 文章标题 -->
+                        <h3 class="post-title">
+                            <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+                        </h3>
+                        
+                        <!-- 文章摘要 -->
+                        <div class="post-excerpt">
+                            <% if (post.excerpt) { %>
+                                <%- truncate(strip_html(post.excerpt), {length: theme.excerpt_length || 200}) %>
+                            <% } else if (post.content) { %>
+                                <%- truncate(strip_html(post.content), {length: theme.excerpt_length || 200}) %>
+                            <% } %>
+                        </div>
+                        
+                        <!-- 文章元信息 -->
+                        <div class="post-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <time datetime="<%= date_xml(post.date) %>">
+                                    <%= date(post.date, 'YYYY-MM-DD') %>
+                                </time>
+                            </div>
+                            
+                            <% if (post.categories && post.categories.length > 0) { %>
+                                <div class="meta-item">
+                                    <i class="fas fa-folder"></i>
+                                    <% post.categories.each(function(category, i) { %>
+                                        <a href="<%- url_for(category.path) %>" class="category-link">
+                                            <%= category.name %>
+                                        </a>
+                                        <% if (i < post.categories.length - 1) { %>, <% } %>
+                                    <% }); %>
+                                </div>
+                            <% } %>
+                            
+                            <% if (theme.show_word_count && post.content) { %>
+                                <div class="meta-item">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span><%= post.content.replace(/<[^>]*>/g, "").length %> 字</span>
+                                </div>
+                            <% } %>
+                            
+                            <% if (theme.show_reading_time && post.content) { %>
+                                <div class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span><%= Math.ceil(post.content.replace(/<[^>]*>/g, "").length / 300) %> 分钟</span>
+                                </div>
+                            <% } %>
+                        </div>
+                        
+                        <!-- 文章标签 -->
+                        <% if (post.tags && post.tags.length > 0) { %>
+                            <div class="post-tags">
+                                <% post.tags.each(function(tag) { %>
+                                    <a href="<%- url_for(tag.path) %>" class="tag">
+                                        <%= tag.name %>
+                                    </a>
+                                <% }); %>
+                            </div>
+                        <% } %>
+                        
+                        <!-- 阅读更多按钮 -->
+                        <div class="post-actions">
+                            <a href="<%- url_for(post.path) %>" class="read-more">
+                                阅读全文
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            <% }); %>
+        <% } else { %>
+            <div class="no-posts">
+                <div class="no-posts-icon">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <h3>还没有文章</h3>
+                <p>开始写作你的第一篇文章吧！</p>
+                <a href="/admin/" class="btn btn-primary">开始写作</a>
+            </div>
+        <% } %>
+    </div>
+    
+    <!-- 分页导航 -->
+    <% if (page.total > 1) { %>
+        <nav class="pagination">
+            <%- paginator({
+                prev_text: '<i class="fas fa-chevron-left"></i> 上一页',
+                next_text: '下一页 <i class="fas fa-chevron-right"></i>',
+                mid_size: 2,
+                escape: false
+            }) %>
+        </nav>
+    <% } %>
+</section>
+
+<!-- 特色内容区域 -->
+<section class="featured-section">
+    <div class="container">
+        <div class="featured-grid">
+            <div class="featured-item">
+                <div class="featured-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>技术分享</h3>
+                <p>深入探讨前端、后端等各种技术话题，分享实战经验和最佳实践。</p>
+            </div>
+            
+            <div class="featured-item">
+                <div class="featured-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>思考感悟</h3>
+                <p>记录技术成长路上的思考，分享对行业趋势的独特见解。</p>
+            </div>
+            
+            <div class="featured-item">
+                <div class="featured-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>生活随笔</h3>
+                <p>程序员的生活不只有代码，还有诗和远方的田野。</p>
+            </div>
+        </div>
+    </div>
+</section> 

@@ -1,0 +1,147 @@
+<div class="page-header">
+    <div class="page-title-wrapper">
+        <h1 class="page-title">
+            <i class="fas fa-archive"></i>
+            文章归档
+        </h1>
+        <p class="page-subtitle">共 <%= site.posts.length %> 篇文章</p>
+    </div>
+</div>
+
+<div class="archive-container">
+    <% if (site.posts.length > 0) { %>
+        <%
+            var archives = {};
+            site.posts.sort('date', -1).each(function(post) {
+                var year = post.date.format('YYYY');
+                var month = post.date.format('MM');
+                var monthKey = year + '-' + month;
+                
+                if (!archives[year]) {
+                    archives[year] = {};
+                }
+                if (!archives[year][monthKey]) {
+                    archives[year][monthKey] = [];
+                }
+                archives[year][monthKey].push(post);
+            });
+        %>
+        
+        <!-- 时间轴式归档 -->
+        <div class="archive-timeline">
+            <% Object.keys(archives).sort().reverse().forEach(function(year) { %>
+                <div class="year-group">
+                    <div class="year-header">
+                        <h2 class="year-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            <%= year %> 年
+                        </h2>
+                        <span class="year-count">
+                            <%= Object.values(archives[year]).reduce((sum, posts) => sum + posts.length, 0) %> 篇文章
+                        </span>
+                    </div>
+                    
+                    <div class="months-container">
+                        <% Object.keys(archives[year]).sort().reverse().forEach(function(monthKey) { %>
+                            <% 
+                                var posts = archives[year][monthKey];
+                                var month = monthKey.split('-')[1];
+                                var monthNames = ['', '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+                            %>
+                            <div class="month-group">
+                                <div class="month-header">
+                                    <h3 class="month-title">
+                                        <i class="fas fa-calendar"></i>
+                                        <%= monthNames[parseInt(month)] %>
+                                    </h3>
+                                    <span class="month-count"><%= posts.length %> 篇</span>
+                                </div>
+                                
+                                <div class="posts-list">
+                                    <% posts.forEach(function(post) { %>
+                                        <div class="archive-post">
+                                            <div class="post-date">
+                                                <div class="date-day">
+                                                    <%= post.date.format('DD') %>
+                                                </div>
+                                                <div class="date-month">
+                                                    <%= post.date.format('MM') %>
+                                                </div>
+                                            </div>
+                                            <div class="post-info">
+                                                <h4 class="post-title">
+                                                    <a href="<%- url_for(post.path) %>">
+                                                        <%= post.title %>
+                                                    </a>
+                                                </h4>
+                                                <div class="post-meta">
+                                                    <% if (post.categories && post.categories.length > 0) { %>
+                                                        <span class="post-category">
+                                                            <i class="fas fa-folder"></i>
+                                                            <a href="<%- url_for(post.categories.data[0].path) %>">
+                                                                <%= post.categories.data[0].name %>
+                                                            </a>
+                                                        </span>
+                                                    <% } %>
+                                                    <% if (theme.show_word_count && post.content) { %>
+                                                        <span class="post-word-count">
+                                                            <i class="fas fa-file-alt"></i>
+                                                            <%= post.content.replace(/<[^>]*>/g, "").length %> 字
+                                                        </span>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        
+        <!-- 归档统计 -->
+        <div class="archive-stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number"><%= Object.keys(archives).length %></div>
+                        <div class="stat-label">年份</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">
+                            <%= Object.values(archives).reduce((total, year) => total + Object.keys(year).length, 0) %>
+                        </div>
+                        <div class="stat-label">月份</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number"><%= site.posts.length %></div>
+                        <div class="stat-label">篇文章</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="no-posts">
+            <div class="no-posts-icon">
+                <i class="fas fa-archive"></i>
+            </div>
+            <h3>暂无文章</h3>
+            <p>还没有发布任何文章，快去写第一篇文章吧！</p>
+        </div>
+    <% } %>
+</div> 

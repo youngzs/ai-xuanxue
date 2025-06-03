@@ -1,0 +1,216 @@
+<div class="page-header">
+    <div class="page-title-wrapper">
+        <h1 class="page-title">
+            <i class="fas fa-search"></i>
+            搜索
+        </h1>
+        <p class="page-subtitle">搜索站内文章内容</p>
+    </div>
+</div>
+
+<div class="search-container">
+    <!-- 搜索框 -->
+    <div class="search-input-wrapper">
+        <div class="search-form">
+            <input type="text" id="search-input-main" placeholder="输入关键词搜索..." autocomplete="off">
+            <button type="button" id="search-btn-main">
+                <i class="fas fa-search"></i>
+                搜索
+            </button>
+        </div>
+        <div class="search-tips">
+            <div class="tips-item">
+                <i class="fas fa-lightbulb"></i>
+                <span>小贴士：可以搜索文章标题、内容、标签等</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 搜索状态 -->
+    <div class="search-status">
+        <div id="search-loading" class="search-loading" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i>
+            正在搜索中...
+        </div>
+        <div id="search-no-results" class="search-no-results" style="display: none;">
+            <div class="no-results-icon">
+                <i class="fas fa-search-minus"></i>
+            </div>
+            <h3>未找到相关内容</h3>
+            <p>尝试使用其他关键词或检查拼写</p>
+        </div>
+    </div>
+
+    <!-- 搜索结果 -->
+    <div id="search-results" class="search-results" style="display: none;">
+        <div class="results-header">
+            <h2 class="results-title">
+                搜索结果 
+                <span id="results-count" class="results-count"></span>
+            </h2>
+        </div>
+        <div id="results-container" class="results-container">
+            <!-- 搜索结果将通过JavaScript动态插入 -->
+        </div>
+    </div>
+
+    <!-- 热门搜索 -->
+    <div class="popular-searches">
+        <h3 class="section-title">
+            <i class="fas fa-fire"></i>
+            热门搜索
+        </h3>
+        <div class="popular-tags">
+            <% if (site.tags.length > 0) { %>
+                <% site.tags.sort('posts.length', -1).limit(8).each(function(tag) { %>
+                    <a href="javascript:void(0)" class="popular-tag" onclick="performSearch('<%= tag.name %>')">
+                        <%= tag.name %>
+                    </a>
+                <% }); %>
+            <% } else { %>
+                <span class="no-popular-tags">暂无热门搜索词</span>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- 最近文章 -->
+    <div class="recent-posts-search">
+        <h3 class="section-title">
+            <i class="fas fa-clock"></i>
+            最新文章
+        </h3>
+        <div class="recent-posts-list">
+            <% site.posts.sort('date', -1).limit(5).each(function(post) { %>
+                <div class="recent-post-item">
+                    <a href="<%- url_for(post.path) %>" class="recent-post-link">
+                        <%= post.title %>
+                    </a>
+                    <time class="recent-post-date">
+                        <%= date(post.date, 'MM-DD') %>
+                    </time>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+
+<script>
+// 搜索功能实现
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input-main');
+    const searchBtn = document.getElementById('search-btn-main');
+    const searchResults = document.getElementById('search-results');
+    const resultsContainer = document.getElementById('results-container');
+    const resultsCount = document.getElementById('results-count');
+    const searchLoading = document.getElementById('search-loading');
+    const searchNoResults = document.getElementById('search-no-results');
+
+    // 搜索按钮点击事件
+    searchBtn.addEventListener('click', function() {
+        performSearch(searchInput.value.trim());
+    });
+
+    // 搜索框回车事件
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch(searchInput.value.trim());
+        }
+    });
+
+    // 获取URL参数中的搜索词
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('q');
+    if (queryParam) {
+        searchInput.value = queryParam;
+        performSearch(queryParam);
+    }
+});
+
+// 执行搜索功能
+function performSearch(query) {
+    if (!query) return;
+
+    const searchInput = document.getElementById('search-input-main');
+    const searchResults = document.getElementById('search-results');
+    const resultsContainer = document.getElementById('results-container');
+    const resultsCount = document.getElementById('results-count');
+    const searchLoading = document.getElementById('search-loading');
+    const searchNoResults = document.getElementById('search-no-results');
+
+    // 更新搜索框
+    searchInput.value = query;
+
+    // 显示加载状态
+    searchLoading.style.display = 'block';
+    searchResults.style.display = 'none';
+    searchNoResults.style.display = 'none';
+
+    // 模拟搜索过程（实际项目中这里应该调用搜索API或使用本地搜索）
+    setTimeout(() => {
+        // 简单的客户端搜索实现（实际项目建议使用专业搜索服务）
+        const posts = [
+            <% site.posts.each(function(post) { %>
+            {
+                title: '<%= post.title.replace(/'/g, "\\'") %>',
+                url: '<%- url_for(post.path) %>',
+                date: '<%= date(post.date, "YYYY-MM-DD") %>',
+                excerpt: '<%= strip_html(post.excerpt || post.content).substring(0, 200).replace(/'/g, "\\'") %>',
+                categories: [<% if (post.categories) { %><% post.categories.each(function(cat) { %>'<%= cat.name.replace(/'/g, "\\'") %>',<% }); %><% } %>],
+                tags: [<% if (post.tags) { %><% post.tags.each(function(tag) { %>'<%= tag.name.replace(/'/g, "\\'") %>',<% }); %><% } %>]
+            },
+            <% }); %>
+        ];
+
+        const results = posts.filter(post => {
+            const searchLower = query.toLowerCase();
+            return post.title.toLowerCase().includes(searchLower) ||
+                   post.excerpt.toLowerCase().includes(searchLower) ||
+                   post.categories.some(cat => cat.toLowerCase().includes(searchLower)) ||
+                   post.tags.some(tag => tag.toLowerCase().includes(searchLower));
+        });
+
+        searchLoading.style.display = 'none';
+
+        if (results.length > 0) {
+            resultsCount.textContent = `(${results.length} 篇)`;
+            resultsContainer.innerHTML = results.map(post => `
+                <div class="search-result-item">
+                    <h3 class="result-title">
+                        <a href="${post.url}">${highlightKeyword(post.title, query)}</a>
+                    </h3>
+                    <div class="result-meta">
+                        <span class="result-date">
+                            <i class="fas fa-calendar"></i>
+                            ${post.date}
+                        </span>
+                        ${post.categories.length > 0 ? `
+                        <span class="result-category">
+                            <i class="fas fa-folder"></i>
+                            ${post.categories[0]}
+                        </span>
+                        ` : ''}
+                    </div>
+                    <div class="result-excerpt">
+                        ${highlightKeyword(post.excerpt, query)}...
+                    </div>
+                    ${post.tags.length > 0 ? `
+                    <div class="result-tags">
+                        ${post.tags.map(tag => `<span class="result-tag">${tag}</span>`).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `).join('');
+            searchResults.style.display = 'block';
+        } else {
+            searchNoResults.style.display = 'block';
+        }
+    }, 500);
+}
+
+// 高亮关键词
+function highlightKeyword(text, keyword) {
+    if (!keyword) return text;
+    const regex = new RegExp(`(${keyword})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+}
+</script> 

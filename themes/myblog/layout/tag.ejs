@@ -1,0 +1,115 @@
+<div class="page-header">
+    <div class="page-title-wrapper">
+        <h1 class="page-title">
+            <i class="fas fa-tag"></i>
+            标签：<%= page.tag %>
+        </h1>
+        <p class="page-subtitle">共 <%= page.posts.length %> 篇文章</p>
+    </div>
+</div>
+
+<div class="posts-grid">
+    <% page.posts.each(function(post) { %>
+        <article class="post-card">
+            <!-- 文章缩略图 -->
+            <% if (post.cover) { %>
+                <div class="post-cover">
+                    <a href="<%- url_for(post.path) %>">
+                        <img src="<%- url_for(post.cover) %>" alt="<%= post.title %>">
+                    </a>
+                </div>
+            <% } %>
+            
+            <div class="post-content">
+                <!-- 文章标题 -->
+                <h3 class="post-title">
+                    <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+                </h3>
+                
+                <!-- 文章摘要 -->
+                <div class="post-excerpt">
+                    <% if (post.excerpt) { %>
+                        <%- truncate(strip_html(post.excerpt), {length: theme.excerpt_length || 200}) %>
+                    <% } else if (post.content) { %>
+                        <%- truncate(strip_html(post.content), {length: theme.excerpt_length || 200}) %>
+                    <% } %>
+                </div>
+                
+                <!-- 文章元信息 -->
+                <div class="post-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <time datetime="<%= date_xml(post.date) %>">
+                            <%= date(post.date, 'YYYY-MM-DD') %>
+                        </time>
+                    </div>
+                    
+                    <% if (post.categories && post.categories.length > 0) { %>
+                        <div class="meta-item">
+                            <i class="fas fa-folder"></i>
+                            <% post.categories.each(function(category, i) { %>
+                                <a href="<%- url_for(category.path) %>" class="category-link">
+                                    <%= category.name %>
+                                </a>
+                                <% if (i < post.categories.length - 1) { %>, <% } %>
+                            <% }); %>
+                        </div>
+                    <% } %>
+                    
+                    <% if (theme.show_word_count && post.content) { %>
+                        <div class="meta-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span><%= post.content.replace(/<[^>]*>/g, "").length %> 字</span>
+                        </div>
+                    <% } %>
+                    
+                    <% if (theme.show_reading_time && post.content) { %>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span><%= Math.ceil(post.content.replace(/<[^>]*>/g, "").length / 300) %> 分钟</span>
+                        </div>
+                    <% } %>
+                </div>
+                
+                <!-- 其他标签 -->
+                <% if (post.tags && post.tags.length > 0) { %>
+                    <div class="post-tags">
+                        <% post.tags.each(function(tag) { %>
+                            <a href="<%- url_for(tag.path) %>" class="tag <%= page.tag === tag.name ? 'current' : '' %>">
+                                <%= tag.name %>
+                            </a>
+                        <% }); %>
+                    </div>
+                <% } %>
+                
+                <!-- 阅读更多按钮 -->
+                <div class="post-actions">
+                    <a href="<%- url_for(post.path) %>" class="read-more">
+                        阅读全文
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    <% }); %>
+</div>
+
+<!-- 分页导航 -->
+<% if (page.total > 1) { %>
+    <nav class="pagination">
+        <%- paginator({
+            prev_text: '<i class="fas fa-chevron-left"></i> 上一页',
+            next_text: '下一页 <i class="fas fa-chevron-right"></i>',
+            mid_size: 2,
+            escape: false
+        }) %>
+    </nav>
+<% } %>
+
+<!-- 返回标签列表 -->
+<div class="back-to-tags">
+    <a href="<%- url_for('/tags/') %>" class="btn btn-outline">
+        <i class="fas fa-arrow-left"></i>
+        返回标签列表
+    </a>
+</div> 

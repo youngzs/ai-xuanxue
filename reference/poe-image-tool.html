@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业人像摄影提示生成器</title>
+    <style>
+        :root {
+            --primary: #5D5CDE;
+            --primary-light: #7a79e3;
+            --primary-dark: #4a49b8;
+            --secondary: #f5f7fa;
+            --dark: #333;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --warning: #ffc107;
+            --border: #dee2e6;
+            
+            /* Light mode colors */
+            --background: #FFFFFF;
+            --card-background: #FFFFFF;
+            --text: #333333;
+            --text-secondary: #666666;
+        }
+        
+        /* Dark mode variables */
+        .dark-mode {
+            --background: #181818;
+            --card-background: #242424;
+            --text: #EEEEEE;
+            --text-secondary: #AAAAAA;
+            --border: #444444;
+            --secondary: #2a2a2a;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+        }
+        
+        .options-panel {
+            flex: 1;
+            background: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        
+        .result-panel {
+            flex: 1;
+            background: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+            transition: color 0.3s;
+        }
+        
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: var(--background);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        select:focus, input:focus, textarea:focus {
+            outline-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        @media (min-width: 576px) {
+            .options-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: var(--primary-light);
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .button-secondary {
+            background-color: #6c757d;
+        }
+        
+        .button-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .button-success {
+            background-color: var(--success);
+        }
+        
+        .button-success:hover {
+            background-color: #218838;
+        }
+        
+        .prompt-result {
+            flex-grow: 1;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            white-space: pre-wrap;
+            min-height: 120px;
+            font-family: monospace;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .history-container {
+            margin-top: 20px;
+        }
+        
+        .history-item {
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: var(--text);
+        }
+        
+        .history-item:hover {
+            background-color: var(--secondary);
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .remove-tag {
+            margin-left: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .switch-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-right: 10px;
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab-content {
+            padding: 15px 0;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        /* Mode toggle */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: var(--card-background);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            transition: background-color 0.3s;
+        }
+        
+        .mode-toggle svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.5s;
+        }
+        
+        .mode-toggle .moon {
+            display: block;
+        }
+        
+        .mode-toggle .sun {
+            display: none;
+        }
+        
+        .dark-mode .mode-toggle .moon {
+            display: none;
+        }
+        
+        .dark-mode .mode-toggle .sun {
+            display: block;
+        }
+        
+        /* Poe integration styles */
+        .poe-buttons {
+            margin-top: 20px;
+        }
+        
+        .poe-button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .poe-button {
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #6A50D3;
+            padding: 12px 15px;
+        }
+        
+        .poe-button.fast {
+            background-color: #4285F4;
+        }
+        
+        .multi-image-num {
+            display: flex;
+            flex-direction: row;
+            margin-top: 15px;
+            align-items: center;
+        }
+        
+        .multi-image-num label {
+            margin-bottom: 0;
+            margin-right: 15px;
+            white-space: nowrap;
+        }
+        
+        .number-picker {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .number-picker button {
+            margin: 0;
+            padding: 5px 12px;
+            border-radius: 0;
+            font-size: 16px;
+            background-color: var(--secondary);
+            color: var(--text);
+        }
+        
+        .number-picker button:hover {
+            background-color: var(--primary-light);
+            color: white;
+        }
+        
+        .number-picker input {
+            width: 50px;
+            border: none;
+            text-align: center;
+            padding: 5px 0;
+            font-size: 16px;
+        }
+        
+        .image-result-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: var(--secondary);
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .image-result-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .image-loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        
+        .generated-images {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        @media (min-width: 576px) {
+            .generated-images.grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .generated-images.grid-3, .generated-images.grid-4 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .generated-images.grid-3 {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            
+            .generated-images.grid-4 {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+        
+        .generated-image-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .generated-image {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            object-fit: cover;
+            aspect-ratio: 3/4;
+        }
+        
+        .generated-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-error {
+            color: #dc3545;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        
+        .save-image-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+            cursor: help;
+        }
+        
+        .tooltip-icon {
+            width: 18px;
+            height: 18px;
+            background-color: var(--primary-light);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.85rem;
+            font-weight: normal;
+        }
+        
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        
+        .toast {
+            background-color: rgba(220, 53, 69, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: fadeIn 0.3s, fadeOut 0.3s 2.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+        
+        .tip-box {
+            background-color: var(--secondary);
+            border-left: 4px solid var(--primary);
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .tip-box h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .tip-item {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* 复制相关元素 */
+        .copy-temp {
+            position: absolute;
+            left: -9999px;
+            height: 0;
+            opacity: 0;
+        }
+        
+        /* 图片查看器样式 */
+        .image-viewer {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+        
+        .image-viewer-content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .close-viewer {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1002;
+        }
+        
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            transition: 0.3s;
+            border-radius: 0 5px 5px 0;
+            user-select: none;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .next {
+            right: 20px;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .prev {
+            left: 20px;
+        }
+        
+        .prev:hover, .next:hover, .close-viewer:hover {
+            color: var(--primary);
+        }
+        
+        .viewer-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .image-number {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 16px;
+            padding: 8px 0;
+        }
+        
+        /* 鼠标指针样式 */
+        .generated-image {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- 提示消息 -->
+    <div class="toast-container">
+        <div class="toast" id="error-toast"></div>
+    </div>
+
+    <!-- 复制临时元素 -->
+    <textarea id="copy-textarea" class="copy-temp" readonly></textarea>
+    
+    <!-- 图片查看器 -->
+    <div id="image-viewer" class="image-viewer">
+        <div class="image-viewer-content">
+            <span class="close-viewer">&times;</span>
+            <img id="viewer-image" class="viewer-image">
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+            <div class="image-number"></div>
+        </div>
+    </div>
+
+    <!-- Dark mode toggle -->
+    <div class="mode-toggle" id="mode-toggle">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <header>
+        <h1>专业人像摄影提示生成器</h1>
+        <p class="subtitle">生成精准的人像摄影提示语，用于创建高质量的专业人像图像</p>
+    </header>
+    
+    <div class="container">
+        <div class="options-panel">
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="basic-options">基础选项</button>
+                    <button class="tab-button" data-tab="advanced-options-tab">高级选项</button>
+                    <button class="tab-button" data-tab="help-tab">使用帮助</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="basic-options">
+                        <div class="section-title">模特与场景设置</div>
+                        <div class="options-grid">
+                            <div class="form-group">
+                                <label for="portrait-style">摄影风格
+                                    <span class="tooltip">
+                                        <span class="tooltip-icon">?</span>
+                                        <span class="tooltip-text">决定整体艺术风格和视觉效果</span>
+                                    </span>
+                                </label>
+                                <select id="portrait-style">
+                                    <option value="fashion">时尚摄影 (Fashion)</option>
+                                    <option value="portrait">肖像摄影 (Portrait)</option>
+                                    <option value="artistic">艺术摄影 (Artistic)</option>
+                                    <option value="editorial">杂志社论 (Editorial)</option>
+                                    <option value="commercial">商业摄影 (Commercial)</option>
+                                    <option value="beauty">美妆摄影 (Beauty)</option>
+                                    <option value="street">街拍风格 (Street)</option>
+                                    <option value="cinematic">电影风格 (Cinematic)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="scene-setting">场景设置</label>
+                                <select id="scene-setting">
+                                    <option value="studio">摄影棚 (Studio)</option>
+                                    <option value="urban">城市环境 (Urban)</option>
+                                    <option value="nature">自然环境 (Nature)</option>
+                                    <option value="beach">海滩 (Beach)</option>
+                                    <option value="forest">森林 (Forest)</option>
+                                    <option value="mountains">山脉 (Mountains)</option>
+                                    <option value="cafe">咖啡馆 (Cafe)</option>
+                                    <option value="library">图书馆 (Library)</option>
+                                    <option value="modern-interior">现代室内 (Modern Interior)</option>
+                                    <option value="vintage-interior">复古室内 (Vintage Interior)</option>
+                                    <option value="rooftop">屋顶天台 (Rooftop)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="pose-type">姿势类型</label>
+                                <select id="pose-type">
+                                    <option value="natural">自然随意 (Natural)</option>
+                                    <option value="professional">专业模特 (Professional)</option>
+                                    <option value="sitting">坐姿 (Sitting)</option>
+                                    <option value="standing">站姿 (Standing)</option>
+                                    <option value="leaning">倚靠姿势 (Leaning)</option>
+                                    <option value="candid">抓拍姿势 (Candid)</option>
+                                    <option value="artistic">艺术姿势 (Artistic)</option>
+                                    <option value="action">动态姿势 (Action)</option>
+                                    <option value="profile">侧面姿势 (Profile)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="facial-expression">面部表情</label>
+                                <select id="facial-expression">
+                                    <option value="neutral">自然表情 (Neutral)</option>
+                                    <option value="smiling">微笑 (Smiling)</option>
+                                    <option value="serious">严肃 (Serious)</option>
+                                    <option value="confident">自信 (Confident)</option>
+                                    <option value="pensive">若有所思 (Pensive)</option>
+                                    <option value="joyful">愉悦 (Joyful)</option>
+                                    <option value="melancholic">忧郁 (Melancholic)</option>
+                                    <option value="dramatic">戏剧性表情 (Dramatic)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="framing-composition">构图方式</label>
+                                <select id="framing-composition">
+                                    <option value="close-up">特写 (Close-up)</option>
+                                    <option value="medium-shot">中景 (Medium shot)</option>
+                                    <option value="full-body">全身像 (Full body)</option>
+                                    <option value="over-the-shoulder">肩部视角 (Over the shoulder)</option>
+                                    <option value="environmental">环境人像 (Environmental)</option>
+                                    <option value="symmetrical">对称构图 (Symmetrical)</option>
+                                    <option value="rule-of-thirds">三分法则 (Rule of thirds)</option>
+                                    <option value="dutch-angle">倾斜角度 (Dutch angle)</option>
+                                    <option value="birds-eye">俯视角度 (Bird's eye)</option>
+                                    <option value="low-angle">低角度 (Low angle)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lighting">光线设置</label>
+                                <select id="lighting">
+                                    <option value="soft">柔光 (Soft light)</option>
+                                    <option value="dramatic">戏剧性光线 (Dramatic)</option>
+                                    <option value="natural">自然光 (Natural light)</option>
+                                    <option value="golden-hour">黄金时刻 (Golden hour)</option>
+                                    <option value="blue-hour">蓝调时刻 (Blue hour)</option>
+                                    <option value="studio-lighting">棚拍光线 (Studio)</option>
+                                    <option value="backlight">逆光 (Backlight)</option>
+                                    <option value="side-light">侧光 (Side light)</option>
+                                    <option value="rembrandt">伦勃朗光线 (Rembrandt)</option>
+                                    <option value="split">分割光线 (Split lighting)</option>
+                                    <option value="high-key">高调光线 (High key)</option>
+                                    <option value="low-key">低调光线 (Low key)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="style-influence">视觉风格参考</label>
+                            <select id="style-influence">
+                                <option value="modern">现代简约 (Modern)</option>
+                                <option value="vintage">复古风格 (Vintage)</option>
+                                <option value="film">胶片风格 (Film)</option>
+                                <option value="high-fashion">高级时尚 (High Fashion)</option>
+                                <option value="minimalist">极简主义 (Minimalist)</option>
+                                <option value="glamour">魅力风格 (Glamour)</option>
+                                <option value="experimental">实验性风格 (Experimental)</option>
+                                <option value="classic">经典风格 (Classic)</option>
+                                <option value="edgy">前卫风格 (Edgy)</option>
+                                <option value="documentary">纪实风格 (Documentary)</option>
+                                <option value="punk">朋克风格 (Punk)</option>
+                                <option value="bohemian">波希米亚风格 (Bohemian)</option>
+                                <option value="elegant">优雅风格 (Elegant)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="multi-image-num">
+                            <label for="image-number">生成图片数量:</label>
+                            <div class="number-picker">
+                                <button id="decrease-num">-</button>
+                                <input type="number" id="image-number" min="1" max="4" value="1" readonly>
+                                <button id="increase-num">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="advanced-options-tab">
+                        <div class="section-title">高级设置</div>
+                        <div class="options-grid">
+                            <div class="form-group">
+                                <label for="art-style">艺术处理风格</label>
+                                <select id="art-style">
+                                    <option value="">-- 不指定 --</option>
+                                    <option value="photorealistic">超写实 (Photorealistic)</option>
+                                    <option value="watercolor">水彩风格 (Watercolor)</option>
+                                    <option value="oil-painting">油画风格 (Oil painting)</option>
+                                    <option value="sketch">素描风格 (Sketch)</option>
+                                    <option value="digital-art">数字艺术 (Digital art)</option>
+                                    <option value="pop-art">波普艺术 (Pop art)</option>
+                                    <option value="anime">动漫风格 (Anime style)</option>
+                                    <option value="comic">漫画风格 (Comic style)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="color-scheme">色彩方案</label>
+                                <select id="color-scheme">
+                                    <option value="vibrant">鲜艳色彩 (Vibrant)</option>
+                                    <option value="muted">柔和色调 (Muted)</option>
+                                    <option value="monochrome">单色 (Monochrome)</option>
+                                    <option value="black-and-white">黑白 (Black and white)</option>
+                                    <option value="sepia">复古棕褐色 (Sepia)</option>
+                                    <option value="pastel">粉彩色调 (Pastel)</option>
+                                    <option value="warm">暖色调 (Warm tones)</option>
+                                    <option value="cool">冷色调 (Cool tones)</option>
+                                    <option value="complementary">互补色 (Complementary)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lens-type">镜头类型</label>
+                                <select id="lens-type">
+                                    <option value="standard">标准镜头 (Standard)</option>
+                                    <option value="wide-angle">广角镜头 (Wide angle)</option>
+                                    <option value="telephoto">长焦镜头 (Telephoto)</option>
+                                    <option value="prime-35mm">35mm定焦 (Prime 35mm)</option>
+                                    <option value="prime-50mm">50mm定焦 (Prime 50mm)</option>
+                                    <option value="prime-85mm">85mm定焦 (Prime 85mm)</option>
+                                    <option value="macro">微距镜头 (Macro)</option>
+                                    <option value="fisheye">鱼眼镜头 (Fisheye)</option>
+                                    <option value="tilt-shift">移轴镜头 (Tilt-shift)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="camera-settings">相机设置</label>
+                                <select id="camera-settings">
+                                    <option value="shallow-dof">浅景深 (Shallow DoF)</option>
+                                    <option value="deep-dof">深景深 (Deep DoF)</option>
+                                    <option value="long-exposure">长曝光 (Long exposure)</option>
+                                    <option value="fast-shutter">高速快门 (Fast shutter)</option>
+                                    <option value="bokeh">散景效果 (Bokeh)</option>
+                                    <option value="high-iso">高ISO (High ISO)</option>
+                                    <option value="motion-blur">动态模糊 (Motion blur)</option>
+                                    <option value="hdr">高动态范围 (HDR)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="aspect-ratio">图像比例</label>
+                            <select id="aspect-ratio">
+                                <option value="9:16">9:16 (手机全屏)</option>
+                                <option value="16:9">16:9 (宽屏)</option>
+                                <option value="3:4">3:4 (标准人像)</option>
+                                <option value="4:5">4:5 (Instagram最佳比例)</option>
+                                <option value="1:1">1:1 (正方形)</option>
+                                <option value="2:3">2:3 (标准打印)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="custom-keyword">自定义关键词</label>
+                            <input type="text" id="custom-keyword" placeholder="输入自定义关键词，回车添加">
+                        </div>
+                        
+                        <div class="tag-list" id="keyword-tags">
+                            <!-- 用户添加的标签将显示在这里 -->
+                        </div>
+                        
+                        <div class="switch-container">
+                            <label class="switch">
+                                <input type="checkbox" id="high-resolution" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span>指定高分辨率</span>
+                        </div>
+                        
+                        <div class="switch-container">
+                            <label class="switch">
+                                <input type="checkbox" id="use-quality-prompt" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span>添加质量提升词</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="help-tab">
+                        <div class="section-title">使用指南</div>
+                        <div class="tip-box">
+                            <h3>关于人像摄影提示</h3>
+                            <div class="tip-item">• 提供清晰具体的场景、光线和姿势描述能显著提高生成质量</div>
+                            <div class="tip-item">• 不同的摄影风格会带来完全不同的视觉效果</div>
+                            <div class="tip-item">• 使用专业摄影术语（如镜头类型、光线技巧等）有助于获得更专业的结果</div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <h3>批量生成技巧</h3>
+                            <div class="tip-item">• 选择相似但略有变化的提示可以产生连贯的系列作品</div>
+                            <div class="tip-item">• 1-2张图像生成较快，3-4张可能需要更长时间</div>
+                            <div class="tip-item">• 对于重要创作，建议单张生成以获得最佳质量</div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <h3>应用场景建议</h3>
+                            <div class="tip-item">• <strong>时尚摄影</strong>: 适合杂志、社交媒体和产品展示</div>
+                            <div class="tip-item">• <strong>艺术肖像</strong>: 非传统创意表达，适合艺术项目</div>
+                            <div class="tip-item">• <strong>商业摄影</strong>: 适合广告、品牌推广和市场营销</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="generate-prompt">生成提示语</button>
+                <button id="random-options" class="button-secondary">随机选项</button>
+            </div>
+        </div>
+        
+        <div class="result-panel">
+            <div class="section-title">生成的提示语</div>
+            <div class="prompt-result" id="prompt-result">
+选择左侧参数后点击"生成提示语"按钮，这里将显示生成的AI提示语。
+
+提示语将包含人像摄影所需的专业摄影参数与视觉风格描述。
+            </div>
+            
+            <div class="button-group">
+                <button id="copy-prompt" class="button-success">复制提示语</button>
+                <button id="save-prompt">保存提示语</button>
+            </div>
+            
+            <div class="poe-buttons">
+                <div class="section-title">直接生成图像</div>
+                <div class="poe-button-group">
+                    <button id="generate-flux-pro" class="poe-button">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 12L12 6L18 12L12 18L6 12Z" fill="white"/>
+                        </svg>
+                        用FLUX-pro生成 (高质量)
+                    </button>
+                    <button id="generate-flux-schnell" class="poe-button fast">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2"/>
+                        </svg>
+                        用FLUX-schnell生成 (快速)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="image-result-container" id="image-result-container">
+                <div class="image-result-title">
+                    <span>生成的图像</span>
+                    <button id="close-image" class="button-secondary" style="padding: 5px 10px; margin: 0;">关闭</button>
+                </div>
+                <div class="image-loading" id="image-loading">
+                    <span class="loading-dots">正在生成图像</span>
+                </div>
+                <div class="image-error" id="image-error">生成图像时发生错误</div>
+                <div id="generated-images" class="generated-images">
+                    <!-- 生成的图像将在这里显示 -->
+                </div>
+                <p class="save-image-text">右键点击图片并选择"保存图片"以下载</p>
+            </div>
+            
+            <div class="history-container">
+                <div class="section-title">历史提示语</div>
+                <div id="history-list">
+                    <!-- 历史提示语将显示在这里 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检测系统深色模式
+            function detectColorScheme() {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.body.classList.add('dark-mode');
+                }
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                    if (event.matches) {
+                        document.body.classList.add('dark-mode');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                    }
+                });
+            }
+            
+            // 初始化检测深色模式
+            detectColorScheme();
+            
+            // 深色模式切换
+            document.getElementById('mode-toggle').addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+            });
+            
+            // Toast 提示函数
+            function showToast(message) {
+                const toast = document.getElementById('error-toast');
+                toast.textContent = message;
+                toast.style.display = 'block';
+                
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 3000);
+            }
+            
+            // 复制到剪贴板的兼容处理
+            function copyTextToClipboard(text) {
+                // 使用临时文本区域进行复制
+                const copyTextarea = document.getElementById('copy-textarea');
+                copyTextarea.value = text;
+                copyTextarea.style.position = 'fixed';
+                copyTextarea.style.opacity = 0;
+                copyTextarea.style.top = '0';
+                document.body.appendChild(copyTextarea);
+                copyTextarea.focus();
+                copyTextarea.select();
+                
+                let successful = false;
+                try {
+                    successful = document.execCommand('copy');
+                } catch (err) {
+                    console.error('无法复制文本: ', err);
+                }
+                
+                copyTextarea.style.top = '-9999px';
+                
+                return successful;
+            }
+            
+            // 获取DOM元素
+            const portraitStyle = document.getElementById('portrait-style');
+            const sceneSetting = document.getElementById('scene-setting');
+            const poseType = document.getElementById('pose-type');
+            const facialExpression = document.getElementById('facial-expression');
+            const framingComposition = document.getElementById('framing-composition');
+            const lighting = document.getElementById('lighting');
+            const styleInfluence = document.getElementById('style-influence');
+            const imageNumber = document.getElementById('image-number');
+            const decreaseNum = document.getElementById('decrease-num');
+            const increaseNum = document.getElementById('increase-num');
+            
+            // 高级选项
+            const artStyle = document.getElementById('art-style');
+            const colorScheme = document.getElementById('color-scheme');
+            const lensType = document.getElementById('lens-type');
+            const cameraSettings = document.getElementById('camera-settings');
+            const aspectRatio = document.getElementById('aspect-ratio');
+            const customKeyword = document.getElementById('custom-keyword');
+            const keywordTags = document.getElementById('keyword-tags');
+            const highResolution = document.getElementById('high-resolution');
+            const useQualityPrompt = document.getElementById('use-quality-prompt');
+            
+            // 按钮和结果展示
+            const generateBtn = document.getElementById('generate-prompt');
+            const randomBtn = document.getElementById('random-options');
+            const promptResult = document.getElementById('prompt-result');
+            const copyBtn = document.getElementById('copy-prompt');
+            const saveBtn = document.getElementById('save-prompt');
+            const historyList = document.getElementById('history-list');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            // Poe集成相关元素
+            const generateFluxProBtn = document.getElementById('generate-flux-pro');
+            const generateFluxSchnellBtn = document.getElementById('generate-flux-schnell');
+            const imageResultContainer = document.getElementById('image-result-container');
+            const imageLoading = document.getElementById('image-loading');
+            const imageError = document.getElementById('image-error');
+            const generatedImages = document.getElementById('generated-images');
+            const closeImageBtn = document.getElementById('close-image');
+            
+            // 存储自定义关键词
+            let customKeywords = [];
+            
+            // 内存中存储历史提示语 (不使用localStorage)
+            let promptHistory = [];
+            
+            // 图片数量增减
+            decreaseNum.addEventListener('click', function() {
+                let num = parseInt(imageNumber.value);
+                if (num > 1) {
+                    imageNumber.value = num - 1;
+                }
+            });
+            
+            increaseNum.addEventListener('click', function() {
+                let num = parseInt(imageNumber.value);
+                if (num < 4) {
+                    imageNumber.value = num + 1;
+                }
+            });
+            
+            // 标签页切换
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 移除所有active类
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+                    
+                    // 添加active类到当前标签
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    const tabElement = document.getElementById(tabId);
+                    if (tabElement) {
+                        tabElement.classList.add('active');
+                    }
+                });
+            });
+            
+            // 显示历史提示语
+            function renderHistory() {
+                historyList.innerHTML = '';
+                promptHistory.slice(0, 5).forEach((prompt, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'history-item';
+                    item.textContent = prompt.substring(0, 50) + (prompt.length > 50 ? '...' : '');
+                    item.addEventListener('click', () => {
+                        promptResult.textContent = prompt;
+                    });
+                    historyList.appendChild(item);
+                });
+            }
+            
+            // 添加自定义关键词
+            customKeyword.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim()) {
+                    addKeyword(this.value.trim());
+                    this.value = '';
+                }
+            });
+            
+            // 添加关键词函数
+            function addKeyword(keyword) {
+                if (customKeywords.includes(keyword)) return;
+                
+                customKeywords.push(keyword);
+                
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `${keyword} <span class="remove-tag" data-keyword="${keyword}">×</span>`;
+                keywordTags.appendChild(tag);
+                
+                // 添加删除事件
+                tag.querySelector('.remove-tag').addEventListener('click', function() {
+                    const keywordToRemove = this.getAttribute('data-keyword');
+                    customKeywords = customKeywords.filter(k => k !== keywordToRemove);
+                    tag.remove();
+                });
+            }
+            
+            // 随机选择选项
+            randomBtn.addEventListener('click', function() {
+                function randomSelect(selectElement) {
+                    const options = selectElement.options;
+                    const randomIndex = Math.floor(Math.random() * options.length);
+                    selectElement.selectedIndex = randomIndex;
+                }
+                
+                randomSelect(portraitStyle);
+                randomSelect(sceneSetting);
+                randomSelect(poseType);
+                randomSelect(facialExpression);
+                randomSelect(framingComposition);
+                randomSelect(lighting);
+                randomSelect(styleInfluence);
+                
+                // 随机高级选项
+                randomSelect(artStyle);
+                randomSelect(colorScheme);
+                randomSelect(lensType);
+                randomSelect(cameraSettings);
+                randomSelect(aspectRatio);
+                
+                // 随机切换复选框
+                highResolution.checked = Math.random() > 0.3; // 70%几率选中
+                useQualityPrompt.checked = Math.random() > 0.2; // 80%几率选中
+                
+                // 随机设置图片数量 (1-4)
+                imageNumber.value = Math.floor(Math.random() * 4) + 1;
+            });
+            
+            // 生成提示语
+            generateBtn.addEventListener('click', function() {
+                generatePrompt();
+            });
+
+            // 生成提示语函数
+            function generatePrompt() {
+                // 基础提示语模板
+                let prompt = `Professional ${portraitStyle.value} photography of a model, ${poseType.value} pose with ${facialExpression.value} expression, in ${sceneSetting.value} setting, ${framingComposition.value} composition, with ${lighting.value} lighting, ${styleInfluence.value} style`;
+                
+                // 添加高级选项
+                if (artStyle.value) {
+                    prompt += `, ${artStyle.value} art style`;
+                }
+                
+                // 添加色彩方案
+                prompt += `, ${colorScheme.value} color scheme`;
+                
+                // 添加镜头和相机设置
+                prompt += `, shot with ${lensType.value} lens, ${cameraSettings.value}`;
+                
+                // 添加高分辨率
+                if (highResolution.checked) {
+                    prompt += ', high resolution';
+                }
+                
+                // 添加质量提升词
+                if (useQualityPrompt.checked) {
+                    prompt += ', professional, detailed, sharp focus, high quality, 8k';
+                }
+                
+                // 添加自定义关键词
+                if (customKeywords.length > 0) {
+                    prompt += `, ${customKeywords.join(', ')}`;
+                }
+                
+                // 添加比例参数
+                const ratio = aspectRatio.value;
+                if (ratio) {
+                    prompt += ` --aspect ${ratio}`;
+                }
+                
+                // 显示生成的提示语
+                promptResult.textContent = prompt;
+                return prompt;
+            }
+            
+            // 复制提示语 - 使用兼容方法
+            copyBtn.addEventListener('click', function() {
+                const promptText = promptResult.textContent.trim();
+                if (!promptText || promptText.includes('选择左侧参数')) return;
+                
+                if (copyTextToClipboard(promptText)) {
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = '已复制!';
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                    }, 2000);
+                } else {
+                    showToast('复制失败，请手动复制文本');
+                    // 聚焦并选中文本以便用户手动复制
+                    promptResult.focus();
+                    promptResult.select();
+                }
+            });
+            
+            // 保存提示语到内存 (不使用localStorage)
+            saveBtn.addEventListener('click', function() {
+                const promptText = promptResult.textContent.trim();
+                if (!promptText || promptText.includes('选择左侧参数')) return;
+                
+                // 避免重复
+                if (!promptHistory.includes(promptText)) {
+                    promptHistory.unshift(promptText);
+                    
+                    // 只保存最近10条
+                    if (promptHistory.length > 10) {
+                        promptHistory.pop();
+                    }
+                    
+                    // 更新显示
+                    renderHistory();
+                    
+                    // 显示保存成功
+                    const originalText = saveBtn.textContent;
+                    saveBtn.textContent = '保存成功!';
+                    setTimeout(() => {
+                        saveBtn.textContent = originalText;
+                    }, 2000);
+                }
+            });
+
+            // 图片查看器相关元素
+            const imageViewer = document.getElementById('image-viewer');
+            const viewerImage = document.getElementById('viewer-image');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            const closeViewer = document.querySelector('.close-viewer');
+            const imageCounter = document.querySelector('.image-number');
+            let currentImageIndex = 0;
+            let imageUrls = [];
+            
+            // 图片查看器逻辑
+            function openImageViewer(src, index) {
+                viewerImage.src = src;
+                currentImageIndex = index;
+                imageViewer.style.display = 'block';
+                updateImageCounter();
+                
+                // 防止滚动
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeImageViewer() {
+                imageViewer.style.display = 'none';
+                // 恢复滚动
+                document.body.style.overflow = '';
+            }
+            
+            function showPrevImage() {
+                if (imageUrls.length <= 1) return;
+                
+                currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
+                viewerImage.src = imageUrls[currentImageIndex];
+                updateImageCounter();
+            }
+            
+            function showNextImage() {
+                if (imageUrls.length <= 1) return;
+                
+                currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
+                viewerImage.src = imageUrls[currentImageIndex];
+                updateImageCounter();
+            }
+            
+            function updateImageCounter() {
+                if (imageUrls.length <= 1) {
+                    imageCounter.style.display = 'none';
+                    prevButton.style.display = 'none';
+                    nextButton.style.display = 'none';
+                    return;
+                }
+                
+                imageCounter.textContent = `${currentImageIndex + 1} / ${imageUrls.length}`;
+                imageCounter.style.display = 'block';
+                prevButton.style.display = 'flex';
+                nextButton.style.display = 'flex';
+            }
+            
+            // 绑定事件
+            closeViewer.addEventListener('click', closeImageViewer);
+            prevButton.addEventListener('click', showPrevImage);
+            nextButton.addEventListener('click', showNextImage);
+            
+            // 键盘导航
+            document.addEventListener('keydown', function(e) {
+                if (imageViewer.style.display === 'block') {
+                    if (e.key === 'ArrowLeft') {
+                        showPrevImage();
+                    } else if (e.key === 'ArrowRight') {
+                        showNextImage();
+                    } else if (e.key === 'Escape') {
+                        closeImageViewer();
+                    }
+                }
+            });
+
+            // 使用Poe API直接生成图像
+            // 图像生成处理器
+            if (window.Poe) {
+                window.Poe.registerHandler("image-handler", (result, context) => {
+                    if (!result.responses) {
+                        imageLoading.style.display = "none";
+                        imageError.style.display = "block";
+                        imageError.textContent = "未收到有效响应";
+                        return;
+                    }
+
+                    // 处理错误状态
+                    if (result.status === "error") {
+                        imageLoading.style.display = "none";
+                        imageError.style.display = "block";
+                        imageError.textContent = "生成图像时发生错误";
+                        return;
+                    }
+                    
+                    if (result.status === "incomplete") {
+                        // 仍在加载
+                        imageLoading.style.display = "block";
+                        imageError.style.display = "none";
+                        return;
+                    }
+                    
+                    // 处理完成状态
+                    if (result.status === "complete") {
+                        imageLoading.style.display = "none";
+                        imageError.style.display = "none";
+                        
+                        // 检查每个响应
+                        let attachments = [];
+                        result.responses.forEach(msg => {
+                            if (msg.attachments && msg.attachments.length > 0) {
+                                msg.attachments.forEach(attachment => {
+                                    attachments.push(attachment);
+                                });
+                            }
+                        });
+                        
+                        if (attachments.length > 0) {
+                            // 清空之前的图像
+                            generatedImages.innerHTML = '';
+                            // 重置图片URL数组
+                            imageUrls = [];
+                            
+                            // 设置网格布局
+                            let gridClass = 'grid-1';
+                            if (attachments.length === 2) gridClass = 'grid-2';
+                            else if (attachments.length === 3) gridClass = 'grid-3';
+                            else if (attachments.length >= 4) gridClass = 'grid-4';
+                            
+                            generatedImages.className = `generated-images ${gridClass}`;
+                            
+                            // 添加新图像
+                            attachments.forEach((attachment, index) => {
+                                const wrapper = document.createElement('div');
+                                wrapper.className = 'generated-image-wrapper';
+                                
+                                const img = document.createElement('img');
+                                img.src = attachment.url;
+                                img.alt = "生成的人像";
+                                img.className = 'generated-image';
+                                
+                                // 存储图片URL到数组中，用于查看器
+                                imageUrls.push(attachment.url);
+                                
+                                // 添加点击事件，打开图片查看器
+                                img.addEventListener('click', function() {
+                                    openImageViewer(attachment.url, index);
+                                });
+                                
+                                wrapper.appendChild(img);
+                                generatedImages.appendChild(wrapper);
+                            });
+                            
+                            // 显示图像容器
+                            generatedImages.style.display = "grid";
+                        } else {
+                            imageError.style.display = "block";
+                            imageError.textContent = "未能获取生成的图像";
+                        }
+                    }
+                });
+            }
+
+            // 发送到FLUX Pro
+            generateFluxProBtn.addEventListener('click', async function() {
+                const promptText = promptResult.textContent.trim();
+                if (!promptText || promptText.includes('选择左侧参数')) {
+                    const newPrompt = generatePrompt();
+                    if (newPrompt) {
+                        await sendToFlux('FLUX-pro-1.1', newPrompt);
+                    }
+                } else {
+                    await sendToFlux('FLUX-pro-1.1', promptText);
+                }
+            });
+
+            // 发送到FLUX Schnell
+            generateFluxSchnellBtn.addEventListener('click', async function() {
+                const promptText = promptResult.textContent.trim();
+                if (!promptText || promptText.includes('选择左侧参数')) {
+                    const newPrompt = generatePrompt();
+                    if (newPrompt) {
+                        await sendToFlux('FLUX-schnell', newPrompt);
+                    }
+                } else {
+                    await sendToFlux('FLUX-schnell', promptText);
+                }
+            });
+
+            // 发送到FLUX函数 - 使用多个调用而不是/repeat
+            async function sendToFlux(botName, promptText) {
+                try {
+                    if (!window.Poe) {
+                        console.error("Poe API not available");
+                        showToast("无法访问Poe API，请确保在Poe平台上运行此应用。");
+                        return;
+                    }
+                    
+                    // 显示图像结果容器和加载指示器
+                    imageResultContainer.style.display = "block";
+                    imageLoading.style.display = "block";
+                    imageError.style.display = "none";
+                    generatedImages.style.display = "none";
+                    generatedImages.innerHTML = '';
+                    
+                    // 获取图像数量
+                    const numImages = parseInt(imageNumber.value) || 1;
+                    
+                    // 改为使用多个@bot的方式，或单次调用
+                    if (numImages === 1) {
+                        // 单个图片生成 - 简单调用
+                        await window.Poe.sendUserMessage(`@${botName} ${promptText}`, {
+                            handler: "image-handler",
+                            stream: false,
+                            openChat: false
+                        });
+                    } else {
+                        // 多个图片生成 - 使用多个@bot的组合
+                        let botMentions = Array(numImages).fill(`@${botName}`).join(' ');
+                        await window.Poe.sendUserMessage(`${botMentions} ${promptText}`, {
+                            handler: "image-handler",
+                            stream: false,
+                            openChat: false
+                        });
+                    }
+                } catch (err) {
+                    console.error("发送消息时出错:", err);
+                    imageLoading.style.display = "none";
+                    imageError.style.display = "block";
+                    imageError.textContent = `错误: ${err.message || "发送请求失败"}`;
+                    
+                    // 显示错误提示
+                    showToast(err.message || "发送请求失败");
+                }
+            }
+
+            // 关闭图像结果
+            closeImageBtn.addEventListener('click', function() {
+                imageResultContainer.style.display = "none";
+            });
+        });
+    </script>
+</body>
+</html>
+

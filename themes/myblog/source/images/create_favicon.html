@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>生成 Favicon</title>
+</head>
+<body>
+    <canvas id="canvas" width="64" height="64"></canvas>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 设置背景渐变
+        const gradient = ctx.createLinearGradient(0, 0, 64, 64);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(1, '#764ba2');
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 64, 64);
+        
+        // 绘制AI符号 - 类似电路板的图案
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        
+        // 绘制中心圆
+        ctx.beginPath();
+        ctx.arc(32, 32, 12, 0, 2 * Math.PI);
+        ctx.stroke();
+        
+        // 绘制连接线
+        ctx.beginPath();
+        ctx.moveTo(20, 32);
+        ctx.lineTo(8, 32);
+        ctx.moveTo(44, 32);
+        ctx.lineTo(56, 32);
+        ctx.moveTo(32, 20);
+        ctx.lineTo(32, 8);
+        ctx.moveTo(32, 44);
+        ctx.lineTo(32, 56);
+        
+        // 绘制角落的小圆点
+        ctx.arc(12, 16, 2, 0, 2 * Math.PI);
+        ctx.arc(52, 16, 2, 0, 2 * Math.PI);
+        ctx.arc(12, 48, 2, 0, 2 * Math.PI);
+        ctx.arc(52, 48, 2, 0, 2 * Math.PI);
+        ctx.stroke();
+        
+        // 填充小圆点
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        
+        // 转换为数据URL并下载
+        setTimeout(() => {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = 'favicon.png';
+            link.href = dataURL;
+            link.click();
+        }, 1000);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,43 @@
+{
+  "name": "ai-xuanxue-blog",
+  "version": "1.0.0",
+  "description": "AI与玄学研究院 - 现代化Hexo博客",
+  "private": true,
+  "scripts": {
+    "dev": "hexo server",
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "deploy": "hexo deploy",
+    "server": "hexo server",
+    "start": "npm run clean && npm run build && npm run server",
+    "new": "hexo new post",
+    "publish": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "hexo",
+    "blog",
+    "ai",
+    "xuanxue",
+    "tech"
+  ],
+  "author": "yanteruo",
+  "license": "MIT",
+  "hexo": {
+    "version": "7.3.0"
+  },
+  "dependencies": {
+    "hexo": "^7.3.0",
+    "hexo-generator-archive": "^2.0.0",
+    "hexo-generator-category": "^2.0.0",
+    "hexo-generator-index": "^4.0.0",
+    "hexo-generator-tag": "^2.0.0",
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-marked": "^7.0.0",
+    "hexo-renderer-stylus": "^3.0.1",
+    "hexo-server": "^3.0.0",
+    "hexo-theme-landscape": "^1.0.0"
+  },
+  "devDependencies": {
+    "@stagewise/toolbar": "^0.3.0"
+  }
+}

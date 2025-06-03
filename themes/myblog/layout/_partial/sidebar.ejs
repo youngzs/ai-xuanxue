@@ -1,0 +1,142 @@
+<aside id="sidebar">
+    <% if (theme.sidebar && theme.sidebar.widgets) { %>
+        <% theme.sidebar.widgets.forEach(function(widget) { %>
+            
+            <!-- 个人资料模块 -->
+            <% if (widget === 'profile') { %>
+                <div class="widget widget-profile">
+                    <div class="widget-header">
+                        <h3 class="widget-title">关于作者</h3>
+                    </div>
+                    <div class="widget-content">
+                        <% if (theme.avatar) { %>
+                            <div class="profile-avatar">
+                                <img src="<%- url_for(theme.avatar) %>" alt="<%= config.author %>">
+                            </div>
+                        <% } %>
+                        <div class="profile-info">
+                            <h4 class="profile-name"><%= config.author %></h4>
+                            <% if (config.description) { %>
+                                <p class="profile-desc"><%= config.description %></p>
+                            <% } %>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <span class="stat-number"><%= site.posts.length %></span>
+                                <span class="stat-label">文章</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number"><%= site.categories.length %></span>
+                                <span class="stat-label">分类</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number"><%= site.tags.length %></span>
+                                <span class="stat-label">标签</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            
+            <!-- 最新文章模块 -->
+            <% if (widget === 'recent_posts') { %>
+                <div class="widget widget-recent">
+                    <div class="widget-header">
+                        <h3 class="widget-title">最新文章</h3>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="recent-posts-list">
+                            <% site.posts.sort('date', -1).limit(5).each(function(post) { %>
+                                <li class="recent-post-item">
+                                    <a href="<%- url_for(post.path) %>" class="recent-post-link">
+                                        <%= post.title %>
+                                    </a>
+                                    <time class="recent-post-date">
+                                        <%= date(post.date, 'MM-DD') %>
+                                    </time>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </div>
+            <% } %>
+            
+            <!-- 分类模块 -->
+            <% if (widget === 'categories' && site.categories.length > 0) { %>
+                <div class="widget widget-categories">
+                    <div class="widget-header">
+                        <h3 class="widget-title">分类</h3>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="category-list">
+                            <% site.categories.each(function(category) { %>
+                                <li class="category-item">
+                                    <a href="<%- url_for(category.path) %>" class="category-link">
+                                        <%= category.name %>
+                                        <span class="category-count">(<%= category.posts.length %>)</span>
+                                    </a>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </div>
+            <% } %>
+            
+            <!-- 标签模块 -->
+            <% if (widget === 'tags' && site.tags.length > 0) { %>
+                <div class="widget widget-tags">
+                    <div class="widget-header">
+                        <h3 class="widget-title">标签</h3>
+                    </div>
+                    <div class="widget-content">
+                        <div class="tag-cloud">
+                            <% site.tags.each(function(tag) { %>
+                                <a href="<%- url_for(tag.path) %>" class="tag-link" style="font-size: <%= Math.min(20, 12 + tag.posts.length * 2) %>px;">
+                                    <%= tag.name %>
+                                </a>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            
+            <!-- 归档模块 -->
+            <% if (widget === 'archive') { %>
+                <div class="widget widget-archive">
+                    <div class="widget-header">
+                        <h3 class="widget-title">归档</h3>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="archive-list">
+                            <%
+                                var archives = {};
+                                site.posts.sort('date', -1).each(function(post) {
+                                    var year = post.date.format('YYYY');
+                                    var month = post.date.format('MM');
+                                    var key = year + '-' + month;
+                                    if (!archives[key]) {
+                                        archives[key] = [];
+                                    }
+                                    archives[key].push(post);
+                                });
+                                
+                                Object.keys(archives).slice(0, 12).forEach(function(key) {
+                                    var posts = archives[key];
+                                    var year = key.split('-')[0];
+                                    var month = key.split('-')[1];
+                            %>
+                                <li class="archive-item">
+                                    <a href="<%- url_for('/archives/' + year + '/' + month + '/') %>" class="archive-link">
+                                        <%= year %>年<%= month %>月
+                                        <span class="archive-count">(<%= posts.length %>)</span>
+                                    </a>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </div>
+            <% } %>
+            
+        <% }); %>
+    <% } %>
+</aside> 

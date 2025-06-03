@@ -1,0 +1,197 @@
+<div class="page">
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <h1 class="page-title"><%= page.title %></h1>
+        
+        <div class="page-meta">
+            <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <time datetime="<%= date_xml(page.date) %>">
+                    <%= date(page.date, 'YYYY年MM月DD日') %>
+                </time>
+            </div>
+            <% if (page.updated && page.updated !== page.date) { %>
+                <div class="meta-item">
+                    <i class="fas fa-edit"></i>
+                    更新于 
+                    <time datetime="<%= date_xml(page.updated) %>">
+                        <%= date(page.updated, 'YYYY年MM月DD日') %>
+                    </time>
+                </div>
+            <% } %>
+        </div>
+    </header>
+    
+    <!-- 页面内容 -->
+    <div class="page-content">
+        <%- page.content %>
+    </div>
+    
+    <% if (page.comments !== false && theme.comments && theme.comments.enable) { %>
+        <footer class="page-footer">
+            <div class="comments-section">
+                <!-- 评论系统可以在这里集成 -->
+            </div>
+        </footer>
+    <% } %>
+</div>
+
+<!-- 页面样式 -->
+<style>
+.page {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.page-header {
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+}
+
+.page-title {
+    margin: 0 0 1rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.page-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.page-content {
+    padding: 2rem;
+    line-height: 1.8;
+}
+
+.page-content h1,
+.page-content h2,
+.page-content h3 {
+    color: #2c3e50;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.page-content h1 {
+    font-size: 2rem;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 0.5rem;
+}
+
+.page-content h2 {
+    font-size: 1.5rem;
+}
+
+.page-content h3 {
+    font-size: 1.25rem;
+}
+
+.page-content p {
+    margin-bottom: 1rem;
+}
+
+.page-content ul,
+.page-content ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.page-content li {
+    margin-bottom: 0.5rem;
+}
+
+.page-content a {
+    color: #3498db;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.page-content a:hover {
+    border-bottom-color: #3498db;
+}
+
+.page-content code {
+    background: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+}
+
+.page-content pre {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.page-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.page-content th,
+.page-content td {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.page-content th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.page-content blockquote {
+    border-left: 4px solid #3498db;
+    padding: 1rem 1.5rem;
+    background: #f8f9fa;
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .page-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .page-content h1 {
+        font-size: 1.75rem;
+    }
+    
+    .page-content h2 {
+        font-size: 1.35rem;
+    }
+    
+    .page-content h3 {
+        font-size: 1.15rem;
+    }
+}
+</style> 

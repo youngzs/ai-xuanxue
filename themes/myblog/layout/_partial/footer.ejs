@@ -1,0 +1,58 @@
+<footer id="footer">
+    <div class="container">
+        <div class="footer-content">
+            <!-- 社交链接 -->
+            <% if (theme.social && Object.keys(theme.social).length > 0) { %>
+                <div class="social-links">
+                    <% for (let name in theme.social) { %>
+                        <a href="<%= theme.social[name] %>" target="_blank" class="social-link" title="<%= name %>">
+                            <% if (name === 'GitHub') { %>
+                                <i class="fab fa-github"></i>
+                            <% } else if (name === '微博') { %>
+                                <i class="fab fa-weibo"></i>
+                            <% } else if (name === '邮箱') { %>
+                                <i class="fas fa-envelope"></i>
+                            <% } else if (name === 'Twitter') { %>
+                                <i class="fab fa-twitter"></i>
+                            <% } else if (name === 'QQ') { %>
+                                <i class="fab fa-qq"></i>
+                            <% } else if (name === '微信') { %>
+                                <i class="fab fa-weixin"></i>
+                            <% } else { %>
+                                <i class="fas fa-link"></i>
+                            <% } %>
+                        </a>
+                    <% } %>
+                </div>
+            <% } %>
+            
+            <!-- 版权信息 -->
+            <div class="copyright">
+                <p>
+                    <% if (theme.footer && theme.footer.copyright) { %>
+                        <%= theme.footer.copyright %>
+                    <% } else { %>
+                        © <%= new Date().getFullYear() %> <%= config.title %>
+                    <% } %>
+                </p>
+                <p class="powered-by">
+                    <% if (theme.footer && theme.footer.powered) { %>
+                        <%= theme.footer.powered %>
+                    <% } else { %>
+                        Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+                    <% } %>
+                    <% if (theme.footer && theme.footer.theme) { %>
+                        | <%= theme.footer.theme %>
+                    <% } %>
+                </p>
+            </div>
+            
+            <!-- 备案信息（如果需要） -->
+            <% if (config.beian) { %>
+                <div class="beian">
+                    <a href="http://beian.miit.gov.cn/" target="_blank"><%= config.beian %></a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</footer> 

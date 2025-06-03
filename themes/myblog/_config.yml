@@ -1,0 +1,75 @@
+# 主题基础配置
+menu:
+  首页: /
+  归档: /archives/
+  分类: /categories/
+  标签: /tags/
+  工具: /tools/
+  关于: /about/
+
+# 网站图标 - 支持多种格式
+favicon: /images/favicon.ico
+favicon_svg: /images/favicon.svg
+
+# 头像 - 支持多种格式
+avatar: /images/avatar.bmp
+avatar_svg: /images/avatar.svg
+
+# 社交链接
+social:
+  GitHub: https://github.com/youngzs
+  微博: https://weibo.com/u/1279981594
+  邮箱: mailto:yanteruo@gmail.com
+
+# 页脚信息
+footer:
+  copyright: "© 2025 AI与玄学研究院"
+  powered: "Powered by Hexo"
+  theme: "Theme by myblog"
+
+# 代码高亮主题
+highlight_theme: github
+
+# 文章摘要长度
+excerpt_length: 200
+
+# 是否显示文章字数统计
+show_word_count: true
+
+# 是否显示阅读时间
+show_reading_time: true
+
+# 首页显示文章数量
+index_posts_num: 10
+
+# 侧边栏配置
+sidebar:
+  enable: true
+  position: right
+  widgets:
+    - profile
+    - recent_posts
+    - categories
+    - tags
+    - archive
+
+# 搜索功能
+search:
+  enable: true
+  path: search.xml
+  field: post 
+
+# 图片配置
+images:
+  # 默认文章封面
+  default_cover: /images/default-cover.svg
+  # 分类页面默认图片
+  category_cover: /images/category-cover.svg
+  # 标签页面默认图片  
+  tag_cover: /images/tag-cover.svg
+  
+# 网站品牌信息
+brand:
+  name: "AI与玄学研究院"
+  slogan: "探索人工智能与古老智慧的奥秘"
+  description: "融合前沿科技与传统哲学，用现代AI解读古老智慧" 

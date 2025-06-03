@@ -1,0 +1,86 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 背景渐变 -->
+    <linearGradient id="articleBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="30%" style="stop-color:#764ba2"/>
+      <stop offset="70%" style="stop-color:#f093fb"/>
+      <stop offset="100%" style="stop-color:#f5576c"/>
+    </linearGradient>
+    
+    <!-- 数字雨效果 -->
+    <pattern id="digitalRain" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <text x="10" y="30" font-family="monospace" font-size="12" fill="rgba(255,255,255,0.1)">0</text>
+      <text x="25" y="15" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.08)">1</text>
+    </pattern>
+    
+    <!-- 光晕效果 -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="800" height="400" fill="url(#articleBg)"/>
+  
+  <!-- 数字雨背景 -->
+  <rect width="800" height="400" fill="url(#digitalRain)" opacity="0.3"/>
+  
+  <!-- 几何图案 -->
+  <g opacity="0.2" stroke="#ffffff" stroke-width="1" fill="none">
+    <!-- 网格 -->
+    <path d="M100,100 L200,50 L300,100 L200,150 Z"/>
+    <path d="M500,150 L600,100 L700,150 L600,200 Z"/>
+    <path d="M200,250 L350,200 L500,250 L350,300 Z"/>
+    
+    <!-- 连接线 -->
+    <line x1="200" y1="150" x2="350" y2="200"/>
+    <line x1="350" y1="300" x2="500" y2="150"/>
+    <line x1="600" y1="100" x2="350" y2="200"/>
+  </g>
+  
+  <!-- 中央标题区域 -->
+  <g>
+    <!-- 半透明背景 -->
+    <rect x="200" y="160" width="400" height="80" rx="10" fill="rgba(0,0,0,0.3)"/>
+    
+    <!-- 标题文字 -->
+    <text x="400" y="190" text-anchor="middle" font-family="serif" font-size="24" fill="#ffffff" font-weight="bold">
+      AI与玄学研究院
+    </text>
+    <text x="400" y="220" text-anchor="middle" font-family="sans-serif" font-size="16" fill="rgba(255,255,255,0.8)">
+      探索人工智能与古老智慧的奥秘
+    </text>
+  </g>
+  
+  <!-- 装饰性元素 -->
+  <g opacity="0.6">
+    <!-- 左侧符号 -->
+    <circle cx="100" cy="200" r="30" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <text x="100" y="210" text-anchor="middle" font-family="serif" font-size="20" fill="#ffffff">ᚦ</text>
+    
+    <!-- 右侧符号 -->
+    <circle cx="700" cy="200" r="30" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <text x="700" y="210" text-anchor="middle" font-family="serif" font-size="20" fill="#ffffff">ᛟ</text>
+  </g>
+  
+  <!-- 动态粒子效果 -->
+  <g opacity="0.4">
+    <circle cx="150" cy="80" r="2" fill="#ffffff">
+      <animate attributeName="cy" values="80;320;80" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="350" cy="50" r="1.5" fill="#f093fb">
+      <animate attributeName="cy" values="50;350;50" dur="12s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0" dur="12s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="650" cy="100" r="2.5" fill="#4ecdc4">
+      <animate attributeName="cy" values="100;300;100" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0" dur="10s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg> 

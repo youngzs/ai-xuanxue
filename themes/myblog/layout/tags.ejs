@@ -1,0 +1,125 @@
+<div class="page-header">
+    <div class="page-title-wrapper">
+        <h1 class="page-title">
+            <i class="fas fa-tags"></i>
+            标签云
+        </h1>
+        <p class="page-subtitle">共 <%= site.tags.length %> 个标签，<%= site.posts.length %> 篇文章</p>
+    </div>
+</div>
+
+<div class="tags-container">
+    <% if (site.tags.length > 0) { %>
+        <!-- 标签云 -->
+        <div class="tag-cloud-section">
+            <h2 class="section-title">
+                <i class="fas fa-cloud"></i>
+                标签云图
+            </h2>
+            <div class="tag-cloud-wrapper">
+                <% site.tags.sort('name').each(function(tag) { %>
+                    <% 
+                        var fontSize = Math.min(24, 12 + tag.posts.length * 2);
+                        var opacity = Math.min(1, 0.5 + tag.posts.length * 0.1);
+                    %>
+                    <a href="<%- url_for(tag.path) %>" 
+                       class="tag-cloud-item" 
+                       style="font-size: <%= fontSize %>px; opacity: <%= opacity %>;"
+                       title="<%= tag.posts.length %> 篇文章">
+                        <%= tag.name %>
+                    </a>
+                <% }); %>
+            </div>
+        </div>
+
+        <!-- 标签列表 -->
+        <div class="tags-list-section">
+            <h2 class="section-title">
+                <i class="fas fa-list"></i>
+                标签列表
+            </h2>
+            <div class="tags-grid">
+                <% site.tags.sort('posts.length', -1).each(function(tag) { %>
+                    <div class="tag-card">
+                        <div class="tag-header">
+                            <div class="tag-icon">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <div class="tag-info">
+                                <h3 class="tag-name">
+                                    <a href="<%- url_for(tag.path) %>">
+                                        <%= tag.name %>
+                                    </a>
+                                </h3>
+                                <p class="tag-count">
+                                    <i class="fas fa-file-alt"></i>
+                                    <%= tag.posts.length %> 篇文章
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tag-posts-preview">
+                            <% tag.posts.sort('date', -1).limit(3).each(function(post) { %>
+                                <div class="preview-post">
+                                    <a href="<%- url_for(post.path) %>" class="preview-title">
+                                        <%= post.title %>
+                                    </a>
+                                    <time class="preview-date">
+                                        <%= date(post.date, 'MM-DD') %>
+                                    </time>
+                                </div>
+                            <% }); %>
+                            <% if (tag.posts.length > 3) { %>
+                                <div class="preview-more">
+                                    <a href="<%- url_for(tag.path) %>">
+                                        还有 <%= tag.posts.length - 3 %> 篇文章...
+                                    </a>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="tag-action">
+                            <a href="<%- url_for(tag.path) %>" class="btn btn-outline">
+                                查看全部
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+
+        <!-- 热门标签 -->
+        <div class="popular-tags-section">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i>
+                热门标签
+            </h2>
+            <div class="popular-tags">
+                <% site.tags.sort('posts.length', -1).limit(10).each(function(tag, index) { %>
+                    <div class="popular-tag-item">
+                        <span class="tag-rank">
+                            <% if (index < 3) { %>
+                                <i class="fas fa-medal" style="color: <%= index === 0 ? '#ffd700' : index === 1 ? '#c0c0c0' : '#cd7f32' %>;"></i>
+                            <% } else { %>
+                                <%= index + 1 %>
+                            <% } %>
+                        </span>
+                        <a href="<%- url_for(tag.path) %>" class="tag-link">
+                            <%= tag.name %>
+                        </a>
+                        <span class="tag-posts-count">
+                            (<%= tag.posts.length %> 篇)
+                        </span>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="no-tags">
+            <div class="no-tags-icon">
+                <i class="fas fa-tags"></i>
+            </div>
+            <h3>暂无标签</h3>
+            <p>还没有创建任何标签，快去为文章添加标签吧！</p>
+        </div>
+    <% } %>
+</div> 

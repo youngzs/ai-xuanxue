@@ -1,0 +1,109 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 背景渐变 -->
+    <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#2d1b69"/>
+      <stop offset="50%" style="stop-color:#11998e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </radialGradient>
+    
+    <!-- 中心渐变 -->
+    <radialGradient id="centerGradient" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#ff6b6b"/>
+      <stop offset="50%" style="stop-color:#4ecdc4"/>
+      <stop offset="100%" style="stop-color:#45b7d1"/>
+    </radialGradient>
+    
+    <!-- 光晕效果 -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- 星星路径 -->
+    <path id="star" d="M0,-10 L2.9,-3.1 L9.5,-3.1 L4.8,1.6 L7.7,8.5 L0,4.9 L-7.7,8.5 L-4.8,1.6 L-9.5,-3.1 L-2.9,-3.1 Z"/>
+  </defs>
+  
+  <!-- 背景 -->
+  <circle cx="100" cy="100" r="100" fill="url(#bgGradient)"/>
+  
+  <!-- 星星背景 -->
+  <g opacity="0.3" stroke="#ffffff" stroke-width="1" fill="none">
+    <use href="#star" transform="translate(160, 40) scale(0.8)"/>
+    <use href="#star" transform="translate(40, 160) scale(0.6)"/>
+    <use href="#star" transform="translate(170, 170) scale(0.5)"/>
+    <use href="#star" transform="translate(30, 30) scale(0.4)"/>
+  </g>
+  
+  <!-- 外围神秘圆环 -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  
+  <!-- 中央AI大脑核心 -->
+  <circle cx="100" cy="100" r="50" fill="url(#centerGradient)" filter="url(#glow)"/>
+  
+  <!-- AI神经网络节点 -->
+  <g stroke="#ffffff" stroke-width="2" fill="none" opacity="0.9">
+    <!-- 中心节点 -->
+    <circle cx="100" cy="100" r="8"/>
+    
+    <!-- 内层节点 -->
+    <circle cx="85" cy="85" r="3"/>
+    <circle cx="115" cy="85" r="3"/>
+    <circle cx="85" cy="115" r="3"/>
+    <circle cx="115" cy="115" r="3"/>
+    
+    <!-- 外层节点 -->
+    <circle cx="70" cy="100" r="2"/>
+    <circle cx="130" cy="100" r="2"/>
+    <circle cx="100" cy="70" r="2"/>
+    <circle cx="100" cy="130" r="2"/>
+  </g>
+  
+  <!-- 神经网络连接线 -->
+  <g stroke="#ffffff" stroke-width="1.5" opacity="0.7">
+    <!-- 从中心到内层 -->
+    <line x1="100" y1="100" x2="85" y2="85"/>
+    <line x1="100" y1="100" x2="115" y2="85"/>
+    <line x1="100" y1="100" x2="85" y2="115"/>
+    <line x1="100" y1="100" x2="115" y2="115"/>
+    
+    <!-- 从中心到外层 -->
+    <line x1="100" y1="100" x2="70" y2="100"/>
+    <line x1="100" y1="100" x2="130" y2="100"/>
+    <line x1="100" y1="100" x2="100" y2="70"/>
+    <line x1="100" y1="100" x2="100" y2="130"/>
+  </g>
+  
+  <!-- 太极图案（玄学元素） -->
+  <g stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" opacity="0.6">
+    <path d="M 100 30 A 35 35 0 0 1 100 100 A 17.5 17.5 0 0 1 100 135 A 35 35 0 0 1 100 30"/>
+    <circle cx="100" cy="56.25" r="8.75" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="100" cy="143.75" r="8.75" fill="rgba(255,255,255,0.1)"/>
+  </g>
+  
+  <!-- 古文字符号 -->
+  <g font-family="serif" font-size="16" fill="rgba(255,255,255,0.3)" text-anchor="middle">
+    <text x="30" y="35">ᛗ</text>
+    <text x="170" y="35">ᚱ</text>
+    <text x="30" y="175">ᚨ</text>
+    <text x="170" y="175">ᛁ</text>
+  </g>
+  
+  <!-- 数据流动效果 -->
+  <g opacity="0.5">
+    <animateTransform attributeName="transform" type="rotate" values="0 100 100;360 100 100" dur="20s" repeatCount="indefinite"/>
+    <circle cx="60" cy="100" r="1" fill="#4ecdc4">
+      <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="140" cy="100" r="1" fill="#ff6b6b">
+      <animate attributeName="opacity" values="1;0;1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="100" cy="60" r="1" fill="#45b7d1">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg> 

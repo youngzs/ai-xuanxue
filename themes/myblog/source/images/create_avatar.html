@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>生成头像</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 设置背景渐变 - 深邃的太空色调
+        const bgGradient = ctx.createRadialGradient(100, 100, 0, 100, 100, 100);
+        bgGradient.addColorStop(0, '#2d1b69');
+        bgGradient.addColorStop(0.5, '#11998e');
+        bgGradient.addColorStop(1, '#0f3460');
+        
+        ctx.fillStyle = bgGradient;
+        ctx.fillRect(0, 0, 200, 200);
+        
+        // 绘制神秘的符号背景
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.lineWidth = 1;
+        
+        // 绘制五角星（玄学元素）
+        function drawStar(centerX, centerY, radius, alpha) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.beginPath();
+            for (let i = 0; i < 5; i++) {
+                const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+        }
+        
+        // 绘制多个星星
+        drawStar(160, 40, 15, 0.3);
+        drawStar(40, 160, 10, 0.4);
+        drawStar(170, 170, 8, 0.2);
+        
+        // 绘制中央主体 - AI大脑图案
+        const centerGradient = ctx.createRadialGradient(100, 100, 20, 100, 100, 60);
+        centerGradient.addColorStop(0, '#ff6b6b');
+        centerGradient.addColorStop(0.5, '#4ecdc4');
+        centerGradient.addColorStop(1, '#45b7d1');
+        
+        ctx.fillStyle = centerGradient;
+        ctx.beginPath();
+        ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // 绘制脑纹理/电路图案
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.globalAlpha = 0.8;
+        
+        // 中央神经网络节点
+        ctx.beginPath();
+        ctx.arc(100, 100, 8, 0, 2 * Math.PI);
+        ctx.stroke();
+        
+        // 连接线 - 象征AI神经网络
+        const nodes = [
+            {x: 85, y: 85}, {x: 115, y: 85}, {x: 85, y: 115}, {x: 115, y: 115},
+            {x: 70, y: 100}, {x: 130, y: 100}, {x: 100, y: 70}, {x: 100, y: 130}
+        ];
+        
+        // 绘制节点
+        nodes.forEach(node => {
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, 3, 0, 2 * Math.PI);
+            ctx.stroke();
+        });
+        
+        // 连接到中心
+        nodes.forEach(node => {
+            ctx.beginPath();
+            ctx.moveTo(100, 100);
+            ctx.lineTo(node.x, node.y);
+            ctx.stroke();
+        });
+        
+        // 绘制外围神秘符号 - 八卦
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.lineWidth = 1.5;
+        
+        // 太极图的简化版本
+        ctx.beginPath();
+        ctx.arc(100, 100, 70, 0, Math.PI);
+        ctx.arc(100, 85, 15, 0, 2 * Math.PI);
+        ctx.arc(100, 115, 15, Math.PI, 2 * Math.PI);
+        ctx.stroke();
+        
+        // 添加一些玄学元素 - 符文
+        ctx.font = '20px serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.textAlign = 'center';
+        
+        // 在四个角落添加符文
+        const runes = ['ᛗ', 'ᚱ', 'ᚨ', 'ᛁ']; // 古北欧符文
+        const positions = [{x: 30, y: 35}, {x: 170, y: 35}, {x: 30, y: 175}, {x: 170, y: 175}];
+        
+        runes.forEach((rune, i) => {
+            ctx.fillText(rune, positions[i].x, positions[i].y);
+        });
+        
+        // 转换为数据URL并下载
+        setTimeout(() => {
+            const dataURL = canvas.toDataURL('image/jpeg', 0.9);
+            const link = document.createElement('a');
+            link.download = 'avatar.jpg';
+            link.href = dataURL;
+            link.click();
+        }, 1000);
+    </script>
+</body>
+</html> 

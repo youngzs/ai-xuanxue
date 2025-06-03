@@ -1,0 +1,722 @@
+/* 专业人像摄影提示生成器样式 */
+.photography-tool {
+    --primary: #5D5CDE;
+    --primary-light: #7a79e3;
+    --primary-dark: #4a49b8;
+    --secondary: #f5f7fa;
+    --dark: #333;
+    --light: #f8f9fa;
+    --success: #28a745;
+    --warning: #ffc107;
+    --border: #dee2e6;
+    
+    /* Light mode colors */
+    --background: #FFFFFF;
+    --card-background: #FFFFFF;
+    --text: #333333;
+    --text-secondary: #666666;
+    
+    position: relative;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode variables */
+.photography-tool.dark-mode {
+    --background: #181818;
+    --card-background: #242424;
+    --text: #EEEEEE;
+    --text-secondary: #AAAAAA;
+    --border: #444444;
+    --secondary: #2a2a2a;
+}
+
+.photography-tool * {
+    box-sizing: border-box;
+}
+
+.photography-tool .tool-header {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+}
+
+.photography-tool .tool-header h1 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.photography-tool .tool-header .subtitle {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.photography-tool .tool-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .photography-tool .tool-container {
+        flex-direction: row;
+    }
+}
+
+.photography-tool .options-panel {
+    flex: 1;
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.photography-tool .result-panel {
+    flex: 1;
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s;
+}
+
+.photography-tool .form-group {
+    margin-bottom: 16px;
+}
+
+.photography-tool label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text);
+    transition: color 0.3s;
+}
+
+.photography-tool select, 
+.photography-tool input, 
+.photography-tool textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--background);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.photography-tool select:focus, 
+.photography-tool input:focus, 
+.photography-tool textarea:focus {
+    outline-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.photography-tool .options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+@media (min-width: 576px) {
+    .photography-tool .options-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.photography-tool button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.photography-tool button:hover {
+    background-color: var(--primary-light);
+}
+
+.photography-tool button:active {
+    transform: scale(0.98);
+}
+
+.photography-tool .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.photography-tool .button-secondary {
+    background-color: #6c757d;
+}
+
+.photography-tool .button-secondary:hover {
+    background-color: #5a6268;
+}
+
+.photography-tool .button-success {
+    background-color: var(--success);
+}
+
+.photography-tool .button-success:hover {
+    background-color: #218838;
+}
+
+.photography-tool .prompt-result {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--secondary);
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    white-space: pre-wrap;
+    min-height: 120px;
+    font-family: monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.photography-tool .history-container {
+    margin-top: 20px;
+}
+
+.photography-tool .history-item {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: var(--text);
+}
+
+.photography-tool .history-item:hover {
+    background-color: var(--secondary);
+}
+
+.photography-tool .section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.photography-tool .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.photography-tool .tag {
+    background-color: var(--primary-light);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.photography-tool .remove-tag {
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.photography-tool .switch-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.photography-tool .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.photography-tool .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.photography-tool .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.photography-tool .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.photography-tool input:checked + .slider {
+    background-color: var(--primary);
+}
+
+.photography-tool input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.photography-tool .tab-container {
+    margin-bottom: 20px;
+}
+
+.photography-tool .tab-buttons {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    flex-wrap: wrap;
+}
+
+.photography-tool .tab-button {
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-right: 10px;
+    margin-top: 0;
+}
+
+.photography-tool .tab-button.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.photography-tool .tab-content {
+    padding: 15px 0;
+}
+
+.photography-tool .tab-pane {
+    display: none;
+}
+
+.photography-tool .tab-pane.active {
+    display: block;
+}
+
+/* Mode toggle */
+.photography-tool .mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background-color: var(--card-background);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+    transition: background-color 0.3s;
+}
+
+.photography-tool .mode-toggle svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.5s;
+    fill: var(--text);
+    stroke: var(--text);
+}
+
+.photography-tool .mode-toggle .moon {
+    display: block;
+}
+
+.photography-tool .mode-toggle .sun {
+    display: none;
+}
+
+.photography-tool.dark-mode .mode-toggle .moon {
+    display: none;
+}
+
+.photography-tool.dark-mode .mode-toggle .sun {
+    display: block;
+}
+
+/* 数量选择器 */
+.photography-tool .multi-image-num {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.photography-tool .multi-image-num label {
+    margin-bottom: 0;
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+.photography-tool .number-picker {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.photography-tool .number-picker button {
+    margin: 0;
+    padding: 5px 12px;
+    border-radius: 0;
+    font-size: 16px;
+    background-color: var(--secondary);
+    color: var(--text);
+}
+
+.photography-tool .number-picker button:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.photography-tool .number-picker input {
+    width: 50px;
+    border: none;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* 图片结果容器 */
+.photography-tool .image-result-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--secondary);
+    border-radius: 10px;
+    display: none;
+}
+
+.photography-tool .image-result-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.photography-tool .image-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+}
+
+.photography-tool .loading-dots::after {
+    content: '';
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+.photography-tool .generated-images {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+@media (min-width: 576px) {
+    .photography-tool .generated-images.grid-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .photography-tool .generated-images.grid-3, 
+    .photography-tool .generated-images.grid-4 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 768px) {
+    .photography-tool .generated-images.grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    .photography-tool .generated-images.grid-4 {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+.photography-tool .generated-image-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.photography-tool .generated-image {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    object-fit: cover;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+}
+
+.photography-tool .generated-image:hover {
+    transform: scale(1.02);
+}
+
+.photography-tool .image-error {
+    color: #dc3545;
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+.photography-tool .save-image-text {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Tooltip */
+.photography-tool .tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: help;
+}
+
+.photography-tool .tooltip-icon {
+    width: 18px;
+    height: 18px;
+    background-color: var(--primary-light);
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.photography-tool .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85rem;
+    font-weight: normal;
+}
+
+.photography-tool .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.photography-tool .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Toast */
+.photography-tool .toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.photography-tool .toast {
+    background-color: rgba(220, 53, 69, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    animation: fadeIn 0.3s, fadeOut 0.3s 2.5s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+.photography-tool .tip-box {
+    background-color: var(--secondary);
+    border-left: 4px solid var(--primary);
+    padding: 12px;
+    margin-top: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.photography-tool .tip-box h3 {
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.photography-tool .tip-item {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+/* 复制相关元素 */
+.photography-tool .copy-temp {
+    position: absolute;
+    left: -9999px;
+    height: 0;
+    opacity: 0;
+}
+
+/* 图片查看器样式 */
+.photography-tool .image-viewer {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.photography-tool .image-viewer-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.photography-tool .close-viewer {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+.photography-tool .prev, 
+.photography-tool .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.3s;
+    border-radius: 0 5px 5px 0;
+    user-select: none;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photography-tool .next {
+    right: 20px;
+    border-radius: 5px 0 0 5px;
+}
+
+.photography-tool .prev {
+    left: 20px;
+}
+
+.photography-tool .prev:hover, 
+.photography-tool .next:hover, 
+.photography-tool .close-viewer:hover {
+    color: var(--primary);
+}
+
+.photography-tool .viewer-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.photography-tool .image-number {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    padding: 8px 0;
+} 

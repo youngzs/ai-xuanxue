@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <% if (page.title) { %>
+            <%= page.title %> | <%= config.title %>
+        <% } else { %>
+            <%= config.title %><% if (config.subtitle) { %> - <%= config.subtitle %><% } %>
+        <% } %>
+    </title>
+    
+    <% if (config.description) { %>
+        <meta name="description" content="<%= config.description %>">
+    <% } %>
+    
+    <% if (config.keywords) { %>
+        <meta name="keywords" content="<%= config.keywords %>">
+    <% } %>
+    
+    <% if (theme.favicon) { %>
+        <link rel="icon" href="<%- url_for(theme.favicon) %>">
+    <% } %>
+    
+    <!-- CSS -->
+    <%- css('css/style') %>
+    <%- css('css/components') %>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="container">
+        <!-- 头部导航 -->
+        <%- partial('_partial/header') %>
+        
+        <!-- 主要内容区域 -->
+        <main id="main">
+            <div class="container">
+                <div class="row">
+                    <!-- 内容区域 -->
+                    <div class="col-main">
+                        <%- body %>
+                    </div>
+                    
+                    <!-- 侧边栏 -->
+                    <% if (theme.sidebar && theme.sidebar.enable) { %>
+                        <div class="col-sidebar">
+                            <%- partial('_partial/sidebar') %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 页脚 -->
+        <%- partial('_partial/footer') %>
+    </div>
+    
+    <!-- 回到顶部按钮 -->
+    <div id="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    
+    <!-- JavaScript -->
+    <%- js('js/main') %>
+    
+    <!-- Stagewise开发工具 (仅开发模式) -->
+    <% if (process.env.NODE_ENV !== 'production') { %>
+        <%- js('js/stagewise-dev') %>
+    <% } %>
+</body>
+</html> 

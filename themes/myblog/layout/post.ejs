@@ -1,0 +1,143 @@
+<article class="post">
+    <!-- 文章头部 -->
+    <header class="post-header">
+        <h1 class="post-title"><%= page.title %></h1>
+        
+        <div class="post-meta">
+            <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <time datetime="<%= date_xml(page.date) %>">
+                    <%= date(page.date, 'YYYY年MM月DD日') %>
+                </time>
+            </div>
+            
+            <% if (page.categories && page.categories.length > 0) { %>
+                <div class="meta-item">
+                    <i class="fas fa-folder"></i>
+                    <% page.categories.each(function(category, i) { %>
+                        <a href="<%- url_for(category.path) %>" class="category-link">
+                            <%= category.name %>
+                        </a>
+                        <% if (i < page.categories.length - 1) { %>, <% } %>
+                    <% }); %>
+                </div>
+            <% } %>
+            
+            <% if (theme.show_word_count && page.content) { %>
+                <div class="meta-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span><%= page.content.replace(/<[^>]*>/g, "").length %> 字</span>
+                </div>
+            <% } %>
+            
+            <% if (theme.show_reading_time && page.content) { %>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>阅读时间 <%= Math.ceil(page.content.replace(/<[^>]*>/g, "").length / 300) %> 分钟</span>
+                </div>
+            <% } %>
+        </div>
+        
+        <!-- 文章标签 -->
+        <% if (page.tags && page.tags.length > 0) { %>
+            <div class="post-tags">
+                <% page.tags.each(function(tag) { %>
+                    <a href="<%- url_for(tag.path) %>" class="tag">
+                        <%= tag.name %>
+                    </a>
+                <% }); %>
+            </div>
+        <% } %>
+    </header>
+    
+    <!-- 文章内容 -->
+    <div class="post-content">
+        <%- page.content %>
+    </div>
+    
+    <!-- 文章底部 -->
+    <footer class="post-footer">
+        <!-- 版权声明 -->
+        <div class="post-copyright">
+            <p>
+                <strong>版权声明：</strong>
+                本文由 <strong><%= config.author %></strong> 原创，遵循
+                <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
+                版权协议，转载请附上原文出处链接和本声明。
+            </p>
+            <p>
+                <strong>原文链接：</strong>
+                <a href="<%= config.url %><%- url_for(page.path) %>">
+                    <%= config.url %><%- url_for(page.path) %>
+                </a>
+            </p>
+        </div>
+        
+        <!-- 分享按钮 -->
+        <div class="post-share">
+            <h4>分享这篇文章</h4>
+            <div class="share-buttons">
+                <a href="https://service.weibo.com/share/share.php?url=<%= encodeURIComponent(config.url + url_for(page.path)) %>&title=<%= encodeURIComponent(page.title) %>" 
+                   target="_blank" class="share-btn weibo">
+                    <i class="fab fa-weibo"></i>
+                    微博
+                </a>
+                <a href="https://connect.qq.com/widget/shareqq/index.html?url=<%= encodeURIComponent(config.url + url_for(page.path)) %>&title=<%= encodeURIComponent(page.title) %>&desc=<%= encodeURIComponent(page.excerpt || page.title) %>" 
+                   target="_blank" class="share-btn qq">
+                    <i class="fab fa-qq"></i>
+                    QQ
+                </a>
+                <a href="javascript:void(0)" onclick="copyLink()" class="share-btn copy">
+                    <i class="fas fa-link"></i>
+                    复制链接
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 上一篇/下一篇导航 -->
+    <nav class="post-nav">
+        <% if (page.prev) { %>
+            <div class="post-nav-item prev">
+                <a href="<%- url_for(page.prev.path) %>" class="post-nav-link">
+                    <div class="post-nav-direction">
+                        <i class="fas fa-chevron-left"></i>
+                        上一篇
+                    </div>
+                    <div class="post-nav-title"><%= page.prev.title %></div>
+                </a>
+            </div>
+        <% } %>
+        
+        <% if (page.next) { %>
+            <div class="post-nav-item next">
+                <a href="<%- url_for(page.next.path) %>" class="post-nav-link">
+                    <div class="post-nav-direction">
+                        下一篇
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="post-nav-title"><%= page.next.title %></div>
+                </a>
+            </div>
+        <% } %>
+    </nav>
+</article>
+
+<script>
+function copyLink() {
+    const url = window.location.href;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+            alert('链接已复制到剪贴板！');
+        });
+    } else {
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert('链接已复制到剪贴板！');
+    }
+}
+</script> 

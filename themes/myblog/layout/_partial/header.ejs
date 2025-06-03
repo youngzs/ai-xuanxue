@@ -1,0 +1,64 @@
+<header id="header">
+    <div class="container">
+        <div class="header-content">
+            <!-- Logo和网站标题 -->
+            <div class="site-branding">
+                <% if (theme.avatar) { %>
+                    <img src="<%- url_for(theme.avatar) %>" alt="<%= config.title %>" class="site-logo">
+                <% } %>
+                <div class="site-info">
+                    <h1 class="site-title">
+                        <a href="<%- url_for('/') %>"><%= config.title %></a>
+                    </h1>
+                    <% if (config.subtitle) { %>
+                        <p class="site-subtitle"><%= config.subtitle %></p>
+                    <% } %>
+                </div>
+            </div>
+            
+            <!-- 导航菜单 -->
+            <nav class="main-nav">
+                <!-- 桌面端菜单 -->
+                <ul class="nav-menu desktop-menu">
+                    <% for (let name in theme.menu) { %>
+                        <li class="nav-item">
+                            <a href="<%- url_for(theme.menu[name]) %>" class="nav-link">
+                                <%= name %>
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+                
+                <!-- 移动端菜单切换按钮 -->
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+            
+            <!-- 搜索框 -->
+            <% if (theme.search && theme.search.enable) { %>
+                <div class="search-box">
+                    <input type="text" placeholder="搜索..." id="search-input">
+                    <button type="button" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            <% } %>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="mobile-menu">
+            <ul class="mobile-nav-menu">
+                <% for (let name in theme.menu) { %>
+                    <li class="mobile-nav-item">
+                        <a href="<%- url_for(theme.menu[name]) %>" class="mobile-nav-link">
+                            <%= name %>
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</header> 
