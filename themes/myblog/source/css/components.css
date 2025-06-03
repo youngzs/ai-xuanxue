@@ -453,9 +453,56 @@
         color: #63b3ed;
     }
     
+    .copyright p {
+        color: #a0aec0;
+    }
+    
+    .powered-by {
+        color: #a0aec0;
+    }
+    
+    .beian {
+        color: #9ca3af;
+    }
+    
+    /* 特色内容区域深色模式 */
+    .featured-section {
+        background: #1a202c;
+    }
+    
+    .featured-item h3 {
+        color: #e2e8f0;
+    }
+    
+    .featured-item p {
+        color: #a0aec0;
+    }
+    
+    /* 页面头部深色模式 */
+    .page-header {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .page-title {
+        color: #e2e8f0;
+    }
+    
+    .page-subtitle {
+        color: #a0aec0;
+    }
+    
     /* 分类和标签页面深色模式 */
     .categories-container,
-    .tags-list-section {
+    .tags-container,
+    .archive-container,
+    .search-container,
+    .tags-list-section,
+    .tag-cloud-section,
+    .categories-stats,
+    .archive-stats,
+    .popular-searches,
+    .recent-posts-search {
         background: #1a202c;
     }
     
@@ -471,16 +518,17 @@
     }
     
     .category-name a,
-    .tag-link {
+    .tag-name a {
         color: #e2e8f0;
     }
     
     .category-name a:hover,
-    .tag-link:hover {
+    .tag-name a:hover {
         color: #63b3ed;
     }
     
     .category-count,
+    .tag-count,
     .tag-posts-count {
         color: #a0aec0;
     }
@@ -493,6 +541,66 @@
         color: #63b3ed;
     }
     
+    .preview-date {
+        color: #718096;
+    }
+    
+    .preview-more a {
+        color: #63b3ed;
+    }
+    
+    .preview-post {
+        border-bottom-color: #4a5568;
+    }
+    
+    /* 无内容状态深色模式 */
+    .no-categories,
+    .no-tags {
+        color: #a0aec0;
+    }
+    
+    .no-categories-icon,
+    .no-tags-icon {
+        color: #718096;
+    }
+    
+    .no-categories h3,
+    .no-tags h3 {
+        color: #e2e8f0;
+    }
+    
+    /* 统计信息深色模式 */
+    .stats-grid .stat-number {
+        color: #63b3ed;
+    }
+    
+    .stats-grid .stat-label {
+        color: #a0aec0;
+    }
+    
+    /* 标签云深色模式 */
+    .tag-cloud-item {
+        background: #374151;
+        color: #a0aec0;
+    }
+    
+    .tag-cloud-item:hover {
+        background: #63b3ed;
+        color: #1a202c;
+    }
+    
+    .popular-tag-item {
+        background: #374151;
+    }
+    
+    .popular-tag-item:hover {
+        background: #4a5568;
+    }
+    
+    .tag-rank {
+        color: #63b3ed;
+    }
+    
     /* 归档页面深色模式 */
     .archive-timeline {
         background: #1a202c;
@@ -502,6 +610,25 @@
     .month-header {
         background: #2d3748;
         color: #e2e8f0;
+        border-bottom-color: #4a5568;
+    }
+    
+    .year-title,
+    .month-title {
+        color: #e2e8f0;
+    }
+    
+    .year-title i,
+    .month-title i {
+        color: #63b3ed;
+    }
+    
+    .month-count {
+        color: #a0aec0;
+    }
+    
+    .month-group {
+        background: #2d3748;
     }
     
     .archive-post {
@@ -509,11 +636,11 @@
     }
     
     .archive-post:hover {
-        background: #2d3748;
+        background: #374151;
     }
     
     .post-date {
-        background: #374151;
+        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
         color: #e2e8f0;
     }
     
@@ -523,6 +650,10 @@
     
     .archive-post .post-title a:hover {
         color: #63b3ed;
+    }
+    
+    .archive-post .post-meta {
+        color: #a0aec0;
     }
     
     .post-category a {
@@ -544,6 +675,10 @@
         border-color: #63b3ed;
     }
     
+    #search-input-main::placeholder {
+        color: #9ca3af;
+    }
+    
     #search-btn-main {
         background: #63b3ed;
         color: #1a202c;
@@ -553,13 +688,42 @@
         background: #90cdf4;
     }
     
-    .search-result-item {
+    .tips-item {
+        color: #a0aec0;
+    }
+    
+    .search-loading {
+        color: #63b3ed;
+    }
+    
+    .search-no-results {
+        color: #a0aec0;
+    }
+    
+    .no-results-icon {
+        color: #718096;
+    }
+    
+    .search-results {
         background: #2d3748;
+    }
+    
+    .results-title {
+        color: #e2e8f0;
+    }
+    
+    .results-count {
+        color: #63b3ed;
+    }
+    
+    .search-result-item {
+        background: #374151;
         border-color: #4a5568;
     }
     
     .search-result-item:hover {
-        background: #374151;
+        background: #4a5568;
+        border-color: #63b3ed;
     }
     
     .result-title a {
@@ -581,8 +745,18 @@
     }
     
     .result-tag {
+        background: #2d3748;
+        color: #a0aec0;
+    }
+    
+    .popular-tags .popular-tag {
         background: #374151;
         color: #a0aec0;
+    }
+    
+    .popular-tags .popular-tag:hover {
+        background: #63b3ed;
+        color: #1a202c;
     }
     
     /* 回到顶部按钮深色模式 */
@@ -741,14 +915,12 @@
     border-radius: 8px;
     overflow-x: auto;
     margin: 1.5rem 0;
-    position: relative;
 }
 
 .post .post-content pre code {
     background: none;
     color: inherit;
     padding: 0;
-    font-size: 0.9rem;
 }
 
 .copy-code-btn {
