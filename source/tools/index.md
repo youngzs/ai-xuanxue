@@ -40,7 +40,6 @@ photorealistic art style, pastel color scheme, shot with prime-35mm lens, shallo
 high resolution, professional, detailed, sharp focus, high quality, 8k --aspect 9:16
 ```
 
-
 ### 生成作品
 <div class="example-gallery">
     <div class="example-image">
@@ -84,7 +83,11 @@ high resolution, professional, detailed, sharp focus, high quality, 8k --aspect 
 <link rel="stylesheet" href="/css/photography-tool.css">
 
 <style>
-/* 工具页面专用样式 */
+/* ========================================
+   工具页面特定样式 - 只包含页面特有功能
+   ======================================== */
+
+/* 摄影工具容器 */
 #photography-tool-container {
     margin: 2rem 0;
     border-radius: 10px;
@@ -92,11 +95,11 @@ high resolution, professional, detailed, sharp focus, high quality, 8k --aspect 
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-.page-content {
-    max-width: none;
+/* 确保工具组件不被全局样式覆盖 */
+.photography-tool * {
+    box-sizing: border-box;
 }
 
-/* 确保工具样式不被博客样式覆盖 */
 .photography-tool h1,
 .photography-tool h2,
 .photography-tool h3 {
@@ -109,45 +112,7 @@ high resolution, professional, detailed, sharp focus, high quality, 8k --aspect 
     text-decoration: none;
 }
 
-.photography-tool * {
-    box-sizing: border-box;
-}
-
-/* 代码块样式优化 */
-.page-content pre {
-    background: #2d3748 !important;
-    color: #e2e8f0 !important;
-    padding: 20px !important;
-    border-radius: 8px !important;
-    font-size: 14px !important;
-    line-height: 1.6 !important;
-    overflow-x: auto !important;
-    margin: 15px 0 !important;
-    border: 1px solid #4a5568 !important;
-}
-
-.page-content code {
-    background: #2d3748 !important;
-    color: #e2e8f0 !important;
-    padding: 3px 6px !important;
-    border-radius: 4px !important;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
-    font-size: 13px !important;
-}
-
-/* 技术参数列表样式 */
-.page-content ul li {
-    margin-bottom: 8px !important;
-    color: #2d3748 !important;
-    font-weight: 500 !important;
-}
-
-.page-content ul li strong {
-    color: #2b6cb0 !important;
-    font-weight: 700 !important;
-}
-
-/* 示例图片库样式 */
+/* 示例图片库 - 工具页面特有功能 */
 .example-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -183,7 +148,7 @@ high resolution, professional, detailed, sharp focus, high quality, 8k --aspect 
     opacity: 0.9;
 }
 
-/* 图片查看器模态框 */
+/* 图片查看器模态框 - 工具页面特有功能 */
 .image-modal {
     display: none;
     position: fixed;
@@ -199,133 +164,78 @@ high resolution, professional, detailed, sharp focus, high quality, 8k --aspect 
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
-    max-height: 80%;
-    object-fit: contain;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90%;
+    margin-top: 5%;
 }
 
 .close {
     position: absolute;
-    top: 15px;
+    top: 20px;
     right: 35px;
     color: #f1f1f1;
     font-size: 40px;
     font-weight: bold;
-    transition: 0.3s;
     cursor: pointer;
-    z-index: 1001;
 }
 
 .close:hover,
 .close:focus {
     color: #bbb;
     text-decoration: none;
-    cursor: pointer;
 }
 
-/* 示例区域标题样式 */
-.page-content h2 {
-    color: #2b6cb0 !important;
-    font-weight: 700 !important;
-    margin-top: 2rem !important;
-    margin-bottom: 1rem !important;
-    font-size: 1.5rem !important;
+/* 深色模式支持 - 工具页面特有组件 */
+@media (prefers-color-scheme: dark) {
+    .example-gallery {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+    
+    .example-image {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    #photography-tool-container {
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
 }
 
-.page-content h3 {
-    color: #2d3748 !important;
-    font-weight: 600 !important;
-    margin-top: 1.5rem !important;
-    margin-bottom: 0.8rem !important;
-    font-size: 1.25rem !important;
-}
-
-/* 响应式设计 */
+/* 响应式设计 - 工具页面特有布局 */
 @media (max-width: 768px) {
     .example-gallery {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 10px;
         padding: 15px;
-    }
-    
-    .modal-content {
-        width: 95%;
-        max-height: 90%;
-    }
-    
-    .close {
-        top: 5px;
-        right: 15px;
-        font-size: 30px;
-    }
-    
-    .page-content pre {
-        font-size: 12px !important;
-        padding: 15px !important;
     }
 }
 </style>
 
-<script src="/js/photography-tool.js"></script>
 <script>
-// 图片查看器功能
+// 图片模态框功能 - 工具页面特有功能
 function openImageModal(src) {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
-    modal.style.display = "block";
+    modal.style.display = 'block';
     modalImg.src = src;
-    
-    // 防止背景滚动
-    document.body.style.overflow = 'hidden';
 }
 
 function closeImageModal() {
-    const modal = document.getElementById('imageModal');
-    modal.style.display = "none";
-    
-    // 恢复背景滚动
-    document.body.style.overflow = 'auto';
+    document.getElementById('imageModal').style.display = 'none';
 }
 
 // 点击模态框外部关闭
 window.onclick = function(event) {
     const modal = document.getElementById('imageModal');
-    if (event.target == modal) {
-        closeImageModal();
+    if (event.target === modal) {
+        modal.style.display = 'none';
     }
 }
 
-// 键盘ESC关闭
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeImageModal();
-    }
-});
-
-// 确保DOM完全加载后再初始化工具
+// 加载摄影工具组件
 document.addEventListener('DOMContentLoaded', function() {
-    // 等待一小段时间确保CSS加载完成
-    setTimeout(function() {
-        console.log('正在初始化摄影工具...');
-        
-        // 检查容器是否存在
-        const container = document.getElementById('photography-tool-container');
-        if (container) {
-            // 初始化摄影工具
-            const tool = initPhotographyTool('photography-tool-container');
-            if (tool) {
-                console.log('摄影工具初始化成功！');
-            } else {
-                console.error('摄影工具初始化失败');
-            }
-        } else {
-            console.error('未找到摄影工具容器');
-        }
-    }, 100);
+    const script = document.createElement('script');
+    script.src = '/js/photography-tool.js';
+    document.head.appendChild(script);
 });
 </script> 

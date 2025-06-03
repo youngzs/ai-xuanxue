@@ -179,249 +179,143 @@ comments: false
 *最后更新：2025年1月18日*
 
 <style>
-/* About页面专用样式 */
-.page-content {
-    line-height: 1.8;
-    color: #2d3748;
-}
+/* ========================================
+   About页面特定样式 - 只包含页面特有功能
+   ======================================== */
 
-/* 改善标题显示 */
-.page-content h1,
-.page-content h2,
-.page-content h3,
-.page-content h4 {
-    color: #2b6cb0 !important;
-    font-weight: 700 !important;
-    margin-top: 2rem !important;
-    margin-bottom: 1rem !important;
-}
-
-.page-content h1 {
-    font-size: 2rem !important;
-    border-bottom: 3px solid #3498db !important;
-    padding-bottom: 0.5rem !important;
-}
-
-.page-content h2 {
-    font-size: 1.5rem !important;
-}
-
-.page-content h3 {
-    font-size: 1.3rem !important;
-}
-
-.page-content h4 {
-    font-size: 1.1rem !important;
-    color: #4a5568 !important;
-}
-
-/* 改善列表样式 */
-.page-content ul li,
-.page-content ol li {
-    margin-bottom: 8px !important;
-    color: #2d3748 !important;
-    line-height: 1.6 !important;
-}
-
-.page-content ul li strong,
-.page-content ol li strong {
-    color: #2b6cb0 !important;
-    font-weight: 600 !important;
-}
-
-/* 改善引用块样式 */
-.page-content blockquote {
-    border-left: 4px solid #3498db !important;
-    background: linear-gradient(90deg, #f7fafc 0%, #edf2f7 100%) !important;
-    padding: 1.5rem !important;
-    margin: 1.5rem 0 !important;
-    font-style: italic !important;
-    color: #2d3748 !important;
-    border-radius: 0 8px 8px 0 !important;
-}
-
-.page-content blockquote p {
-    margin: 0 !important;
-    font-size: 1.1rem !important;
-    font-weight: 500 !important;
-}
-
-/* 改善链接样式 */
-.page-content a {
-    color: #3498db !important;
-    text-decoration: none !important;
-    border-bottom: 1px solid transparent !important;
-    transition: all 0.3s ease !important;
-    font-weight: 500 !important;
-}
-
-.page-content a:hover {
-    color: #2980b9 !important;
-    border-bottom-color: #3498db !important;
-}
-
-/* 职业发展流程图样式 */
+/* 职业发展历程组件 - About页面特有功能 */
 .career-progression {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
-    margin: 2rem 0 !important;
-    padding: 2rem !important;
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%) !important;
-    border-radius: 12px !important;
-    border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07) !important;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 1px solid #e9ecef;
 }
 
 .career-step {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: white;
-    border-radius: 10px;
-    padding: 1.5rem 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    min-width: 120px;
     text-align: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 120px;
+    max-width: 150px;
 }
 
 .career-step:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    border-color: #3498db;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .step-number {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #3498db, #2980b9);
+    background: #3498db;
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
+    font-weight: bold;
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
 }
 
 .step-content h4 {
-    margin: 0 0 0.5rem 0 !important;
-    color: #2d3748 !important;
-    font-size: 1rem !important;
-    font-weight: 600 !important;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    line-height: 1.3;
 }
 
 .step-content p {
-    margin: 0 !important;
-    color: #718096 !important;
-    font-size: 0.85rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .career-arrow {
     font-size: 1.5rem;
     color: #3498db;
-    font-weight: 700;
+    font-weight: bold;
     margin: 0 0.5rem;
-    animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
+/* 深色模式支持 - About页面特有组件 */
+@media (prefers-color-scheme: dark) {
+    .career-progression {
+        background: #2d3748;
+        border-color: #4a5568;
     }
-    50% {
-        opacity: 0.7;
-        transform: scale(1.1);
+    
+    .career-step {
+        background: #374151;
+        color: #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    
+    .career-step:hover {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    
+    .step-number {
+        background: #63b3ed;
+        color: #1a202c;
+    }
+    
+    .step-content h4 {
+        color: #e2e8f0;
+    }
+    
+    .step-content p {
+        color: #a0aec0;
+    }
+    
+    .career-arrow {
+        color: #63b3ed;
     }
 }
 
-/* 给不同步骤添加渐变色 */
-.career-step:nth-child(1) .step-number {
-    background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
-    color: #01579b;
-}
-
-.career-step:nth-child(3) .step-number {
-    background: linear-gradient(135deg, #b3e5fc, #81d4fa);
-    color: #0277bd;
-}
-
-.career-step:nth-child(5) .step-number {
-    background: linear-gradient(135deg, #81d4fa, #4fc3f7);
-    color: #0288d1;
-}
-
-.career-step:nth-child(7) .step-number {
-    background: linear-gradient(135deg, #4fc3f7, #29b6f6);
-    color: #039be5;
-}
-
-.career-step:nth-child(9) .step-number {
-    background: linear-gradient(135deg, #29b6f6, #03a9f4);
-    color: #0288d1;
-}
-
-.career-step:nth-child(11) .step-number {
-    background: linear-gradient(135deg, #03a9f4, #0277bd);
-    color: white;
-}
-
-/* 改善段落间距 */
-.page-content p {
-    margin-bottom: 1.2rem !important;
-    color: #2d3748 !important;
-    font-size: 1rem !important;
-}
-
-/* 表情符号样式 */
-.page-content h1 .emoji,
-.page-content h2 .emoji,
-.page-content h3 .emoji,
-.page-content h4 .emoji {
-    margin-right: 0.5rem;
-}
-
-/* 响应式设计 */
+/* 响应式设计 - About页面特有布局 */
 @media (max-width: 768px) {
-    .page-content h1 {
-        font-size: 1.75rem !important;
-    }
-    
-    .page-content h2 {
-        font-size: 1.35rem !important;
-    }
-    
-    .page-content h3 {
-        font-size: 1.15rem !important;
-    }
-    
     .career-progression {
         flex-direction: column;
-        padding: 1rem !important;
-        margin: 1.5rem 0 !important;
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+    }
+    
+    .career-step {
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+        max-width: 280px;
     }
     
     .career-arrow {
         transform: rotate(90deg);
-        margin: 0.5rem 0;
+        margin: 0;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .career-progression {
+        justify-content: space-around;
     }
     
     .career-step {
-        width: 100%;
-        max-width: 200px;
-    }
-    
-    .page-content blockquote {
-        padding: 1rem !important;
-        margin: 1rem 0 !important;
+        flex: 0 1 calc(50% - 2rem);
+        min-width: 120px;
     }
 }
 </style>
