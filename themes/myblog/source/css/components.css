@@ -480,7 +480,7 @@
     
     /* 页面头部深色模式 */
     .page-header {
-        background: #2d3748;
+        background: #1a202c;
         color: #e2e8f0;
     }
     
@@ -503,18 +503,22 @@
     .archive-stats,
     .popular-searches,
     .recent-posts-search {
-        background: #1a202c;
+        background: transparent;
     }
     
     .category-card,
-    .tag-card {
+    .tag-card,
+    .tag-cloud-section,
+    .tags-list-section,
+    .popular-tags-section {
         background: #2d3748;
-        color: #e2e8f0;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        border: 1px solid #4a5568;
     }
     
     .category-card:hover,
     .tag-card:hover {
-        background: #374151;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
     
     .category-name a,
@@ -534,7 +538,7 @@
     }
     
     .preview-title {
-        color: #a0aec0;
+        color: #e2e8f0;
     }
     
     .preview-title:hover {
@@ -542,7 +546,7 @@
     }
     
     .preview-date {
-        color: #718096;
+        color: #9ca3af;
     }
     
     .preview-more a {
@@ -561,7 +565,7 @@
     
     .no-categories-icon,
     .no-tags-icon {
-        color: #718096;
+        color: #6b7280;
     }
     
     .no-categories h3,
@@ -571,7 +575,7 @@
     
     /* 统计信息深色模式 */
     .stats-grid .stat-number {
-        color: #63b3ed;
+        color: #e2e8f0;
     }
     
     .stats-grid .stat-label {
@@ -582,15 +586,18 @@
     .tag-cloud-item {
         background: #374151;
         color: #a0aec0;
+        border: 1px solid #4a5568;
     }
     
     .tag-cloud-item:hover {
         background: #63b3ed;
         color: #1a202c;
+        transform: translateY(-2px);
     }
     
     .popular-tag-item {
         background: #374151;
+        border: 1px solid #4a5568;
     }
     
     .popular-tag-item:hover {
@@ -629,6 +636,7 @@
     
     .month-group {
         background: #2d3748;
+        border-color: #4a5568;
     }
     
     .archive-post {
@@ -640,8 +648,17 @@
     }
     
     .post-date {
-        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+        background: #374151;
         color: #e2e8f0;
+        border-color: #4a5568;
+    }
+    
+    .date-day {
+        color: #63b3ed;
+    }
+    
+    .date-month {
+        color: #a0aec0;
     }
     
     .archive-post .post-title a {
@@ -663,16 +680,18 @@
     /* 搜索页面深色模式 */
     .search-input-wrapper {
         background: #2d3748;
+        border-color: #4a5568;
     }
     
     #search-input-main {
         background: #374151;
-        color: #e2e8f0;
         border-color: #4a5568;
+        color: #e2e8f0;
     }
     
     #search-input-main:focus {
         border-color: #63b3ed;
+        box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1);
     }
     
     #search-input-main::placeholder {
@@ -685,27 +704,27 @@
     }
     
     #search-btn-main:hover {
-        background: #90cdf4;
+        background: #4299e1;
     }
     
     .tips-item {
+        background: #374151;
         color: #a0aec0;
+        border-color: #4a5568;
     }
     
-    .search-loading {
-        color: #63b3ed;
-    }
-    
+    .search-loading,
     .search-no-results {
         color: #a0aec0;
     }
     
     .no-results-icon {
-        color: #718096;
+        color: #6b7280;
     }
     
     .search-results {
         background: #2d3748;
+        border-color: #4a5568;
     }
     
     .results-title {
@@ -713,17 +732,15 @@
     }
     
     .results-count {
-        color: #63b3ed;
+        color: #a0aec0;
     }
     
     .search-result-item {
-        background: #374151;
-        border-color: #4a5568;
+        border-bottom-color: #4a5568;
     }
     
     .search-result-item:hover {
-        background: #4a5568;
-        border-color: #63b3ed;
+        background: #374151;
     }
     
     .result-title a {
@@ -734,19 +751,23 @@
         color: #63b3ed;
     }
     
-    .result-date,
+    .result-date {
+        color: #9ca3af;
+    }
+    
     .result-excerpt {
         color: #a0aec0;
     }
     
     .result-excerpt mark {
-        background: #63b3ed;
+        background: #fbbf24;
         color: #1a202c;
     }
     
     .result-tag {
-        background: #2d3748;
+        background: #374151;
         color: #a0aec0;
+        border-color: #4a5568;
     }
     
     .popular-tags .popular-tag {
