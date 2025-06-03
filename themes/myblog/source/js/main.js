@@ -271,36 +271,510 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== 添加夜间模式样式 =====
 const nightModeStyles = `
+/* 夜间模式基础样式 */
 .night-mode {
     background-color: #1a1a2e !important;
     color: #eee !important;
 }
 
+/* 头部导航 */
 .night-mode #header {
     background: #16213e !important;
     border-bottom: 1px solid #2a2a2a;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-.night-mode .post-card,
-.night-mode .widget,
-.night-mode .featured-section {
-    background: #16213e !important;
-    color: #eee !important;
-}
-
-.night-mode .post-title a,
-.night-mode .nav-link,
 .night-mode .site-title a {
     color: #eee !important;
 }
 
-.night-mode .post-excerpt,
 .night-mode .site-subtitle {
     color: #bbb !important;
 }
 
+.night-mode .nav-link {
+    color: #eee !important;
+}
+
+.night-mode .nav-link:hover {
+    color: #64b3f4 !important;
+}
+
+.night-mode .mobile-menu {
+    background: #16213e !important;
+    border-top: 1px solid #2a2a2a;
+}
+
+.night-mode .mobile-nav-link {
+    color: #eee !important;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.night-mode .search-box {
+    background: #2a2a2a !important;
+}
+
+.night-mode #search-input {
+    color: #eee !important;
+}
+
+.night-mode #search-input::placeholder {
+    color: #999 !important;
+}
+
+/* 卡片组件 */
+.night-mode .post-card,
+.night-mode .widget,
+.night-mode .featured-section,
+.night-mode .featured-item,
+.night-mode .category-card {
+    background: #16213e !important;
+    color: #eee !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .post-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4) !important;
+}
+
+/* 文章内容 */
+.night-mode .post-title a,
+.night-mode .page-title,
+.night-mode .section-title,
+.night-mode .widget-title {
+    color: #eee !important;
+}
+
+.night-mode .post-title a:hover {
+    color: #64b3f4 !important;
+}
+
+.night-mode .post-excerpt,
+.night-mode .post-meta,
+.night-mode .page-subtitle {
+    color: #bbb !important;
+}
+
+.night-mode .post-content,
+.night-mode .page-content {
+    color: #eee !important;
+}
+
+.night-mode .post-content h1,
+.night-mode .post-content h2,
+.night-mode .post-content h3,
+.night-mode .post-content h4,
+.night-mode .post-content h5,
+.night-mode .post-content h6,
+.night-mode .page-content h1,
+.night-mode .page-content h2,
+.night-mode .page-content h3,
+.night-mode .page-content h4,
+.night-mode .page-content h5,
+.night-mode .page-content h6 {
+    color: #eee !important;
+}
+
+.night-mode .post-content p,
+.night-mode .page-content p,
+.night-mode .post-content li,
+.night-mode .page-content li {
+    color: #ddd !important;
+}
+
+.night-mode .post-content a,
+.night-mode .page-content a {
+    color: #64b3f4 !important;
+}
+
+.night-mode .post-content a:hover,
+.night-mode .page-content a:hover {
+    color: #4a9eff !important;
+}
+
+/* 代码块 */
+.night-mode .post-content pre,
+.night-mode .page-content pre {
+    background: #0d1117 !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .post-content code,
+.night-mode .page-content code {
+    background: #2a2a2a !important;
+    color: #f8f8f2 !important;
+}
+
+.night-mode .post-content pre code,
+.night-mode .page-content pre code {
+    background: transparent !important;
+    color: #f8f8f2 !important;
+}
+
+.night-mode .copy-code-btn {
+    background: #2a2a2a !important;
+    color: #eee !important;
+}
+
+/* 引用块 */
+.night-mode .post-content blockquote,
+.night-mode .page-content blockquote {
+    background: #2a2a2a !important;
+    border-left: 4px solid #64b3f4 !important;
+    color: #ddd !important;
+}
+
+/* 表格 */
+.night-mode .post-content table,
+.night-mode .page-content table {
+    background: #16213e !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .post-content th,
+.night-mode .page-content th {
+    background: #2a2a2a !important;
+    color: #eee !important;
+    border: 1px solid #3a3a3a;
+}
+
+.night-mode .post-content td,
+.night-mode .page-content td {
+    border: 1px solid #2a2a2a;
+    color: #ddd !important;
+}
+
+.night-mode .post-content tr:hover,
+.night-mode .page-content tr:hover {
+    background: #2a2a2a !important;
+}
+
+/* 标签和分类 */
+.night-mode .tag,
+.night-mode .tag-link,
+.night-mode .category-link {
+    background: #2a2a2a !important;
+    color: #ddd !important;
+}
+
+.night-mode .tag:hover,
+.night-mode .tag-link:hover,
+.night-mode .category-link:hover {
+    background: #64b3f4 !important;
+    color: #fff !important;
+}
+
+.night-mode .tag.current {
+    background: #64b3f4 !important;
+    color: #fff !important;
+}
+
+/* 分页 */
+.night-mode .pagination .page-number,
+.night-mode .pagination .prev,
+.night-mode .pagination .next {
+    background: #16213e !important;
+    color: #ddd !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .pagination .current {
+    background: #64b3f4 !important;
+    color: #fff !important;
+}
+
+/* 页面头部 */
+.night-mode .page-header {
+    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%) !important;
+}
+
+.night-mode .hero-banner {
+    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%) !important;
+}
+
+/* 分类页面特定样式 */
+.night-mode .categories-grid .category-card {
+    background: #16213e !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .category-name a {
+    color: #eee !important;
+}
+
+.night-mode .category-name a:hover {
+    color: #64b3f4 !important;
+}
+
+.night-mode .category-count {
+    background: #2a2a2a !important;
+    color: #ddd !important;
+}
+
+/* 归档页面 */
+.night-mode .year-header,
+.night-mode .month-header {
+    background: #16213e !important;
+}
+
+.night-mode .year-title,
+.night-mode .month-title {
+    color: #eee !important;
+}
+
+.night-mode .archive-post {
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.night-mode .archive-post:hover {
+    background: #2a2a2a !important;
+}
+
+.night-mode .archive-post .post-title a {
+    color: #eee !important;
+}
+
+.night-mode .archive-post .post-title a:hover {
+    color: #64b3f4 !important;
+}
+
+.night-mode .post-date {
+    background: #2a2a2a !important;
+    color: #ddd !important;
+}
+
+/* 搜索页面 */
+.night-mode .search-input-wrapper {
+    background: #16213e !important;
+}
+
+.night-mode #search-input-main {
+    background: #2a2a2a !important;
+    color: #eee !important;
+    border: 1px solid #3a3a3a;
+}
+
+.night-mode .search-result-item {
+    background: #16213e !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .result-title a {
+    color: #eee !important;
+}
+
+.night-mode .result-title a:hover {
+    color: #64b3f4 !important;
+}
+
+.night-mode .result-excerpt {
+    color: #bbb !important;
+}
+
+.night-mode .result-excerpt mark {
+    background: #64b3f4 !important;
+    color: #fff !important;
+}
+
+/* 工具页面特定样式 */
+.night-mode .tool-container {
+    background: #16213e !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .tool-section {
+    background: #1a1a2e !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .tool-section h3 {
+    color: #eee !important;
+}
+
+.night-mode .tool-section label {
+    color: #ddd !important;
+}
+
+.night-mode .tool-section select,
+.night-mode .tool-section input,
+.night-mode .tool-section textarea {
+    background: #2a2a2a !important;
+    color: #eee !important;
+    border: 1px solid #3a3a3a;
+}
+
+.night-mode .btn {
+    background: #64b3f4 !important;
+    color: #fff !important;
+    border: none;
+}
+
+.night-mode .btn:hover {
+    background: #4a9eff !important;
+}
+
+.night-mode .result-display {
+    background: #2a2a2a !important;
+    color: #eee !important;
+    border: 1px solid #3a3a3a;
+}
+
+/* 侧边栏 */
+.night-mode .profile-info {
+    color: #eee !important;
+}
+
+.night-mode .profile-name {
+    color: #eee !important;
+}
+
+.night-mode .profile-desc {
+    color: #bbb !important;
+}
+
+.night-mode .stat-number {
+    color: #64b3f4 !important;
+}
+
+.night-mode .stat-label {
+    color: #ddd !important;
+}
+
+.night-mode .recent-post-link {
+    color: #ddd !important;
+}
+
+.night-mode .recent-post-link:hover {
+    color: #64b3f4 !important;
+}
+
+.night-mode .recent-post-date {
+    color: #999 !important;
+}
+
+/* 页脚 */
 .night-mode #footer {
     background: #0f0f23 !important;
+    border-top: 1px solid #2a2a2a;
+}
+
+.night-mode .copyright,
+.night-mode .powered-by {
+    color: #bbb !important;
+}
+
+.night-mode .social-link {
+    background: #2a2a2a !important;
+    color: #ddd !important;
+}
+
+.night-mode .social-link:hover {
+    background: #64b3f4 !important;
+    color: #fff !important;
+}
+
+/* 职业发展时间线 */
+.night-mode .career-step {
+    background: #16213e !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .career-step:hover {
+    background: #1e2a4a !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4) !important;
+}
+
+.night-mode .step-icon {
+    background: linear-gradient(135deg, #64b3f4, #4a9eff) !important;
+}
+
+.night-mode .step-title {
+    color: #eee !important;
+}
+
+.night-mode .step-company {
+    color: #64b3f4 !important;
+}
+
+.night-mode .step-period,
+.night-mode .step-description {
+    color: #bbb !important;
+}
+
+/* 图片库样式 */
+.night-mode .image-gallery {
+    background: #16213e !important;
+}
+
+.night-mode .gallery-item {
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .image-info {
+    background: #2a2a2a !important;
+    color: #eee !important;
+}
+
+.night-mode .image-title {
+    color: #eee !important;
+}
+
+.night-mode .image-params {
+    color: #bbb !important;
+}
+
+/* 模态框 */
+.night-mode .modal-content {
+    background: #16213e !important;
+    border: 1px solid #2a2a2a;
+}
+
+.night-mode .modal-title {
+    color: #eee !important;
+}
+
+.night-mode .close {
+    color: #ddd !important;
+}
+
+.night-mode .close:hover {
+    color: #fff !important;
+}
+
+/* 其他元素 */
+.night-mode hr {
+    border-color: #2a2a2a !important;
+}
+
+.night-mode .border {
+    border-color: #2a2a2a !important;
+}
+
+.night-mode .bg-light {
+    background: #2a2a2a !important;
+}
+
+.night-mode .text-muted {
+    color: #999 !important;
+}
+
+/* 滚动条样式 */
+.night-mode ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.night-mode ::-webkit-scrollbar-track {
+    background: #1a1a2e;
+}
+
+.night-mode ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 4px;
+}
+
+.night-mode ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
 }
 `;
 

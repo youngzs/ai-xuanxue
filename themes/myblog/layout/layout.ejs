@@ -69,10 +69,5 @@
     
     <!-- JavaScript -->
     <%- js('js/main') %>
-    
-    <!-- Stagewise开发工具 (仅开发模式) -->
-    <% if (process.env.NODE_ENV !== 'production') { %>
-        <%- js('js/stagewise-dev') %>
-    <% } %>
 </body>
 </html> 

@@ -29,6 +29,13 @@
 - **分类标签** - 文章分类和标签云
 - **归档** - 按月份归档文章
 
+### 🔮 玄学内容展示 (NEW!)
+- **玄学专栏** - 专门展示传统文化内容
+- **奇门遁甲详解** - 深入介绍古老预测学
+- **八卦理论精髓** - 《易经》智慧的核心解读
+- **项目展示页** - 展示玄学文档工具等开源项目
+- **技术与文化融合** - 用现代技术传承古老智慧
+
 ### 🎨 AI工具集成
 - **专业人像摄影提示生成器** - 集成FLUX模型的AI摄影工具
   - 📸 专业摄影参数设置
@@ -65,11 +72,47 @@ mysite/
 │       └── images/            # 图片资源
 ├── source/                     # 内容源文件
 │   ├── _posts/                # 文章目录
+│   │   ├── xuanxue-project-introduction.md  # 玄学项目介绍
+│   │   ├── qimen-dunjia-basics.md          # 奇门遁甲入门
+│   │   └── bagua-theory-basics.md          # 八卦理论精髓
+│   ├── projects/              # 项目展示页面
+│   │   └── index.md          # 开源项目展示
 │   ├── tools/                 # 工具页面
 │   │   └── index.md          # AI工具集页面
-│   └── about/                 # 关于页面
+│   ├── about/                 # 关于页面
+│   └── images/                # 图片资源
+│       ├── xuanxue/          # 玄学相关图片
+│       └── ...               # 其他图片
 └── public/                    # 生成的静态网站
 ```
+
+## 📖 新增内容
+
+### 玄学知识系列文章
+
+#### 1. 玄学文档展示工具介绍
+- 项目背景和设计理念
+- 技术架构和实现方案
+- 在线展示和GitHub链接
+- 未来发展规划
+
+#### 2. 奇门遁甲入门指南
+- 历史渊源和基础理论
+- 九宫八卦和天干地支
+- 起局方法和实战应用
+- 学习建议和资源推荐
+
+#### 3. 八卦理论精髓解读
+- 《易经》智慧核心
+- 八卦详解和应用方法
+- 现代价值和哲学思想
+- 学习方法和常见误区
+
+### 项目展示页面
+- 开源项目汇总展示
+- 技术栈和特色功能
+- 贡献指南和联系方式
+- 项目统计和发展规划
 
 ## 🎯 组件化设计
 
@@ -78,6 +121,7 @@ mysite/
 - 网站Logo和标题
 - 搜索框
 - 移动端汉堡菜单
+- **新增**: 玄学专栏和项目展示入口
 
 ### 侧边栏 (sidebar.ejs)
 - 模块化组件设计
@@ -120,25 +164,32 @@ hexo server
 hexo generate
 ```
 
+### 5. 创建新文章
+```bash
+hexo new post "文章标题"
+```
+
 ## ⚙️ 配置说明
 
 ### 主题配置 (themes/myblog/_config.yml)
 
 ```yaml
-# 导航菜单
+# 导航菜单（已更新）
 menu:
   首页: /
   归档: /archives/
   分类: /categories/
   标签: /tags/
+  玄学专栏: /categories/玄学知识/  # 新增
+  项目展示: /projects/              # 新增
   工具: /tools/
   关于: /about/
 
 # 社交链接
 social:
-  GitHub: https://github.com/your-username
-  微博: https://weibo.com/your-username
-  邮箱: mailto:your-email@example.com
+  GitHub: https://github.com/youngzs
+  微博: https://weibo.com/u/1279981594
+  邮箱: mailto:yanteruo@gmail.com
 
 # 侧边栏组件
 sidebar:
@@ -168,6 +219,23 @@ sidebar:
 
 - **桌面端**: > 768px
 - **移动端**: ≤ 768px
+
+## 🔮 玄学文档展示工具集成
+
+### 在线访问
+- **项目网站**: [xuanxue.vercel.app](https://xuanxue.vercel.app)
+- **GitHub仓库**: [github.com/youngzs/xuanxue](https://github.com/youngzs/xuanxue)
+
+### 内容特色
+- **奇门遁甲**: 完整的理论体系和实战应用
+- **八卦理论**: 《易经》智慧的深度解读
+- **中医古籍**: 传统医学经典文献
+- **现代化展示**: Markdown + MkDocs技术栈
+
+### 博客整合
+- 在博客中专门介绍项目背景和技术实现
+- 提供详细的学习指南和入门教程
+- 展示传统文化与现代技术的融合
 
 ## 🎨 AI工具使用说明
 
@@ -213,8 +281,19 @@ sidebar:
 - [EJS模板引擎](https://ejs.co/)
 - [Font Awesome图标](https://fontawesome.com/)
 - [Google Fonts](https://fonts.google.com/)
+- [MkDocs文档](https://www.mkdocs.org/)
+- [Material主题](https://squidfunk.github.io/mkdocs-material/)
 
 ## 📝 更新日志
+
+### v2.1.0 (2025-01-19) - 玄学内容专版
+- 🔮 新增玄学专栏导航入口
+- 📚 添加玄学文档展示工具介绍文章
+- 🌌 发布奇门遁甲入门指南
+- ☯️ 发布八卦理论精髓解读
+- 🚀 新增项目展示页面
+- 🎨 优化导航菜单结构
+- 📁 完善图片资源目录结构
 
 ### v2.0.0 (2025-01-10)
 - ✨ 新增AI工具集成功能
@@ -236,3 +315,5 @@ MIT License
 ---
 
 **AI与玄学研究院** - 探索人工智能与古老智慧的奥秘 ✨ 
+
+*"技术让传统文化焕发新的生命力，古老智慧在数字时代续写新篇章。"* 

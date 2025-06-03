@@ -84,8 +84,7 @@ comments: false
             <p>学习基础技能</p>
         </div>
     </div>
-    <div class="career-arrow">→</div>
-    
+    <div class="career-arrow">→</div>    
     <div class="career-step">
         <div class="step-number">2</div>
         <div class="step-content">
@@ -93,8 +92,7 @@ comments: false
             <p>技能逐渐成熟</p>
         </div>
     </div>
-    <div class="career-arrow">→</div>
-    
+    <div class="career-arrow">→</div>    
     <div class="career-step">
         <div class="step-number">3</div>
         <div class="step-content">
@@ -102,8 +100,7 @@ comments: false
             <p>独当一面</p>
         </div>
     </div>
-    <div class="career-arrow">→</div>
-    
+    <div class="career-arrow">→</div>    
     <div class="career-step">
         <div class="step-number">4</div>
         <div class="step-content">
@@ -111,8 +108,7 @@ comments: false
             <p>领域专精</p>
         </div>
     </div>
-    <div class="career-arrow">→</div>
-    
+    <div class="career-arrow">→</div>    
     <div class="career-step">
         <div class="step-number">5</div>
         <div class="step-content">
@@ -120,8 +116,7 @@ comments: false
             <p>整体把控</p>
         </div>
     </div>
-    <div class="career-arrow">→</div>
-    
+    <div class="career-arrow">→</div>    
     <div class="career-step">
         <div class="step-number">6</div>
         <div class="step-content">

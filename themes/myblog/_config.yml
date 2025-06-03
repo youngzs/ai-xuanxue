@@ -4,6 +4,8 @@ menu:
   归档: /archives/
   分类: /categories/
   标签: /tags/
+  玄学专栏: /categories/玄学知识/
+  项目展示: /projects/
   工具: /tools/
   关于: /about/
 
@@ -12,7 +14,7 @@ favicon: /images/favicon.ico
 favicon_svg: /images/favicon.svg
 
 # 头像 - 支持多种格式
-avatar: /images/avatar.bmp
+avatar: /images/avatar.webp
 avatar_svg: /images/avatar.svg
 
 # 社交链接
