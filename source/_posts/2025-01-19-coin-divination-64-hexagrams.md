@@ -70,26 +70,82 @@ cover: /images/xuanxue/bagua-cover.webp
         <label for="question">🤔 请输入您要占问的事情：</label>
         <textarea id="question" placeholder="例如：我这次求职能否成功？"></textarea>
     </div>    
-    <div class="divination-process">
-        <button id="start-divination" class="btn-primary">开始占卜</button>
-        <button id="throw-coins" class="btn-secondary" style="display:none;">投掷硬币</button>
-        <button id="reset-divination" class="btn-reset" style="display:none;">重新占卜</button>
-    </div>    
-    <div id="throwing-area" class="throwing-area" style="display:none;">
-        <div class="throw-info">
-            <span id="throw-count">第 1 次投掷</span>
-            <span id="yao-position">（初爻）</span>
-        </div>
-        <div class="coins-display">
-            <div class="coin" id="coin1">🪙</div>
-            <div class="coin" id="coin2">🪙</div>
-            <div class="coin" id="coin3">🪙</div>
-        </div>
-        <div class="throw-result">
-            <span id="throw-details"></span>
-            <span id="yao-result"></span>
+    <div class="mode-selection">
+        <h4>📊 选择占卜方式</h4>
+        <div class="mode-buttons">
+            <button id="online-mode" class="mode-btn active">🎲 在线投掷</button>
+            <button id="offline-mode" class="mode-btn">📝 输入结果</button>
         </div>
     </div>    
+    <!-- 在线投掷模式 -->
+    <div id="online-divination" class="divination-mode">
+        <div class="divination-process">
+            <button id="start-divination" class="btn-primary">开始占卜</button>
+            <button id="throw-coins" class="btn-secondary" style="display:none;">投掷硬币</button>
+            <button id="reset-divination" class="btn-reset" style="display:none;">重新占卜</button>
+        </div>    
+        <div id="throwing-area" class="throwing-area" style="display:none;">
+            <div class="throw-info">
+                <span id="throw-count">第 1 次投掷</span>
+                <span id="yao-position">（初爻）</span>
+            </div>
+            <div class="coins-display">
+                <div class="coin" id="coin1">🪙</div>
+                <div class="coin" id="coin2">🪙</div>
+                <div class="coin" id="coin3">🪙</div>
+            </div>
+            <div class="throw-result">
+                <span id="throw-details"></span>
+                <span id="yao-result"></span>
+            </div>
+        </div>
+    </div>    
+    <!-- 线下输入模式 -->
+    <div id="offline-divination" class="divination-mode" style="display:none;">
+        <div class="offline-input-section">
+            <h4>📋 输入您的投掷结果</h4>
+            <p class="input-instruction">
+                请按从下到上的顺序（初爻→上爻），输入每次投掷的菊花数量（0-3）：
+            </p>
+            <div class="yao-inputs">
+                <div class="yao-input-row">
+                    <label>上爻（第6次）：</label>
+                    <input type="number" class="yao-input" min="0" max="3" data-yao="5" placeholder="0-3">
+                    <span class="yao-result-display" data-yao="5"></span>
+                </div>
+                <div class="yao-input-row">
+                    <label>五爻（第5次）：</label>
+                    <input type="number" class="yao-input" min="0" max="3" data-yao="4" placeholder="0-3">
+                    <span class="yao-result-display" data-yao="4"></span>
+                </div>
+                <div class="yao-input-row">
+                    <label>四爻（第4次）：</label>
+                    <input type="number" class="yao-input" min="0" max="3" data-yao="3" placeholder="0-3">
+                    <span class="yao-result-display" data-yao="3"></span>
+                </div>
+                <div class="yao-input-row">
+                    <label>三爻（第3次）：</label>
+                    <input type="number" class="yao-input" min="0" max="3" data-yao="2" placeholder="0-3">
+                    <span class="yao-result-display" data-yao="2"></span>
+                </div>
+                <div class="yao-input-row">
+                    <label>二爻（第2次）：</label>
+                    <input type="number" class="yao-input" min="0" max="3" data-yao="1" placeholder="0-3">
+                    <span class="yao-result-display" data-yao="1"></span>
+                </div>
+                <div class="yao-input-row">
+                    <label>初爻（第1次）：</label>
+                    <input type="number" class="yao-input" min="0" max="3" data-yao="0" placeholder="0-3">
+                    <span class="yao-result-display" data-yao="0"></span>
+                </div>
+            </div>
+            <div class="offline-controls">
+                <button id="generate-hexagram" class="btn-primary">生成卦象</button>
+                <button id="clear-inputs" class="btn-reset">清空重填</button>
+            </div>
+        </div>
+    </div>    
+    <!-- 卦象显示区域 -->    
     <div id="hexagram-display" class="hexagram-display" style="display:none;">
         <h4>📜 卦象结果</h4>
         <div class="hexagram-visual">
@@ -241,6 +297,125 @@ cover: /images/xuanxue/bagua-cover.webp
 .question-input textarea:focus {
     outline: none;
     border-color: #3498db;
+}
+
+/* 模式选择样式 */
+.mode-selection {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.mode-selection h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.mode-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.mode-btn {
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    background: white;
+    color: #6c757d;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.mode-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* 线下输入模式样式 */
+.offline-input-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 1rem 0;
+    border: 2px solid #3498db;
+}
+
+.offline-input-section h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.input-instruction {
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.yao-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.yao-input-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.yao-input-row label {
+    min-width: 120px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.95rem;
+}
+
+.yao-input {
+    width: 60px;
+    padding: 0.5rem;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.yao-input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.yao-result-display {
+    min-width: 120px;
+    padding: 0.3rem 0.8rem;
+    background: #e3f2fd;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1976d2;
+    text-align: center;
+}
+
+.offline-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .divination-process {
@@ -448,6 +623,59 @@ cover: /images/xuanxue/bagua-cover.webp
         border-color: #63b3ed;
     }
     
+    .mode-selection h4 {
+        color: #e2e8f0;
+    }
+    
+    .mode-btn {
+        background: #374151;
+        border-color: #4a5568;
+        color: #a0aec0;
+    }
+    
+    .mode-btn.active {
+        background: #63b3ed;
+        color: #1a202c;
+        border-color: #63b3ed;
+    }
+    
+    .offline-input-section {
+        background: #374151;
+        border-color: #63b3ed;
+    }
+    
+    .offline-input-section h4 {
+        color: #e2e8f0;
+    }
+    
+    .input-instruction {
+        color: #a0aec0;
+    }
+    
+    .yao-input-row {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+    
+    .yao-input-row label {
+        color: #e2e8f0;
+    }
+    
+    .yao-input {
+        background: #1a202c;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .yao-input:focus {
+        border-color: #63b3ed;
+    }
+    
+    .yao-result-display {
+        background: #1e3a8a;
+        color: #93c5fd;
+    }
+    
     .throwing-area {
         background: #374151;
         border-color: #63b3ed;
@@ -522,6 +750,45 @@ cover: /images/xuanxue/bagua-cover.webp
     .divination-container {
         padding: 1.5rem;
     }
+    
+    .mode-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .mode-btn {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .yao-input-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .yao-input-row label {
+        min-width: auto;
+    }
+    
+    .yao-result-display {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .offline-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-reset {
+        width: 100%;
+        max-width: 200px;
+        margin: 0.25rem 0;
+    }
 }
 </style>
 
@@ -537,6 +804,7 @@ function initDivinationTool() {
     let currentThrow = 0;
     let hexagramLines = [];
     let question = '';
+    let currentMode = 'online'; // 'online' 或 'offline'
     
     // 爻位名称
     const yaoPositions = ['初爻', '二爻', '三爻', '四爻', '五爻', '上爻'];
@@ -550,8 +818,155 @@ function initDivinationTool() {
     const hexagramDisplay = document.getElementById('hexagram-display');
     const interpretation = document.getElementById('interpretation');
     
-    // 开始占卜
-    startBtn.addEventListener('click', function() {
+    // 模式切换相关元素
+    const onlineModeBtn = document.getElementById('online-mode');
+    const offlineModeBtn = document.getElementById('offline-mode');
+    const onlineDivination = document.getElementById('online-divination');
+    const offlineDivination = document.getElementById('offline-divination');
+    const generateHexagramBtn = document.getElementById('generate-hexagram');
+    const clearInputsBtn = document.getElementById('clear-inputs');
+    const yaoInputs = document.querySelectorAll('.yao-input');
+    const yaoResultDisplays = document.querySelectorAll('.yao-result-display');
+    
+    // 初始化
+    initEventListeners();
+    
+    function initEventListeners() {
+        // 模式切换
+        onlineModeBtn.addEventListener('click', () => switchMode('online'));
+        offlineModeBtn.addEventListener('click', () => switchMode('offline'));
+        
+        // 在线模式事件
+        startBtn.addEventListener('click', startOnlineDivination);
+        throwBtn.addEventListener('click', throwCoins);
+        resetBtn.addEventListener('click', resetTool);
+        
+        // 线下模式事件
+        generateHexagramBtn.addEventListener('click', generateHexagramFromInput);
+        clearInputsBtn.addEventListener('click', clearOfflineInputs);
+        
+        // 爻输入实时预览
+        yaoInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => updateYaoDisplay(e.target, index));
+        });
+    }
+    
+    // 模式切换
+    function switchMode(mode) {
+        currentMode = mode;
+        
+        if (mode === 'online') {
+            onlineModeBtn.classList.add('active');
+            offlineModeBtn.classList.remove('active');
+            onlineDivination.style.display = 'block';
+            offlineDivination.style.display = 'none';
+        } else {
+            onlineModeBtn.classList.remove('active');
+            offlineModeBtn.classList.add('active');
+            onlineDivination.style.display = 'none';
+            offlineDivination.style.display = 'block';
+        }
+        
+        // 重置状态
+        resetDisplays();
+    }
+    
+    // 重置显示
+    function resetDisplays() {
+        hexagramDisplay.style.display = 'none';
+        interpretation.style.display = 'none';
+        document.getElementById('change-hexagram').style.display = 'none';
+    }
+    
+    // 菊花数量转换为爻类型
+    function flowerCountToYaoType(count) {
+        switch (count) {
+            case 0: return { type: 'old_yin', symbol: '⚋', name: '老阴（变）', changing: true };
+            case 1: return { type: 'young_yang', symbol: '⚊', name: '少阳', changing: false };
+            case 2: return { type: 'young_yin', symbol: '⚋', name: '少阴', changing: false };
+            case 3: return { type: 'old_yang', symbol: '⚊', name: '老阳（变）', changing: true };
+            default: return null;
+        }
+    }
+    
+    // 更新爻显示
+    function updateYaoDisplay(input, index) {
+        const value = parseInt(input.value);
+        const display = yaoResultDisplays[index];
+        
+        if (isNaN(value) || value < 0 || value > 3) {
+            display.textContent = '';
+            display.style.display = 'none';
+            return;
+        }
+        
+        const yaoInfo = flowerCountToYaoType(value);
+        if (yaoInfo) {
+            display.textContent = `${yaoInfo.symbol} ${yaoInfo.name}`;
+            display.style.display = 'inline-block';
+            display.style.color = yaoInfo.changing ? '#e74c3c' : '#1976d2';
+        }
+    }
+    
+    // 从输入生成卦象
+    function generateHexagramFromInput() {
+        question = questionInput.value.trim();
+        if (!question) {
+            alert('请先输入您要占问的问题！');
+            return;
+        }
+        
+        // 收集所有输入值
+        const inputs = [];
+        let hasEmptyInput = false;
+        
+        yaoInputs.forEach((input) => {
+            const value = parseInt(input.value);
+            if (isNaN(value) || value < 0 || value > 3) {
+                hasEmptyInput = true;
+                return;
+            }
+            inputs[parseInt(input.dataset.yao)] = value;
+        });
+        
+        if (hasEmptyInput || inputs.length !== 6) {
+            alert('请填写完整的六次投掷结果（每个都要输入0-3的数字）！');
+            return;
+        }
+        
+        // 构建hexagramLines数组（按从下到上的顺序：初爻到上爻）
+        hexagramLines = [];
+        for (let i = 0; i < 6; i++) {
+            const flowerCount = inputs[i];
+            const yaoInfo = flowerCountToYaoType(flowerCount);
+            
+            hexagramLines.push({
+                type: yaoInfo.type,
+                symbol: yaoInfo.symbol,
+                name: yaoInfo.name,
+                flowerCount: flowerCount,
+                changing: yaoInfo.changing
+            });
+        }
+        
+        // 生成并显示卦象
+        processHexagramResult();
+    }
+    
+    // 清空线下输入
+    function clearOfflineInputs() {
+        yaoInputs.forEach(input => {
+            input.value = '';
+        });
+        yaoResultDisplays.forEach(display => {
+            display.textContent = '';
+            display.style.display = 'none';
+        });
+        resetDisplays();
+    }
+    
+    // 开始在线占卜
+    function startOnlineDivination() {
         question = questionInput.value.trim();
         if (!question) {
             alert('请先输入您要占问的问题！');
@@ -566,10 +981,10 @@ function initDivinationTool() {
         currentThrow = 0;
         hexagramLines = [];
         updateThrowInfo();
-    });
+    }
     
     // 投掷硬币
-    throwBtn.addEventListener('click', function() {
+    function throwCoins() {
         if (currentThrow >= 6) return;
         
         // 模拟投掷三枚硬币
@@ -584,66 +999,72 @@ function initDivinationTool() {
         
         // 计算结果
         const flowerCount = coins.filter(c => c === 1).length;
-        const total = coins.reduce((a, b) => a + b, 0);
-        
-        let yaoType, yaoSymbol, yaoName;
-        switch (flowerCount) {
-            case 0: // 老阴
-                yaoType = 'old_yin';
-                yaoSymbol = '⚋';
-                yaoName = '老阴（变）';
-                break;
-            case 1: // 少阳
-                yaoType = 'young_yang';
-                yaoSymbol = '⚊';
-                yaoName = '少阳';
-                break;
-            case 2: // 少阴
-                yaoType = 'young_yin';
-                yaoSymbol = '⚋';
-                yaoName = '少阴';
-                break;
-            case 3: // 老阳
-                yaoType = 'old_yang';
-                yaoSymbol = '⚊';
-                yaoName = '老阳（变）';
-                break;
-        }
+        const yaoInfo = flowerCountToYaoType(flowerCount);
         
         hexagramLines.push({
-            type: yaoType,
-            symbol: yaoSymbol,
-            name: yaoName,
+            type: yaoInfo.type,
+            symbol: yaoInfo.symbol,
+            name: yaoInfo.name,
             coins: coins,
-            flowerCount: flowerCount
+            flowerCount: flowerCount,
+            changing: yaoInfo.changing
         });
         
         // 显示结果
         setTimeout(() => {
-            displayThrowResult(coins, flowerCount, yaoName);
+            displayThrowResult(coins, flowerCount, yaoInfo.name);
             
             currentThrow++;
             if (currentThrow < 6) {
                 updateThrowInfo();
             } else {
-                completeHexagram();
+                processHexagramResult();
             }
         }, 1000);
-    });
+    }
+    
+    // 处理卦象结果（通用函数）
+    function processHexagramResult() {
+        if (currentMode === 'online') {
+            throwBtn.style.display = 'none';
+        }
+        
+        // 生成卦象代码
+        const hexagramCode = HexagramDatabase.generateHexagramCode(hexagramLines);
+        
+        // 分析上下卦
+        const lowerTrigram = hexagramCode.substring(0, 3);
+        const upperTrigram = hexagramCode.substring(3, 6);
+        
+        const lowerTrigramInfo = HexagramDatabase.getTrigram(lowerTrigram);
+        const upperTrigramInfo = HexagramDatabase.getTrigram(upperTrigram);
+        
+        // 查找六十四卦
+        const hexagramInfo = HexagramDatabase.getHexagram(hexagramCode);
+        
+        // 显示卦象
+        displayHexagram(hexagramInfo, upperTrigramInfo, lowerTrigramInfo);
+        
+        // 显示详细解释
+        displayDetailedInterpretation(hexagramInfo);
+    }
     
     // 重新开始
-    resetBtn.addEventListener('click', function() {
-        startBtn.style.display = 'inline-block';
-        throwBtn.style.display = 'none';
-        resetBtn.style.display = 'none';
-        throwingArea.style.display = 'none';
-        hexagramDisplay.style.display = 'none';
-        interpretation.style.display = 'none';
+    function resetTool() {
+        if (currentMode === 'online') {
+            startBtn.style.display = 'inline-block';
+            throwBtn.style.display = 'none';
+            resetBtn.style.display = 'none';
+            throwingArea.style.display = 'none';
+        } else {
+            clearOfflineInputs();
+        }
         
+        resetDisplays();
         currentThrow = 0;
         hexagramLines = [];
         questionInput.value = '';
-    });
+    }
     
     // 更新投掷信息
     function updateThrowInfo() {
@@ -677,30 +1098,6 @@ function initDivinationTool() {
         document.getElementById('yao-result').textContent = `→ ${yaoName}`;
     }
     
-    // 完成卦象
-    function completeHexagram() {
-        throwBtn.style.display = 'none';
-        
-        // 生成卦象代码
-        const hexagramCode = HexagramDatabase.generateHexagramCode(hexagramLines);
-        
-        // 分析上下卦
-        const lowerTrigram = hexagramCode.substring(0, 3);
-        const upperTrigram = hexagramCode.substring(3, 6);
-        
-        const lowerTrigramInfo = HexagramDatabase.getTrigram(lowerTrigram);
-        const upperTrigramInfo = HexagramDatabase.getTrigram(upperTrigram);
-        
-        // 查找六十四卦
-        const hexagramInfo = HexagramDatabase.getHexagram(hexagramCode);
-        
-        // 显示卦象
-        displayHexagram(hexagramInfo, upperTrigramInfo, lowerTrigramInfo);
-        
-        // 显示详细解释
-        displayDetailedInterpretation(hexagramInfo);
-    }
-    
     // 显示卦象
     function displayHexagram(hexagramInfo, upperTrigram, lowerTrigram) {
         const hexagramLinesElement = document.getElementById('hexagram-lines');
@@ -710,7 +1107,7 @@ function initDivinationTool() {
         for (let i = 5; i >= 0; i--) {
             const line = document.createElement('div');
             line.textContent = hexagramLines[i].symbol;
-            if (hexagramLines[i].type.includes('old')) {
+            if (hexagramLines[i].changing) {
                 line.style.color = '#e74c3c';
                 line.style.fontWeight = 'bold';
                 line.title = hexagramLines[i].name;
@@ -770,9 +1167,7 @@ function initDivinationTool() {
         interpretation.style.display = 'block';
         
         // 检查是否有变卦
-        const changingLines = hexagramLines.filter(line => 
-            line.type === 'old_yin' || line.type === 'old_yang'
-        );
+        const changingLines = hexagramLines.filter(line => line.changing);
         
         if (changingLines.length > 0) {
             displayChangeHexagram(changingLines);
