@@ -8,8 +8,8 @@
 body {
     font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    color: #1a1a1a;
+    background-color: #ffffff;
 }
 
 a {
@@ -49,11 +49,12 @@ img {
 
 /* ===== 头部样式 ===== */
 #header {
-    background: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(26,26,26,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid #ebebeb;
 }
 
 .header-content {
@@ -79,11 +80,11 @@ img {
 .site-title a {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #2c3e50;
+    color: #1a1a1a;
 }
 
 .site-subtitle {
-    color: #7f8c8d;
+    color: #8590a6;
     font-size: 0.9rem;
     margin-top: 0.25rem;
 }
@@ -102,14 +103,14 @@ img {
 }
 
 .nav-link {
-    color: #2c3e50;
+    color: #1a1a1a;
     font-weight: 500;
     padding: 0.5rem 0;
     position: relative;
 }
 
 .nav-link:hover {
-    color: #3498db;
+    color: #0084ff;
 }
 
 .nav-link::after {
@@ -119,7 +120,7 @@ img {
     left: 0;
     width: 0;
     height: 2px;
-    background: #3498db;
+    background: #0084ff;
     transition: width 0.3s ease;
 }
 
@@ -139,14 +140,14 @@ img {
 .mobile-menu-toggle span {
     width: 25px;
     height: 3px;
-    background: #2c3e50;
+    background: #1a1a1a;
     transition: all 0.3s ease;
 }
 
 .mobile-menu {
     display: none;
-    background: #fff;
-    border-top: 1px solid #eee;
+    background: #ffffff;
+    border-top: 1px solid #ebebeb;
     padding: 1rem 0;
 }
 
@@ -158,20 +159,21 @@ img {
 }
 
 .mobile-nav-link {
-    color: #2c3e50;
+    color: #1a1a1a;
     font-weight: 500;
     padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ebebeb;
 }
 
 /* ===== 搜索框样式 ===== */
 .search-box {
     display: flex;
     align-items: center;
-    background: #f8f9fa;
+    background: #f6f6f6;
     border-radius: 25px;
     padding: 0.5rem 1rem;
     margin-left: 2rem;
+    border: 1px solid #ebebeb;
 }
 
 #search-input {
@@ -180,14 +182,23 @@ img {
     outline: none;
     padding: 0.25rem;
     width: 200px;
+    color: #1a1a1a;
+}
+
+#search-input::placeholder {
+    color: #8590a6;
 }
 
 #search-btn {
     background: none;
     border: none;
-    color: #7f8c8d;
+    color: #8590a6;
     cursor: pointer;
     padding: 0.25rem;
+}
+
+#search-btn:hover {
+    color: #0084ff;
 }
 
 /* ===== 主要内容区域 ===== */
@@ -198,7 +209,7 @@ img {
 
 /* ===== 英雄横幅样式 ===== */
 .hero-banner {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%);
     color: white;
     padding: 4rem 0;
     text-align: center;
@@ -244,11 +255,11 @@ img {
 
 .btn-primary {
     background: #fff;
-    color: #667eea;
+    color: #0084ff;
 }
 
 .btn-primary:hover {
-    background: #f8f9ff;
+    background: #f6f6f6;
     transform: translateY(-2px);
 }
 
@@ -260,7 +271,7 @@ img {
 
 .btn-outline:hover {
     background: #fff;
-    color: #667eea;
+    color: #0084ff;
 }
 
 .hero-bg {
@@ -282,69 +293,6 @@ img {
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-/* ===== 深色模式支持 ===== */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #1a202c;
-        color: #e2e8f0;
-    }
-    
-    #header {
-        background: #2d3748;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-    
-    .site-title a {
-        color: #e2e8f0;
-    }
-    
-    .site-subtitle {
-        color: #a0aec0;
-    }
-    
-    .nav-link {
-        color: #e2e8f0;
-    }
-    
-    .nav-link:hover {
-        color: #63b3ed;
-    }
-    
-    .nav-link::after {
-        background: #63b3ed;
-    }
-    
-    .mobile-menu-toggle span {
-        background: #e2e8f0;
-    }
-    
-    .mobile-menu {
-        background: #2d3748;
-        border-top-color: #4a5568;
-    }
-    
-    .mobile-nav-link {
-        color: #e2e8f0;
-        border-bottom-color: #4a5568;
-    }
-    
-    .search-box {
-        background: #374151;
-    }
-    
-    #search-input {
-        color: #e2e8f0;
-    }
-    
-    #search-input::placeholder {
-        color: #9ca3af;
-    }
-    
-    #search-btn {
-        color: #9ca3af;
     }
 }
 

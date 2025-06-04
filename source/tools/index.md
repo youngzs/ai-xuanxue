@@ -3,6 +3,187 @@ title: AI工具集
 date: 2025-01-10 10:00:00
 layout: page
 ---
+<style>
+/* ========================================
+   工具页面样式
+   ======================================== */
+
+/* 工具链接卡片 */
+.tool-link-container {
+    margin: 2rem 0;
+}
+
+.tool-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.tool-card {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.tool-icon {
+    font-size: 3rem;
+    margin-right: 2rem;
+}
+
+.tool-info {
+    flex: 1;
+}
+
+.tool-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.tool-info p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+.tool-arrow {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.tool-card:hover .tool-arrow {
+    transform: translateX(5px);
+}
+</style>
+<style>
+/* ===== Tools页面专用样式 - 知乎风格浅色主题 ===== */
+.page-content {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+}
+
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4,
+.page-content h5,
+.page-content h6 {
+    color: #1a1a1a !important;
+    font-weight: 600;
+}
+
+.page-content p,
+.page-content li {
+    color: #1a1a1a !important;
+    line-height: 1.7;
+}
+
+.page-content a {
+    color: #0084ff !important;
+    transition: color 0.3s ease;
+}
+
+.page-content a:hover {
+    color: #0066cc !important;
+}
+
+.page-content strong {
+    color: #1a1a1a !important;
+    font-weight: 600;
+}
+
+.page-content em {
+    color: #8590a6 !important;
+}
+
+.page-content blockquote {
+    background: #f6f6f6 !important;
+    border-left: 4px solid #0084ff !important;
+    color: #1a1a1a !important;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.page-content hr {
+    border-color: #ebebeb !important;
+    margin: 2rem 0;
+}
+
+.page-content ul,
+.page-content ol {
+    color: #1a1a1a !important;
+}
+
+.page-content li {
+    margin-bottom: 0.5rem;
+}
+
+.page-content code {
+    background: #f6f6f6 !important;
+    color: #1a1a1a !important;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.page-content pre {
+    background: #f6f6f6 !important;
+    color: #1a1a1a !important;
+    padding: 1.5rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid #ebebeb !important;
+}
+
+.page-content pre code {
+    background: none !important;
+    color: inherit !important;
+    padding: 0;
+}
+
+/* 确保所有文本元素使用正确的颜色 */
+.page-content * {
+    color: inherit !important;
+}
+
+
+/* 示例图片库样式覆盖 */
+.example-gallery {
+    background: #f6f6f6 !important;
+    border: 1px solid #ebebeb !important;
+}
+
+/* 图片查看器模态框样式覆盖 */
+.image-modal {
+    background-color: rgba(26, 26, 26, 0.8) !important;
+}
+
+.modal-content {
+    background: #ffffff !important;
+    border: 1px solid #ebebeb !important;
+}
+
+.close {
+    color: #8590a6 !important;
+}
+
+.close:hover {
+    color: #1a1a1a !important;
+}
+</style>
 
 # AI工具集
 
@@ -92,190 +273,6 @@ high resolution, professional, detailed, sharp focus, high quality, 8k --aspect 
     <span class="close" onclick="closeImageModal()">&times;</span>
     <img class="modal-content" id="modalImage">
 </div>
-
-<style>
-/* ========================================
-   工具页面样式
-   ======================================== */
-
-/* 工具链接卡片 */
-.tool-link-container {
-    margin: 2rem 0;
-}
-
-.tool-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.tool-card {
-    display: flex;
-    align-items: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 15px;
-    color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 1rem;
-}
-
-.tool-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-}
-
-.tool-icon {
-    font-size: 3rem;
-    margin-right: 2rem;
-}
-
-.tool-info {
-    flex: 1;
-}
-
-.tool-info h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.tool-info p {
-    margin: 0;
-    opacity: 0.9;
-    font-size: 1rem;
-}
-
-.tool-arrow {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-left: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.tool-card:hover .tool-arrow {
-    transform: translateX(5px);
-}
-
-/* 示例图片库 */
-.example-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin: 20px 0;
-    padding: 20px;
-    background: #f7fafc;
-    border-radius: 10px;
-    border: 1px solid #e2e8f0;
-}
-
-.example-image {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.example-image:hover {
-    transform: scale(1.05);
-}
-
-.example-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-}
-
-.example-image img:hover {
-    opacity: 0.9;
-}
-
-/* 图片查看器模态框 */
-.image-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.9);
-}
-
-.modal-content {
-    margin: auto;
-    display: block;
-    max-width: 90%;
-    max-height: 90%;
-    margin-top: 5%;
-}
-
-.close {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-}
-
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-    .example-gallery {
-        background: #2d3748;
-        border-color: #4a5568;
-    }
-    
-    .example-image {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-    
-    .tool-card {
-        background: linear-gradient(135deg, #4c63d2 0%, #5a4c8a 100%);
-    }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .example-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 10px;
-        padding: 15px;
-    }
-    
-    .tool-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 1.5rem;
-    }
-    
-    .tool-icon {
-        margin-right: 0;
-        margin-bottom: 1rem;
-    }
-    
-    .tool-arrow {
-        margin-left: 0;
-        margin-top: 1rem;
-        transform: rotate(90deg);
-    }
-    
-    .tool-card:hover .tool-arrow {
-        transform: rotate(90deg) translateX(5px);
-    }
-}
-</style>
 
 <script>
 // 图片模态框功能

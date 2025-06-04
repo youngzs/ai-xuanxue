@@ -5,6 +5,114 @@ layout: page
 comments: false
 ---
 
+<style>
+/* ===== Projects页面专用样式 - 知乎风格浅色主题 ===== */
+.page-content {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+}
+
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4,
+.page-content h5,
+.page-content h6 {
+    color: #1a1a1a !important;
+    font-weight: 600;
+}
+
+.page-content p,
+.page-content li {
+    color: #1a1a1a !important;
+    line-height: 1.7;
+}
+
+.page-content a {
+    color: #0084ff !important;
+    transition: color 0.3s ease;
+}
+
+.page-content a:hover {
+    color: #0066cc !important;
+}
+
+.page-content strong {
+    color: #1a1a1a !important;
+    font-weight: 600;
+}
+
+.page-content em {
+    color: #8590a6 !important;
+}
+
+.page-content blockquote {
+    background: #f6f6f6 !important;
+    border-left: 4px solid #0084ff !important;
+    color: #1a1a1a !important;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.page-content hr {
+    border-color: #ebebeb !important;
+    margin: 2rem 0;
+}
+
+.page-content ul,
+.page-content ol {
+    color: #1a1a1a !important;
+}
+
+.page-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* 项目卡片样式 */
+.project-card {
+    background: #ffffff !important;
+    border: 1px solid #ebebeb !important;
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26,26,26,0.1) !important;
+}
+
+.project-stats {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    color: #8590a6 !important;
+}
+
+.project-stats span {
+    background: #f6f6f6 !important;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    border: 1px solid #ebebeb !important;
+}
+
+/* 确保所有文本元素使用正确的颜色 */
+.page-content * {
+    color: inherit !important;
+}
+
+/* 特定元素的颜色覆盖 */
+.page-content .highlight {
+    color: #0084ff !important;
+}
+
+.page-content .muted {
+    color: #8590a6 !important;
+}
+</style>
+
 # 🚀 我的开源项目
 
 欢迎来到我的项目展示页面！这里汇总了我在GitHub上的主要开源项目，涵盖了传统文化、AI工具、Web开发等多个领域。

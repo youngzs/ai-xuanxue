@@ -72,7 +72,8 @@
                             <% site.categories.each(function(category) { %>
                                 <li class="category-item">
                                     <a href="<%- url_for(category.path) %>" class="category-link">
-                                        <%= category.name %><span class="category-count">(<%= category.posts.length %>)</span>
+                                        <span class="category-name"><%= category.name %></span>
+                                        <span class="category-count"><%= category.posts.length %></span>
                                     </a>
                                 </li>
                             <% }); %>
@@ -126,8 +127,8 @@
                             %>
                                 <li class="archive-item">
                                     <a href="<%- url_for('/archives/' + year + '/' + month + '/') %>" class="archive-link">
-                                        <%= year %>年<%= month %>月
-                                        <span class="archive-count">(<%= posts.length %>)</span>
+                                        <span class="archive-name"><%= year %>年<%= month %>月</span>
+                                        <span class="archive-count"><%= posts.length %></span>
                                     </a>
                                 </li>
                             <% }); %>

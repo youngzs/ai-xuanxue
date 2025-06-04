@@ -1,9 +1,43 @@
-/* 侧边栏所有模块统一样式 */
+/* 侧边栏所有模块统一样式 - 知乎风格配色 */
 /* 使用最高优先级来覆盖所有可能的冲突样式 */
+
+/* 侧边栏整体容器优化 */
+.col-sidebar {
+    padding: 0 15px !important;
+    min-width: 280px !important;
+    max-width: 320px !important;
+    width: 300px !important;
+    overflow: hidden !important;
+}
+
+/* Widget基础样式优化 */
+.widget {
+    margin-bottom: 1.5rem !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    word-wrap: break-word !important;
+    background: #ffffff !important;
+    border: 1px solid #ebebeb !important;
+    box-shadow: 0 1px 3px rgba(26,26,26,0.1) !important;
+}
+
+.widget-header {
+    padding: 1rem 1.5rem 0.5rem !important;
+}
+
+.widget-title {
+    color: #1a1a1a !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
 
 /* 分类模块样式 */
 .widget.widget-categories .widget-content {
-    padding: 0.8rem 1.5rem !important;
+    padding: 0.5rem 1.5rem 1rem !important;
 }
 
 .widget.widget-categories .category-list {
@@ -13,18 +47,21 @@
 }
 
 .widget.widget-categories .category-item {
-    margin: 0 0 0.3rem 0 !important;
+    margin: 0 0 0.5rem 0 !important;
     padding: 0 !important;
-    line-height: 1.3 !important;
+    line-height: 1.4 !important;
+    overflow: hidden !important;
 }
 
 .widget.widget-categories .category-link {
-    color: #2c3e50 !important;
-    padding: 0.2rem 0 !important;
-    display: block !important;
+    color: #1a1a1a !important;
+    padding: 0.3rem 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     width: 100% !important;
     transition: color 0.3s ease !important;
-    line-height: 1.3 !important;
+    line-height: 1.4 !important;
     font-size: 0.9rem !important;
     text-decoration: none !important;
     background: transparent !important;
@@ -32,10 +69,12 @@
     outline: none !important;
     box-shadow: none !important;
     margin: 0 !important;
+    overflow: hidden !important;
+    min-width: 0 !important;
 }
 
 .widget.widget-categories .category-link:hover {
-    color: #3498db !important;
+    color: #0084ff !important;
     background: transparent !important;
     text-decoration: none !important;
 }
@@ -45,19 +84,34 @@
     outline: none !important;
     box-shadow: none !important;
     background: transparent !important;
-    color: #3498db !important;
+    color: #0084ff !important;
+}
+
+/* 修复分类数字显示 */
+.widget.widget-categories .category-name {
+    flex: 1 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    min-width: 0 !important;
 }
 
 .widget.widget-categories .category-count {
-    color: #95a5a6 !important;
+    color: #8590a6 !important;
     font-size: 0.8rem !important;
-    margin-left: 0.3rem !important;
-    display: inline !important;
+    background: #f6f6f6 !important;
+    padding: 0.2rem 0.5rem !important;
+    border-radius: 3px !important;
+    border: 1px solid #ebebeb !important;
+    margin-left: 0.5rem !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
 }
 
 /* 最新文章模块样式 */
 .widget.widget-recent .widget-content {
-    padding: 0.8rem 1.5rem !important;
+    padding: 0.5rem 1.5rem 1rem !important;
 }
 
 .widget.widget-recent .recent-posts-list {
@@ -67,13 +121,11 @@
 }
 
 .widget.widget-recent .recent-post-item {
-    margin: 0 0 0.3rem 0 !important;
-    padding: 0.2rem 0 !important;
-    border-bottom: 1px solid #ecf0f1 !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: flex-start !important;
-    gap: 1rem !important;
+    margin: 0 0 0.8rem 0 !important;
+    padding: 0.5rem 0 !important;
+    border-bottom: 1px solid #ebebeb !important;
+    display: block !important;
+    overflow: hidden !important;
 }
 
 .widget.widget-recent .recent-post-item:last-child {
@@ -82,55 +134,69 @@
 }
 
 .widget.widget-recent .recent-post-link {
-    color: #2c3e50 !important;
+    color: #1a1a1a !important;
     font-size: 0.9rem !important;
-    line-height: 1.3 !important;
-    flex: 1 !important;
+    line-height: 1.4 !important;
+    display: block !important;
+    margin-bottom: 0.3rem !important;
     transition: color 0.3s ease !important;
     text-decoration: none !important;
+    font-weight: 500 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
 }
 
 .widget.widget-recent .recent-post-link:hover {
-    color: #3498db !important;
+    color: #0084ff !important;
     text-decoration: none !important;
 }
 
 .widget.widget-recent .recent-post-date {
-    color: #95a5a6 !important;
+    color: #8590a6 !important;
     font-size: 0.8rem !important;
+    display: block !important;
     white-space: nowrap !important;
 }
 
 /* 标签模块样式 */
 .widget.widget-tags .widget-content {
-    padding: 0.8rem 1.5rem !important;
+    padding: 0.5rem 1.5rem 1rem !important;
 }
 
 .widget.widget-tags .tag-cloud {
-    line-height: 1.8 !important;
+    line-height: 2 !important;
+    overflow: hidden !important;
 }
 
 .widget.widget-tags .tag-link {
     display: inline-block !important;
-    background: #ecf0f1 !important;
-    color: #7f8c8d !important;
-    padding: 0.25rem 0.6rem !important;
-    margin: 0.15rem !important;
-    border-radius: 12px !important;
+    background: #f6f6f6 !important;
+    color: #8590a6 !important;
+    padding: 0.3rem 0.7rem !important;
+    margin: 0.2rem 0.2rem 0.2rem 0 !important;
+    border-radius: 4px !important;
     font-size: 0.8rem !important;
     transition: all 0.3s ease !important;
     text-decoration: none !important;
+    border: 1px solid #ebebeb !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 
 .widget.widget-tags .tag-link:hover {
-    background: #3498db !important;
-    color: #fff !important;
+    background: #0084ff !important;
+    color: #ffffff !important;
     text-decoration: none !important;
+    border-color: #0084ff !important;
 }
 
 /* 归档模块样式 */
 .widget.widget-archive .widget-content {
-    padding: 0.8rem 1.5rem !important;
+    padding: 0.5rem 1.5rem 1rem !important;
 }
 
 .widget.widget-archive .archive-list {
@@ -140,31 +206,164 @@
 }
 
 .widget.widget-archive .archive-item {
-    margin: 0 0 0.3rem 0 !important;
+    margin: 0 0 0.5rem 0 !important;
     padding: 0 !important;
-    line-height: 1.3 !important;
+    line-height: 1.4 !important;
+    overflow: hidden !important;
 }
 
 .widget.widget-archive .archive-link {
-    color: #2c3e50 !important;
-    padding: 0.2rem 0 !important;
-    display: block !important;
+    color: #1a1a1a !important;
+    padding: 0.3rem 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     width: 100% !important;
     transition: color 0.3s ease !important;
-    line-height: 1.3 !important;
+    line-height: 1.4 !important;
     font-size: 0.9rem !important;
     text-decoration: none !important;
     background: transparent !important;
+    overflow: hidden !important;
+    min-width: 0 !important;
 }
 
 .widget.widget-archive .archive-link:hover {
-    color: #3498db !important;
+    color: #0084ff !important;
     background: transparent !important;
     text-decoration: none !important;
 }
 
+/* 修复归档数字显示 */
+.widget.widget-archive .archive-name {
+    flex: 1 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    min-width: 0 !important;
+}
+
 .widget.widget-archive .archive-count {
-    color: #95a5a6 !important;
+    color: #8590a6 !important;
     font-size: 0.8rem !important;
-    margin-left: 0.3rem !important;
+    background: #f6f6f6 !important;
+    padding: 0.2rem 0.5rem !important;
+    border-radius: 3px !important;
+    border: 1px solid #ebebeb !important;
+    margin-left: 0.5rem !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+}
+
+/* 用户资料卡片样式优化 */
+.widget .profile-avatar {
+    text-align: center !important;
+    margin-bottom: 1rem !important;
+    padding: 0 1rem !important;
+}
+
+.widget .profile-avatar img {
+    max-width: 80px !important;
+    max-height: 80px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 3px solid #ebebeb !important;
+}
+
+.widget .profile-info {
+    text-align: center !important;
+    padding: 0 1rem 1rem !important;
+    overflow: hidden !important;
+}
+
+.widget .profile-name {
+    color: #1a1a1a !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.widget .profile-desc {
+    color: #8590a6 !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 1rem !important;
+    line-height: 1.4 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+.widget .profile-stats {
+    display: flex !important;
+    justify-content: space-around !important;
+    padding: 1rem 0 0 !important;
+    border-top: 1px solid #ebebeb !important;
+    margin: 0 1rem !important;
+}
+
+.widget .stat-item {
+    text-align: center !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.widget .stat-number {
+    color: #1a1a1a !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    display: block !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.2rem !important;
+}
+
+.widget .stat-label {
+    color: #8590a6 !important;
+    font-size: 0.8rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .col-sidebar {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 10px !important;
+        margin-top: 2rem !important;
+    }
+    
+    .widget {
+        margin-bottom: 1rem !important;
+    }
+    
+    .widget-header,
+    .widget.widget-categories .widget-content,
+    .widget.widget-recent .widget-content,
+    .widget.widget-tags .widget-content,
+    .widget.widget-archive .widget-content {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    .widget.widget-recent .recent-post-link,
+    .widget.widget-categories .category-link,
+    .widget.widget-archive .archive-link {
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+    
+    .widget .profile-stats {
+        margin: 0 0.5rem !important;
+    }
 } 
