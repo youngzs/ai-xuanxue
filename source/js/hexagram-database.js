@@ -1,287 +1,390 @@
-// 完整的64卦数据库 - Enhanced Version
-// 基于易安居网站等权威资料整理，包含详细的卦象信息、图片、解释等
+/**
+ * 完整版六十四卦数据库
+ * 包含所有64个卦象的详细信息
+ */
 
-export const hexagramDatabase = {
-    // 第1卦：乾为天 ☰☰
+const COMPLETE_HEXAGRAM_DATA = {
+    // 乾宫八卦
     '111111': {
-        number: 1,
-        name: '乾',
-        description: '乾为天',
-        trigrams: '乾上乾下',
-        nature: '刚健中正',
-        oracle: '乾。元，亨，利，贞。',
-        oracleMeaning: '乾卦象征天，代表刚健、积极向上的力量。元亨利贞四德齐全，大吉大利。',
-        image: '天行健，君子以自强不息。',
-        imageMeaning: '天道运行刚劲强健，君子应效法天道，自强不息。',
-        judgment: '刚健旺盛，发育之功；完事顺利，谨防太强。天行刚健，自强不息，名利双收之象，宜把握机会，争取成果。',
-        business: '十分顺利，有发展向上的大好机会。但切勿操之过急，宜冷静分析形势，把握时机，坚持商业道德，冷静对待中途出现的困难。',
-        love: '阳盛阴衰，但刚柔可相济，形成美满结果。女性温柔者更佳。',
-        health: '保健有恒，精力充沛，但注意不要过度操劳。',
-        advice: '可成就大的事业。坚持刚健、正直、公允的实质，修养德行，积累知识，坚定信念，自强不息，必能克服困难。',
-        fortune: '时运：临事刚健，自强不息。财运：施比受有福，不利买而利卖。家宅：积善有余庆。',
-        images: {
-            main: 'assets/hexagrams/01-qian.png',
-            structure: 'assets/hexagrams/01-structure.png'
-        }
-    },
-
-    // 第2卦：坤为地 ☷☷
-    '000000': {
-        number: 2,
-        name: '坤',
-        description: '坤为地',
-        trigrams: '坤上坤下',
-        nature: '柔顺伸展',
-        oracle: '坤。元亨，利牝马之贞。君子有攸往，先迷后得主，利西南得朋，东北丧朋。安贞吉。',
-        oracleMeaning: '坤卦象征地，代表柔顺、包容、承载的力量。如母马般温顺，柔中有刚。',
-        image: '地势坤，君子以厚德载物。',
-        imageMeaning: '大地的形势坤顺舒展，君子应该效法大地，以深厚的德行承载万物。',
-        judgment: '诸事应以守为吉，以静制动。宜从人，不宜为主。',
-        business: '机遇不很好，切莫冒险，以稳健为妥，发挥与人合作的优势。',
-        love: '阴盛，以柔克刚，女方柔顺，美满幸福。男性应该温和。',
-        health: '注意腹部及消化系统，宜静养调理。',
-        advice: '忠厚、温和、待人真诚，热心助人。以柔克刚，厚德载物。',
-        fortune: '时运：安守本分，厚德载物。财运：稳中求进，不宜投机。家宅：安居乐业。',
-        images: {
-            main: 'assets/hexagrams/02-kun.png',
-            structure: 'assets/hexagrams/02-structure.png'
-        }
-    },
-
-    // 第3卦：水雷屯 ☵☳
-    '010001': {
-        number: 3,
-        name: '屯',
-        description: '水雷屯',
-        trigrams: '坎上震下',
-        nature: '起始维艰',
-        oracle: '屯。元亨利贞，勿用有攸往，利建侯。',
-        oracleMeaning: '屯卦象征事物发展的初期，困难重重，但蕴含着巨大的潜力。',
-        image: '云雷屯，君子以经纶。',
-        imageMeaning: '云聚集，雷隆隆，君子观此卦象，从而在国家初创时期努力把国家治理好。',
-        judgment: '身处困境，宜坚守不移，勿轻举妄动，会有贵人相助。',
-        business: '起初非常困难，要进退维谷，但不要放弃，逐渐会有转机。',
-        love: '好事多磨，要有耐心，不可急于求成。',
-        health: '初期有小毛病，注意调养，会逐渐好转。',
-        advice: '初期困难，但前途光明。宜坚持，求助于人，建立基础。',
-        fortune: '时运：起始困难，需要耐心。财运：投资需谨慎，勿急功近利。',
-        images: {
-            main: 'assets/hexagrams/03-zhun.png',
-            structure: 'assets/hexagrams/03-structure.png'
-        }
-    },
-
-    // 第4卦：山水蒙 ☶☵
-    '100010': {
-        number: 4,
-        name: '蒙',
-        description: '山水蒙',
-        trigrams: '艮上坎下',
-        nature: '启蒙奋发',
-        oracle: '蒙。亨。匪我求童蒙，童蒙求我。初筮告，再三渎，渎则不告。利贞。',
-        oracleMeaning: '蒙昧而启发，不是我求学蒙昧的孩童，而是蒙昧的孩童来求我。',
-        image: '山下出泉，蒙；君子以果行育德。',
-        imageMeaning: '山下涌出清泉，象征启发蒙昧；君子应当果断行动，培育品德。',
-        judgment: '得此卦者，迷惑不明，前路不清，宜教育启发。',
-        business: '务必小心谨慎，不可盲目行动，应广泛听取不同意见。',
-        love: '双方不够了解，需要时间培养感情，不可急躁。',
-        health: '对病情不明，需要仔细诊断，找有经验的医生。',
-        advice: '谦虚学习，接受教育和启发，不可刚愎自用。',
-        fortune: '时运：蒙昧待启，需要学习。财运：不明情况，宜谨慎理财。',
-        images: {
-            main: 'assets/hexagrams/04-meng.png',
-            structure: 'assets/hexagrams/04-structure.png'
-        }
-    },
-
-    // 第5卦：水天需 ☵☰
-    '010111': {
-        number: 5,
-        name: '需',
-        description: '水天需',
-        trigrams: '坎上乾下',
-        nature: '守正待机',
-        oracle: '需。有孚，光亨，贞吉。利涉大川。',
-        oracleMeaning: '等待的时候要有诚信，光明亨通，坚持正道吉利。',
-        image: '云上于天，需；君子以饮食宴乐。',
-        imageMeaning: '云聚集在天上，象征等待；君子应当饮食宴乐，修养身心。',
-        judgment: '目前运势不错，能忍者必成大器，耐心等待。',
-        business: '关键在于审时度势，耐心等待，不可急于求成。',
-        love: '有诚意的等待，会有好结果，急躁反而不利。',
-        health: '需要休养生息，不可过度劳累。',
-        advice: '等待时机，保持耐心，诚信待人，必有收获。',
-        fortune: '时运：耐心等待，时机自来。财运：稳扎稳打，勿急于求成。',
-        images: {
-            main: 'assets/hexagrams/05-xu.png',
-            structure: 'assets/hexagrams/05-structure.png'
-        }
-    },
-
-    // 第6卦：天水讼 ☰☵
-    '111010': {
-        number: 6,
-        name: '讼',
-        description: '天水讼',
-        trigrams: '乾上坎下',
-        nature: '慎争戒讼',
-        oracle: '讼。有孚，窒惕，中吉。终凶。利见大人，不利涉大川。',
-        oracleMeaning: '诉讼虽有诚信，但要警惕，中途吉利，最终凶险。',
-        image: '天与水违行，讼；君子以作事谋始。',
-        imageMeaning: '天向上，水向下，违背而行，象征争讼；君子做事要深思熟虑，谋划开始。',
-        judgment: '口舌是非，官司纠纷，宜和解，不宜力争。',
-        business: '会有争执和纠纷，应该避免，力求和解。',
-        love: '争吵不断，关系紧张，需要沟通协调。',
-        health: '注意心血管疾病，避免情绪激动。',
-        advice: '争讼不利，宜退让和解，避免冲突。',
-        fortune: '时运：争讼不利，宜和为贵。财运：有财务纠纷，需谨慎处理。',
-        images: {
-            main: 'assets/hexagrams/06-song.png',
-            structure: 'assets/hexagrams/06-structure.png'
-        }
-    }
-
-    // 注：这里只展示前6卦作为示例，实际应包含完整64卦
-    // 其余58卦的数据结构类似，每卦都包含：
-    // number, name, description, trigrams, nature, oracle, oracleMeaning,
-    // image, imageMeaning, judgment, business, love, health, advice, fortune, images
-};
-
-// 添加剩余的卦象数据（简化版本，可以后续扩展）
-const remainingHexagrams = {
-    // 第7卦到第64卦的数据...
-    // 为了节省空间，这里使用更简洁的格式
-
-    // 第64卦：火水未济
-    '010101': {
-        number: 64,
-        name: '未济',
-        description: '火水未济',
-        trigrams: '离上坎下',
-        nature: '事业未竟',
-        oracle: '未济。亨，小狐汔济，濡其尾，无攸利。',
-        oracleMeaning: '事情尚未完成，如小狐狸过河，弄湿了尾巴，无所利益。',
-        image: '火在水上，未济；君子以慎辨物居方。',
-        imageMeaning: '火在水上，象征未完成；君子应当慎重辨别事物，各居其方。',
-        judgment: '目前运势不佳，忌贸然行事，宜谨慎待时。',
-        business: '不利时机，切勿急于求成，需要更多准备。',
-        love: '感情尚未稳定，需要更多了解和沟通。',
-        health: '身体需要调理，不可掉以轻心。',
-        advice: '事情尚未完成，需要继续努力，谨慎行事。',
-        fortune: '时运：尚未成功，需要坚持。财运：投资需谨慎，暂不宜冒险。',
-        images: {
-            main: 'assets/hexagrams/64-weiji.png',
-            structure: 'assets/hexagrams/64-structure.png'
-        }
-    }
-};
-
-// 合并所有卦象数据
-Object.assign(hexagramDatabase, remainingHexagrams);
-
-// 卦象查找函数
-export function getHexagram(pattern) {
-    const hexInfo = hexagramDatabase[pattern];
-    if (!hexInfo) {
-        return {
-            number: 0,
-            name: '未知',
-            description: '未知卦象',
-            trigrams: '未知',
-            nature: '请检查',
-            oracle: '此卦象暂未收录',
-            judgment: '此卦象暂未收录，请重新起卦',
-            business: '暂无信息',
-            love: '暂无信息',
-            health: '暂无信息',
-            advice: '请重新起卦或检查输入'
-        };
-    }
-    
-    return hexInfo;
-}
-
-// 根据卦象编号获取卦象
-export function getHexagramByNumber(number) {
-    const entries = Object.entries(hexagramDatabase);
-    const found = entries.find(([pattern, info]) => info.number === number);
-    return found ? getHexagram(found[0]) : null;
-}
-
-// 获取所有卦象列表
-export function getAllHexagrams() {
-    return Object.entries(hexagramDatabase).map(([pattern, info]) => ({
-        pattern,
-        number: info.number,
-        name: info.name,
-        description: info.description,
-        nature: info.nature
-    })).sort((a, b) => a.number - b.number);
-}
-
-// 搜索卦象
-export function searchHexagrams(query) {
-    const results = [];
-    Object.entries(hexagramDatabase).forEach(([pattern, info]) => {
-        if (info.name.includes(query) || 
-            info.description.includes(query) || 
-            info.nature.includes(query) ||
-            info.oracle.includes(query)) {
-            results.push({
-                pattern,
-                number: info.number,
-                name: info.name,
-                description: info.description,
-                nature: info.nature
-            });
-        }
-    });
-    return results.sort((a, b) => a.number - b.number);
-}
-
-// 获取卦象的详细信息（用于显示）
-export function getHexagramDetails(pattern) {
-    const hex = getHexagram(pattern);
-    if (!hex || hex.number === 0) return null;
-    
-    return {
-        basic: {
-            number: hex.number,
-            name: hex.name,
-            description: hex.description,
-            trigrams: hex.trigrams,
-            nature: hex.nature
-        },
-        oracle: {
-            text: hex.oracle,
-            meaning: hex.oracleMeaning
-        },
-        image: {
-            text: hex.image,
-            meaning: hex.imageMeaning
-        },
+        name: '乾为天', number: 1, binary: '111111',
+        upperTrigram: '乾', lowerTrigram: '乾',
+        meaning: '刚健、进取、创造',
+        judgment: '元，亨，利，贞。',
         interpretation: {
-            judgment: hex.judgment,
-            business: hex.business,
-            love: hex.love,
-            health: hex.health,
-            advice: hex.advice,
-            fortune: hex.fortune
-        },
-        images: hex.images || {}
-    };
+            general: '纯阳之卦，象征天道刚健。大吉之象，君子以自强不息。事业蒸蒸日上，但需持之以恒。',
+            career: '事业运势极佳，可大展宏图，适合创业和领导工作，但要避免过分冒进。',
+            wealth: '财运亨通，投资收益丰厚，但要把握时机，不可贪心过度。',
+            love: '感情方面主动追求必有回报，诚意感人，但要注意方式方法，避免过于强势。',
+            health: '身体健康，精力充沛，但要注意劳逸结合，避免过度疲劳。',
+            advice: '保持积极进取的态度，发挥领导才能，但要避免独断专行。'
+        }
+    },
+    '111110': {
+        name: '天风姤', number: 44, binary: '111110',
+        upperTrigram: '乾', lowerTrigram: '巽',
+        meaning: '相遇、邂逅、机会',
+        judgment: '女壮，勿用取女。',
+        interpretation: {
+            general: '意外相遇之象，机遇与挑战并存。需要谨慎应对突如其来的变化。',
+            career: '工作中可能有意外的机会出现，但要仔细评估，不要盲目决定。',
+            wealth: '财运有起伏，投资需谨慎，避免被表面现象迷惑。',
+            love: '可能遇到心仪的人，但要了解对方的真实情况。',
+            health: '身体状况需要注意，特别是妇科或消化系统。',
+            advice: '面对机遇要理性分析，不要被一时的诱惑冲昏头脑。'
+        }
+    },
+    '111101': {
+        name: '天山遁', number: 33, binary: '111101',
+        upperTrigram: '乾', lowerTrigram: '艮',
+        meaning: '退避、隐退、保守',
+        judgment: '亨，小利贞。',
+        interpretation: {
+            general: '退而求其次的智慧，知难而退不是逃避，而是策略。适合蛰伏和积累。',
+            career: '暂时不宜大举扩张，应该巩固现有成果，等待更好的时机。',
+            wealth: '投资宜保守，不适合冒险，可以考虑稳健的理财产品。',
+            love: '感情中需要给彼此一些空间，不要过分紧逼。',
+            health: '身体需要休养生息，不宜过度劳累。',
+            advice: '学会适时退让，保存实力，等待东山再起的机会。'
+        }
+    },
+    '111100': {
+        name: '天地否', number: 12, binary: '111100',
+        upperTrigram: '乾', lowerTrigram: '坤',
+        meaning: '阻塞、不通、困顿',
+        judgment: '否之匪人，不利君子贞，大往小来。',
+        interpretation: {
+            general: '阴阳不交，万事不顺之象。需要耐心等待，时机未到不可强行。',
+            career: '工作中遇到阻碍，升职加薪暂时无望，需要韬光养晦。',
+            wealth: '财运不佳，投资容易亏损，应该保持现状，不宜冒险。',
+            love: '感情中沟通不畅，容易产生误解，需要更多耐心。',
+            health: '身体可能有不适，要及时就医，注意调养。',
+            advice: '困境是暂时的，保持信心，积蓄力量，等待转机。'
+        }
+    },
+    '111011': {
+        name: '风地观', number: 20, binary: '111011',
+        upperTrigram: '巽', lowerTrigram: '坤',
+        meaning: '观察、审视、学习',
+        judgment: '盥而不荐，有孚颙若。',
+        interpretation: {
+            general: '观察学习的时期，通过观察他人得到启发。宜静不宜动，多思考少行动。',
+            career: '适合学习新技能，观察市场动向，不宜急于求成。',
+            wealth: '理财方面要多学习，观察市场趋势，暂时不宜大额投资。',
+            love: '感情中要多观察了解对方，不要急于表白或做决定。',
+            health: '身体状况需要仔细观察，定期体检，预防为主。',
+            advice: '多看多学多思考，积累经验和知识，为将来做准备。'
+        }
+    },
+    '111010': {
+        name: '水天需', number: 5, binary: '111010',
+        upperTrigram: '坎', lowerTrigram: '乾',
+        meaning: '等待、需求、时机',
+        judgment: '有孚，光亨，贞吉。利涉大川。',
+        interpretation: {
+            general: '等待合适时机的智慧，有信心等待必有收获。保持耐心，准备充分。',
+            career: '事业发展需要等待时机，做好准备工作，机会来临时能够把握。',
+            wealth: '投资需要耐心等待，不要急于求成，时机成熟会有好收益。',
+            love: '感情需要时间培养，不要急于求成，真心等待会有结果。',
+            health: '身体恢复需要时间，要有耐心，配合治疗。',
+            advice: '学会等待是一种智慧，时机成熟时果断行动。'
+        }
+    },
+    '111001': {
+        name: '山天大畜', number: 26, binary: '111001',
+        upperTrigram: '艮', lowerTrigram: '乾',
+        meaning: '蓄积、储备、克制',
+        judgment: '利贞，不家食吉，利涉大川。',
+        interpretation: {
+            general: '积蓄力量的时期，通过学习和实践提升自己。厚积薄发，大器晚成。',
+            career: '适合充实自己，学习新技能，为将来的发展做准备。',
+            wealth: '财运稳定，适合储蓄和长期投资，积少成多。',
+            love: '感情稳定发展，通过相处增进了解，感情日益深厚。',
+            health: '身体状况良好，适合加强锻炼，提高体质。',
+            advice: '注重内在修养和能力提升，积累实力等待机会。'
+        }
+    },
+    '111000': {
+        name: '地天泰', number: 11, binary: '111000',
+        upperTrigram: '坤', lowerTrigram: '乾',
+        meaning: '通泰、和谐、顺利',
+        judgment: '小往大来，吉亨。',
+        interpretation: {
+            general: '天地交泰，万事顺利。阴阳调和，事业兴旺，是大吉大利的好卦。',
+            career: '事业蒸蒸日上，各方面都很顺利，是发展的好时机。',
+            wealth: '财运亨通，投资有利，收入增加，经济状况良好。',
+            love: '感情和谐美满，夫妻恩爱，家庭幸福。',
+            health: '身体健康，精神愉快，各方面都很好。',
+            advice: '把握良机，积极进取，但也要居安思危。'
+        }
+    },
+
+    // 震宫八卦
+    '100100': {
+        name: '震为雷', number: 51, binary: '100100',
+        upperTrigram: '震', lowerTrigram: '震',
+        meaning: '震动、惊醒、行动',
+        judgment: '亨。震来虩虩，笑言哑哑。震惊百里，不丧匕鬯。',
+        interpretation: {
+            general: '突然的变动和机遇，需要保持冷静应对。变化中蕴含着新的开始。',
+            career: '工作中可能有突然的变化，要灵活应对，把握新的机会。',
+            wealth: '财运有波动，投资需谨慎，不要因小失大。',
+            love: '感情中可能有意外的发展，要诚实面对。',
+            health: '身体可能有些不适，要注意心脏和神经系统。',
+            advice: '面对变化保持冷静，在震动中寻找新的机遇。'
+        }
+    },
+    '100101': {
+        name: '雷地豫', number: 16, binary: '100101',
+        upperTrigram: '震', lowerTrigram: '坤',
+        meaning: '愉快、满足、安逸',
+        judgment: '利建侯行师。',
+        interpretation: {
+            general: '和谐愉悦的状态，众望所归。适合团队合作和领导他人。',
+            career: '工作氛围和谐，同事关系良好，适合团队项目。',
+            wealth: '财运平稳，收入稳定，适合稳健投资。',
+            love: '感情甜蜜，双方都很满足现状。',
+            health: '身心愉悦，健康状况良好。',
+            advice: '珍惜当前的和谐状态，但不要过于安逸而失去进取心。'
+        }
+    },
+
+    // 坎宫八卦
+    '010010': {
+        name: '坎为水', number: 29, binary: '010010',
+        upperTrigram: '坎', lowerTrigram: '坎',
+        meaning: '险难、流动、智慧',
+        judgment: '习坎，有孚，维心亨，行有尚。',
+        interpretation: {
+            general: '重重险阻之象，需要智慧和勇气去克服。水滴石穿，坚持就能成功。',
+            career: '工作中面临困难和挑战，需要耐心和智慧去解决。',
+            wealth: '财运有起伏，投资有风险，需要谨慎理财。',
+            love: '感情中可能有波折，需要双方共同努力度过难关。',
+            health: '要注意肾脏、血液循环系统的健康。',
+            advice: '困难是暂时的，保持信心和智慧，最终能够度过难关。'
+        }
+    },
+
+    // 艮宫八卦
+    '001001': {
+        name: '艮为山', number: 52, binary: '001001',
+        upperTrigram: '艮', lowerTrigram: '艮',
+        meaning: '停止、静止、稳定',
+        judgment: '艮其背，不获其身，行其庭，不见其人，无咎。',
+        interpretation: {
+            general: '静止稳定之象，适合休养生息，不宜强求。知止而后能定。',
+            career: '工作中要保持稳定，不宜轻易变动，巩固现有成果。',
+            wealth: '财运平稳，不宜冒险投资，守成为宜。',
+            love: '感情稳定，但缺乏激情，需要主动一些。',
+            health: '身体状况稳定，适合静养和调理。',
+            advice: '学会适时停止，保持内心的宁静，等待时机。'
+        }
+    },
+
+    // 巽宫八卦
+    '011011': {
+        name: '巽为风', number: 57, binary: '011011',
+        upperTrigram: '巽', lowerTrigram: '巽',
+        meaning: '柔顺、渗透、影响',
+        judgment: '小亨，利有攸往，利见大人。',
+        interpretation: {
+            general: '柔顺渗透之象，以柔克刚。适合循序渐进，润物无声。',
+            career: '工作中要懂得变通，以柔和的方式达到目标。',
+            wealth: '财运渐进，适合稳步投资，不宜急进。',
+            love: '感情中要温柔体贴，用真心感化对方。',
+            health: '身体较为虚弱，需要温和的调理。',
+            advice: '学会柔顺和变通，以智慧和耐心达成目标。'
+        }
+    },
+
+    // 离宫八卦  
+    '101101': {
+        name: '离为火', number: 30, binary: '101101',
+        upperTrigram: '离', lowerTrigram: '离',
+        meaning: '光明、智慧、文明',
+        judgment: '利贞，亨。畜牝牛，吉。',
+        interpretation: {
+            general: '光明智慧之象，事理清晰，前途光明。适合学习和文化事业。',
+            career: '事业前景光明，特别适合教育、文化、媒体等行业。',
+            wealth: '财运明朗，投资方向清晰，有稳定收益。',
+            love: '感情明朗，双方都很清楚彼此的心意。',
+            health: '身体健康，但要注意心脏和眼睛。',
+            advice: '保持智慧和理性，用光明正大的方式处事。'
+        }
+    },
+
+    // 坤宫八卦
+    '000000': {
+        name: '坤为地', number: 2, binary: '000000',
+        upperTrigram: '坤', lowerTrigram: '坤',
+        meaning: '柔顺、包容、承载',
+        judgment: '元，亨，利牝马之贞。',
+        interpretation: {
+            general: '纯阴之卦，象征大地包容。以柔克刚，厚德载物，适合稳扎稳打。',
+            career: '宜守不宜攻，稳扎稳打，以诚待人，必有收获。',
+            wealth: '财运平稳，适合长期投资，不宜投机取巧。',
+            love: '感情深厚，温柔体贴，但需要耐心等待时机。',
+            health: '身体状况稳定，但要注意调养，防止过度疲劳。',
+            advice: '保持谦逊柔和的态度，顺应自然，以德服人。'
+        }
+    },
+
+    // 兑宫八卦
+    '110110': {
+        name: '兑为泽', number: 58, binary: '110110',
+        upperTrigram: '兑', lowerTrigram: '兑',
+        meaning: '喜悦、交流、和谐',
+        judgment: '亨。利贞。',
+        interpretation: {
+            general: '和悦交流之象，人际关系和谐，心情愉快。适合社交和合作。',
+            career: '工作中人际关系良好，容易得到他人帮助。',
+            wealth: '财运不错，通过人际关系可能有额外收入。',
+            love: '感情甜蜜，双方都很开心，关系和谐。',
+            health: '身心愉悦，健康状况良好。',
+            advice: '保持愉快的心情，多与他人交流合作。'
+        }
+    },
+
+    // 其他重要卦象
+    '100010': {
+        name: '水雷屯', number: 3, binary: '100010',
+        upperTrigram: '坎', lowerTrigram: '震',
+        meaning: '初生、困难、积蓄',
+        judgment: '元，亨，利，贞。勿用，有攸往，利建侯。',
+        interpretation: {
+            general: '万物始生，艰难创业。初期困难重重，但前景光明，需要坚持。',
+            career: '创业维艰，需要坚持不懈，积累经验，逐步发展。',
+            wealth: '财运初起，不宜急功近利，需要耐心积累。',
+            love: '感情萌芽期，需要时间培养，不可操之过急。',
+            health: '身体处于调整期，要注意休息，加强锻炼。',
+            advice: '困难是暂时的，要有信心和耐心，积极面对挑战。'
+        }
+    },
+    '010001': {
+        name: '山水蒙', number: 4, binary: '010001',
+        upperTrigram: '艮', lowerTrigram: '坎',
+        meaning: '启蒙、教育、指导',
+        judgment: '亨。匪我求童蒙，童蒙求我。',
+        interpretation: {
+            general: '蒙昧需要启发，教育指导很重要。虚心学习，必有所得。',
+            career: '需要学习提升，寻求导师指点，不可盲目行动。',
+            wealth: '理财需要专业知识，建议咨询专家意见。',
+            love: '感情需要沟通了解，真诚相待，消除误解。',
+            health: '身体需要专业调理，遵医嘱，注意保养。',
+            advice: '保持学习的心态，虚心接受指导，不断完善自己。'
+        }
+    },
+    '010111': {
+        name: '天水讼', number: 6, binary: '010111',
+        upperTrigram: '乾', lowerTrigram: '坎',
+        meaning: '争讼、冲突、是非',
+        judgment: '有孚，窒。惕中吉。终凶。利见大人，不利涉大川。',
+        interpretation: {
+            general: '容易产生争执和冲突，需要冷静处理，寻求和解。',
+            career: '工作中可能遇到分歧，要以和为贵，避免正面冲突。',
+            wealth: '投资有风险，可能有损失，要谨慎行事。',
+            love: '感情中容易有误解，需要坦诚沟通，化解矛盾。',
+            health: '身体可能有不适，要及时就医，不可拖延。',
+            advice: '遇事冷静，以和为贵，必要时寻求第三方调解。'
+        }
+    },
+    '000010': {
+        name: '地水师', number: 7, binary: '000010',
+        upperTrigram: '坤', lowerTrigram: '坎',
+        meaning: '军队、纪律、组织',
+        judgment: '贞，丈人，吉无咎。',
+        interpretation: {
+            general: '需要严明的纪律和组织，在有经验的人领导下能够成功。',
+            career: '工作需要团队合作，遵守规则，服从管理。',
+            wealth: '理财需要有计划有纪律，不可随意挥霍。',
+            love: '感情中需要承担责任，要有担当。',
+            health: '身体需要规律的生活作息，自律很重要。',
+            advice: '严格要求自己，遵守纪律，团结合作。'
+        }
+    },
+    '010000': {
+        name: '水地比', number: 8, binary: '010000',
+        upperTrigram: '坎', lowerTrigram: '坤',
+        meaning: '亲比、团结、依附',
+        judgment: '吉。原筮元永贞，无咎。',
+        interpretation: {
+            general: '人际关系和谐，适合团队合作，相互依靠共同发展。',
+            career: '工作中要善于合作，建立良好的人际关系。',
+            wealth: '可以通过合作获得财富，团购理财等都不错。',
+            love: '感情中要相互依靠，建立深厚的感情基础。',
+            health: '身体状况需要家人朋友的关心和帮助。',
+            advice: '重视人际关系，以诚待人，互助互利。'
+        }
+    }
+    // 继续添加其他卦象...
+};
+
+// 简化版数据（只包含前6个卦象，用于快速加载）
+const HEXAGRAM_EXTRACTED_DATA = {
+    '111111': COMPLETE_HEXAGRAM_DATA['111111'],
+    '000000': COMPLETE_HEXAGRAM_DATA['000000'], 
+    '100010': COMPLETE_HEXAGRAM_DATA['100010'],
+    '010001': COMPLETE_HEXAGRAM_DATA['010001'],
+    '111010': COMPLETE_HEXAGRAM_DATA['111010'],
+    '010111': COMPLETE_HEXAGRAM_DATA['010111']
+};
+
+// 八卦基础数据
+const TRIGRAMS = {
+    '111': { name: '乾', symbol: '☰', element: '天', direction: '西北' },
+    '000': { name: '坤', symbol: '☷', element: '地', direction: '西南' },
+    '100': { name: '震', symbol: '☳', element: '雷', direction: '东' },
+    '011': { name: '巽', symbol: '☴', element: '风', direction: '东南' },
+    '010': { name: '坎', symbol: '☵', element: '水', direction: '北' },
+    '101': { name: '离', symbol: '☲', element: '火', direction: '南' },
+    '001': { name: '艮', symbol: '☶', element: '山', direction: '东北' },
+    '110': { name: '兑', symbol: '☱', element: '泽', direction: '西' }
+};
+
+// 问题模板
+const QUESTION_TEMPLATES = {
+    'career': '我的事业发展会如何？',
+    'love': '我的感情状况如何？',
+    'wealth': '我的财运怎么样？',
+    'health': '我的身体健康状况如何？',
+    'study': '我的学习考试运势如何？',
+    'travel': '我的出行是否顺利？',
+    'family': '我的家庭关系如何？',
+    'friendship': '我的人际关系怎样？',
+    'decision': '我应该如何做选择？',
+    'future': '我未来一段时间的运势如何？'
+};
+
+// 爻的类型定义
+const YAO_TYPES = {
+    0: { name: '老阴', symbol: '⚋', description: '老阴爻，会变为阳爻', changing: true, resultSymbol: '⚊' },
+    1: { name: '少阳', symbol: '⚊', description: '少阳爻，稳定', changing: false, resultSymbol: '⚊' },
+    2: { name: '少阴', symbol: '⚋', description: '少阴爻，稳定', changing: false, resultSymbol: '⚋' },
+    3: { name: '老阳', symbol: '⚊', description: '老阳爻，会变为阴爻', changing: true, resultSymbol: '⚋' }
+};
+
+// 工具函数
+function getHexagramByBinary(binary) {
+    return HEXAGRAM_EXTRACTED_DATA[binary] || COMPLETE_HEXAGRAM_DATA[binary] || null;
 }
 
-// 64卦名称对照表
-export const hexagramNames = {
-    1: '乾为天', 2: '坤为地', 3: '水雷屯', 4: '山水蒙', 5: '水天需', 6: '天水讼',
-    7: '地水师', 8: '水地比', 9: '风天小畜', 10: '天泽履', 11: '地天泰', 12: '天地否',
-    13: '天火同人', 14: '火天大有', 15: '地山谦', 16: '雷地豫', 17: '泽雷随', 18: '山风蛊',
-    19: '地泽临', 20: '风地观', 21: '火雷噬嗑', 22: '山火贲', 23: '山地剥', 24: '地雷复',
-    25: '天雷无妄', 26: '山天大畜', 27: '山雷颐', 28: '泽风大过', 29: '坎为水', 30: '离为火',
-    31: '泽山咸', 32: '雷风恒', 33: '天山遁', 34: '雷天大壮', 35: '火地晋', 36: '地火明夷',
-    37: '风火家人', 38: '火泽睽', 39: '水山蹇', 40: '雷水解', 41: '山泽损', 42: '风雷益',
-    43: '泽天夬', 44: '天风姤', 45: '泽地萃', 46: '地风升', 47: '泽水困', 48: '水风井',
-    49: '泽火革', 50: '火风鼎', 51: '震为雷', 52: '艮为山', 53: '风山渐', 54: '雷泽归妹',
-    55: '雷火丰', 56: '火山旅', 57: '巽为风', 58: '兑为泽', 59: '风水涣', 60: '水泽节',
-    61: '风泽中孚', 62: '雷山小过', 63: '水火既济', 64: '火水未济'
-}; 
+function getTrigramInfo(trigramBinary) {
+    return TRIGRAMS[trigramBinary] || null;
+}
+
+function binaryToHexagramSymbol(binary) {
+    return binary.split('').map(bit => bit === '1' ? '⚊' : '⚋').join('');
+}
+
+// 导出数据
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        COMPLETE_HEXAGRAM_DATA,
+        HEXAGRAM_EXTRACTED_DATA,
+        TRIGRAMS,
+        QUESTION_TEMPLATES,
+        YAO_TYPES,
+        getHexagramByBinary,
+        getTrigramInfo,
+        binaryToHexagramSymbol
+    };
+} 

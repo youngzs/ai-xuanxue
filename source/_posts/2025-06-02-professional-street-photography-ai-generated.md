@@ -19,7 +19,7 @@ cover: /images/poe-gen/professional_stree_image_9.jpg
 ### 🔗 访问工具
 
 <div class="tool-link-container">
-    <a href="/tools/photography-prompt-generator.html" class="tool-link" target="_blank">
+    <a href="/tools/photography-prompt-generator.html" class="tool-link">
         <div class="tool-card">
             <div class="tool-icon">📸</div>
             <div class="tool-info">
@@ -121,21 +121,24 @@ FLUX-pro-1.1模型的出现，标志着AI在视觉艺术生成方面又向前迈
     display: flex;
     align-items: center;
     padding: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 15px;
-    color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff !important;
+    border-radius: 8px;
+    color: #495057 !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     margin-bottom: 1rem;
+    border: 1px solid #dee2e6 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
 }
 
 .tool-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
 }
 
 .tool-icon {
     font-size: 3rem;
     margin-right: 2rem;
+    color: #007bff !important;
 }
 
 .tool-info {
@@ -145,23 +148,25 @@ FLUX-pro-1.1模型的出现，标志着AI在视觉艺术生成方面又向前迈
 .tool-info h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
+    color: #495057 !important;
 }
 
 .tool-info p {
     margin: 0;
-    opacity: 0.9;
     font-size: 1rem;
+    color: #6c757d !important;
 }
 
 .tool-arrow {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 600;
     margin-left: 1rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
+    color: #007bff !important;
 }
 
 .tool-card:hover .tool-arrow {
-    transform: translateX(5px);
+    transform: translateX(3px);
 }
 </style>

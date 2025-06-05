@@ -344,9 +344,9 @@ comments: false
     gap: 1rem;
     margin: 2rem 0;
     padding: 2rem;
-    background: #f8f9fa;
-    border-radius: 15px;
-    border: 1px solid #e9ecef;
+    background: #f8f9fa !important;
+    border-radius: 8px;
+    border: 1px solid #dee2e6 !important;
 }
 
 .career-step {
@@ -354,30 +354,31 @@ comments: false
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background: #ffffff;
-    border-radius: 12px;
+    background: #ffffff !important;
+    border-radius: 6px;
     padding: 1.5rem 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     min-width: 120px;
     max-width: 150px;
+    border: 1px solid #dee2e6 !important;
 }
 
 .career-step:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
 }
 
 .step-number {
     width: 40px;
     height: 40px;
-    background: #3498db;
-    color: white;
+    background: #007bff !important;
+    color: white !important;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
@@ -386,13 +387,13 @@ comments: false
     font-size: 0.9rem;
     font-weight: 600;
     margin: 0 0 0.5rem 0;
-    color: #2c3e50;
+    color: #495057 !important;
     line-height: 1.3;
 }
 
 .step-content p {
     font-size: 0.8rem;
-    color: #6c757d;
+    color: #6c757d !important;
     margin: 0;
     line-height: 1.2;
 }

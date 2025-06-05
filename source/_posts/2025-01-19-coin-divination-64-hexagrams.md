@@ -65,10 +65,13 @@ cover: /images/xuanxue/bagua-cover.webp
     <div class="tool-header">
         <h3>🪙 三币占卜工具</h3>
         <p>诚心求问，投掷三币，获得六十四卦指引</p>
-    </div>  
+    </div>      
     <div class="question-input">
-        <label for="question">🤔 请输入您要占问的事情：</label>
-        <textarea id="question" placeholder="例如：我这次求职能否成功？"></textarea>
+        <label for="question">🤔 请选择或输入您要占问的事情：</label>
+        <select id="question-selector" class="question-selector">
+            <option value="">-- 选择常见问题或自定义输入 --</option>
+        </select>
+        <textarea id="question" placeholder="选择上面的常见问题，或自己输入要占问的事情..."></textarea>
     </div>    
     <div class="mode-selection">
         <h4>📊 选择占卜方式</h4>
@@ -76,14 +79,14 @@ cover: /images/xuanxue/bagua-cover.webp
             <button id="online-mode" class="mode-btn active">🎲 在线投掷</button>
             <button id="offline-mode" class="mode-btn">📝 输入结果</button>
         </div>
-    </div>    
+    </div>
     <!-- 在线投掷模式 -->
     <div id="online-divination" class="divination-mode">
         <div class="divination-process">
             <button id="start-divination" class="btn-primary">开始占卜</button>
             <button id="throw-coins" class="btn-secondary" style="display:none;">投掷硬币</button>
             <button id="reset-divination" class="btn-reset" style="display:none;">重新占卜</button>
-        </div>    
+        </div> 
         <div id="throwing-area" class="throwing-area" style="display:none;">
             <div class="throw-info">
                 <span id="throw-count">第 1 次投掷</span>
@@ -144,25 +147,28 @@ cover: /images/xuanxue/bagua-cover.webp
                 <button id="clear-inputs" class="btn-reset">清空重填</button>
             </div>
         </div>
-    </div>    
+    </div>   
     <!-- 卦象显示区域 -->    
     <div id="hexagram-display" class="hexagram-display" style="display:none;">
         <h4>📜 卦象结果</h4>
         <div class="hexagram-visual">
-            <div class="hexagram-lines" id="hexagram-lines"></div>
-            <div class="hexagram-info">
-                <div class="hexagram-name" id="hexagram-name"></div>
+            <div class="hexagram-info-left">
+                <div class="hexagram-lines" id="hexagram-lines"></div>
                 <div class="hexagram-composition">
-                    <span id="upper-trigram"></span> 上卦 / <span id="lower-trigram"></span> 下卦
+                    <div><span id="upper-trigram"></span> 上卦</div>
+                    <div><span id="lower-trigram"></span> 下卦</div>
                 </div>
             </div>
+            <div class="hexagram-info-center">
+                <div class="hexagram-name" id="hexagram-name"></div>
+                <img id="hexagram-image" class="hexagram-main-image" style="display:none;" alt="卦象图">
+            </div>
         </div>
-    </div>    
+    </div>   
     <div id="interpretation" class="interpretation" style="display:none;">
         <h4>🔍 卦象解读</h4>
-        <div class="interpretation-content" id="interpretation-content"></div>        
+        <div class="interpretation-content" id="interpretation-content"></div>   
         <div id="change-hexagram" class="change-hexagram" style="display:none;">
-            <h5>🔄 变卦</h5>
             <div class="change-info" id="change-info"></div>
         </div>
     </div>
@@ -247,14 +253,14 @@ cover: /images/xuanxue/bagua-cover.webp
 ---
 
 <style>
-/* 占卜工具样式 */
+/* 占卜工具样式 - 浅色主题 */
 .divination-container {
-    background: #f8f9fa;
+    background: #ffffff;
     border-radius: 15px;
     padding: 2rem;
     margin: 2rem 0;
-    border: 2px solid #e9ecef;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .tool-header {
@@ -263,7 +269,7 @@ cover: /images/xuanxue/bagua-cover.webp
 }
 
 .tool-header h3 {
-    color: #2c3e50;
+    color: #495057;
     margin-bottom: 0.5rem;
     font-size: 1.8rem;
 }
@@ -280,23 +286,43 @@ cover: /images/xuanxue/bagua-cover.webp
 .question-input label {
     display: block;
     font-weight: 600;
-    color: #2c3e50;
+    color: #495057;
     margin-bottom: 0.5rem;
+}
+
+.question-selector {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    background: #ffffff;
+    color: #495057;
+}
+
+.question-selector:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
 }
 
 .question-input textarea {
     width: 100%;
     padding: 1rem;
-    border: 2px solid #e9ecef;
-    border-radius: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
     font-size: 1rem;
     resize: vertical;
     min-height: 80px;
+    background: #ffffff;
+    color: #495057;
 }
 
 .question-input textarea:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
 }
 
 /* 模式选择样式 */
@@ -306,7 +332,7 @@ cover: /images/xuanxue/bagua-cover.webp
 }
 
 .mode-selection h4 {
-    color: #2c3e50;
+    color: #495057;
     margin-bottom: 1rem;
     font-size: 1.2rem;
 }
@@ -319,37 +345,37 @@ cover: /images/xuanxue/bagua-cover.webp
 
 .mode-btn {
     padding: 0.8rem 1.5rem;
-    border: 2px solid #e9ecef;
-    border-radius: 25px;
-    background: white;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    background: #ffffff;
     color: #6c757d;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .mode-btn.active {
-    background: #3498db;
+    background: #007bff;
     color: white;
-    border-color: #3498db;
+    border-color: #007bff;
 }
 
 .mode-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: #f8f9fa;
+    border-color: #adb5bd;
 }
 
 /* 线下输入模式样式 */
 .offline-input-section {
-    background: white;
-    border-radius: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
     padding: 2rem;
     margin: 1rem 0;
-    border: 2px solid #3498db;
+    border: 1px solid #dee2e6;
 }
 
 .offline-input-section h4 {
-    color: #2c3e50;
+    color: #495057;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -374,41 +400,44 @@ cover: /images/xuanxue/bagua-cover.webp
     align-items: center;
     gap: 1rem;
     padding: 0.8rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
+    background: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
 }
 
 .yao-input-row label {
     min-width: 120px;
-    font-weight: 600;
-    color: #2c3e50;
+    font-weight: 500;
+    color: #495057;
     font-size: 0.95rem;
 }
 
 .yao-input {
     width: 60px;
     padding: 0.5rem;
-    border: 2px solid #e9ecef;
-    border-radius: 6px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
     text-align: center;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
+    background: #ffffff;
+    color: #495057;
 }
 
 .yao-input:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
 }
 
 .yao-result-display {
     min-width: 120px;
     padding: 0.3rem 0.8rem;
-    background: #e3f2fd;
-    border-radius: 15px;
+    background: #e7f3ff;
+    border-radius: 12px;
     font-size: 0.9rem;
-    font-weight: 600;
-    color: #1976d2;
+    font-weight: 500;
+    color: #0056b3;
     text-align: center;
 }
 
@@ -428,16 +457,16 @@ cover: /images/xuanxue/bagua-cover.webp
 .btn-reset {
     padding: 0.8rem 2rem;
     border: none;
-    border-radius: 25px;
-    font-weight: 600;
+    border-radius: 20px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     margin: 0 0.5rem;
     font-size: 1rem;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #007bff;
     color: white;
 }
 
@@ -451,27 +480,32 @@ cover: /images/xuanxue/bagua-cover.webp
     color: white;
 }
 
-.btn-primary:hover,
-.btn-secondary:hover,
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-secondary:hover {
+    background: #1e7e34;
+}
+
 .btn-reset:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: #545b62;
 }
 
 .throwing-area {
-    background: white;
-    border-radius: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
     padding: 2rem;
     margin: 1rem 0;
     text-align: center;
-    border: 2px dashed #3498db;
+    border: 1px dashed #adb5bd;
 }
 
 .throw-info {
     margin-bottom: 1rem;
     font-size: 1.2rem;
-    font-weight: 600;
-    color: #2c3e50;
+    font-weight: 500;
+    color: #495057;
 }
 
 .coins-display {
@@ -486,9 +520,25 @@ cover: /images/xuanxue/bagua-cover.webp
     animation: flip 0.6s ease-in-out;
     cursor: pointer;
     transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coin-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 }
 
 .coin:hover {
+    transform: scale(1.1);
+}
+
+.coin:hover .coin-image {
     transform: scale(1.1);
 }
 
@@ -501,17 +551,19 @@ cover: /images/xuanxue/bagua-cover.webp
 .throw-result {
     margin-top: 1rem;
     padding: 1rem;
-    background: #e3f2fd;
-    border-radius: 8px;
-    border-left: 4px solid #2196f3;
+    background: #e7f3ff;
+    border-radius: 6px;
+    border-left: 3px solid #007bff;
+    color: #495057;
 }
 
 .hexagram-display {
-    background: white;
-    border-radius: 12px;
+    background: #ffffff;
+    border-radius: 8px;
     padding: 2rem;
     margin: 1rem 0;
-    border: 2px solid #f39c12;
+    border: 1px solid #ffc107;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .hexagram-visual {
@@ -521,61 +573,97 @@ cover: /images/xuanxue/bagua-cover.webp
     justify-content: center;
 }
 
+.hexagram-info-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
 .hexagram-lines {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     font-family: monospace;
     font-size: 2rem;
+    border: 1px solid #ffc107;
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fffbf0;
 }
 
-.hexagram-info {
+.hexagram-line {
     text-align: center;
+    line-height: 1;
+}
+
+.hexagram-line.changing-line {
+    color: #dc3545;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.hexagram-composition {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.hexagram-info-center {
+    text-align: center;
+    flex: 1;
 }
 
 .hexagram-name {
     font-size: 2rem;
-    font-weight: bold;
-    color: #d35400;
-    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 1rem;
 }
 
-.hexagram-composition {
-    color: #7f8c8d;
-    font-size: 1rem;
+.hexagram-main-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    border: 2px solid #ffc107;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .interpretation {
-    background: #fff8e1;
-    border-radius: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
     padding: 2rem;
     margin: 1rem 0;
-    border: 2px solid #ffc107;
+    border: 1px solid #dee2e6;
 }
 
 .interpretation h4,
 .interpretation h5 {
-    color: #e65100;
+    color: #495057;
     margin-bottom: 1rem;
 }
 
 .interpretation-content {
     line-height: 1.8;
-    color: #2c3e50;
+    color: #495057;
 }
 
 .change-hexagram {
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 2px dashed #ffc107;
+    border-top: 1px dashed #dee2e6;
 }
 
 .detailed-interpretation {
     margin-top: 2rem;
     padding: 1.5rem;
-    background: #f0f8ff;
-    border-radius: 8px;
-    border-left: 4px solid #3498db;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #007bff;
 }
 
 .interpretation-section {
@@ -583,154 +671,82 @@ cover: /images/xuanxue/bagua-cover.webp
 }
 
 .interpretation-section h6 {
-    color: #2c3e50;
+    color: #495057;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
     font-weight: 600;
 }
 
-.interpretation-section p {
+.interpretation-section h7 {
+    color: #6f42c1;
     margin-bottom: 0.5rem;
-    color: #555;
+    font-size: 1rem;
+    font-weight: 500;
+    display: block;
 }
 
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-    .divination-container {
-        background: #2d3748;
-        border-color: #4a5568;
-    }
-    
-    .tool-header h3 {
-        color: #e2e8f0;
-    }
-    
-    .tool-header p {
-        color: #a0aec0;
-    }
-    
-    .question-input label {
-        color: #e2e8f0;
-    }
-    
-    .question-input textarea {
-        background: #374151;
-        border-color: #4a5568;
-        color: #e2e8f0;
-    }
-    
-    .question-input textarea:focus {
-        border-color: #63b3ed;
-    }
-    
-    .mode-selection h4 {
-        color: #e2e8f0;
-    }
-    
-    .mode-btn {
-        background: #374151;
-        border-color: #4a5568;
-        color: #a0aec0;
-    }
-    
-    .mode-btn.active {
-        background: #63b3ed;
-        color: #1a202c;
-        border-color: #63b3ed;
-    }
-    
-    .offline-input-section {
-        background: #374151;
-        border-color: #63b3ed;
-    }
-    
-    .offline-input-section h4 {
-        color: #e2e8f0;
-    }
-    
-    .input-instruction {
-        color: #a0aec0;
-    }
-    
-    .yao-input-row {
-        background: #2d3748;
-        border-color: #4a5568;
-    }
-    
-    .yao-input-row label {
-        color: #e2e8f0;
-    }
-    
-    .yao-input {
-        background: #1a202c;
-        border-color: #4a5568;
-        color: #e2e8f0;
-    }
-    
-    .yao-input:focus {
-        border-color: #63b3ed;
-    }
-    
-    .yao-result-display {
-        background: #1e3a8a;
-        color: #93c5fd;
-    }
-    
-    .throwing-area {
-        background: #374151;
-        border-color: #63b3ed;
-    }
-    
-    .throw-info {
-        color: #e2e8f0;
-    }
-    
-    .throw-result {
-        background: #1e3a8a;
-        border-color: #3b82f6;
-        color: #e2e8f0;
-    }
-    
-    .hexagram-display {
-        background: #374151;
-        border-color: #f59e0b;
-    }
-    
-    .hexagram-name {
-        color: #fbbf24;
-    }
-    
-    .hexagram-composition {
-        color: #9ca3af;
-    }
-    
-    .interpretation {
-        background: #365314;
-        border-color: #eab308;
-    }
-    
-    .interpretation h4,
-    .interpretation h5 {
-        color: #fbbf24;
-    }
-    
-    .interpretation-content {
-        color: #e2e8f0;
-    }
-    
-    .detailed-interpretation {
-        background: #1e3a8a;
-        border-color: #3b82f6;
-    }
-    
-    .interpretation-section h6 {
-        color: #e2e8f0;
-    }
-    
-    .interpretation-section p {
-        color: #cbd5e0;
-    }
+.interpretation-section p {
+    margin-bottom: 0.5rem;
+    color: #6c757d;
 }
+
+/* 相关卦象样式 */
+.related-hexagram {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.related-hexagram h6 {
+    color: #495057;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.hexagram-card {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hexagram-info {
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #495057;
+}
+
+.hexagram-images {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.hexagram-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    object-fit: cover;
+}
+
+.hexagram-img-small {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    object-fit: cover;
+}
+
+/* 浅色主题统一样式 - 保持简洁一致的视觉效果 */
 
 /* 响应式设计 */
 @media (max-width: 768px) {
@@ -789,404 +805,48 @@ cover: /images/xuanxue/bagua-cover.webp
         max-width: 200px;
         margin: 0.25rem 0;
     }
+    
+    .hexagram-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hexagram-main-image {
+        max-width: 150px;
+        max-height: 150px;
+    }
 }
 </style>
 
-<script src="/js/hexagram-database.js"></script>
+<script src="/js/simple-hexagram-data.js"></script>
+<script src="/js/extracted-hexagram-database.js"></script>
+<script src="/js/hexagram-integration.js"></script>
+<script src="/js/divination-tool.js"></script>
 <script>
-// 三币占卜工具脚本（改进版）
+// 初始化脚本 - 等待所有模块加载完成
 document.addEventListener('DOMContentLoaded', function() {
-    initDivinationTool();
+    // 检查基础数据是否加载
+    if (typeof HEXAGRAM_EXTRACTED_DATA === 'undefined') {
+        console.error('简化卦象数据库未加载，请检查文件路径');
+    }
+    
+    if (typeof extractedHexagramDatabase === 'undefined') {
+        console.warn('完整卦象数据库未加载，将使用简化版数据');
+    }
+    
+    // 等待数据整合完成
+    setTimeout(() => {
+        if (typeof window.getHexagramByBinary === 'function') {
+            console.log('✅ 三币占卜工具初始化成功');
+            
+            // 测试数据完整性
+            const testHexagram = window.getHexagramByBinary('111111');
+            if (testHexagram) {
+                console.log(`✅ 数据库测试通过：${testHexagram.name}`);
+            }
+        } else {
+            console.error('❌ 数据整合失败');
+        }
+    }, 500);
 });
-
-function initDivinationTool() {
-    // 工具变量
-    let currentThrow = 0;
-    let hexagramLines = [];
-    let question = '';
-    let currentMode = 'online'; // 'online' 或 'offline'
-    
-    // 爻位名称
-    const yaoPositions = ['初爻', '二爻', '三爻', '四爻', '五爻', '上爻'];
-    
-    // 获取DOM元素
-    const startBtn = document.getElementById('start-divination');
-    const throwBtn = document.getElementById('throw-coins');
-    const resetBtn = document.getElementById('reset-divination');
-    const questionInput = document.getElementById('question');
-    const throwingArea = document.getElementById('throwing-area');
-    const hexagramDisplay = document.getElementById('hexagram-display');
-    const interpretation = document.getElementById('interpretation');
-    
-    // 模式切换相关元素
-    const onlineModeBtn = document.getElementById('online-mode');
-    const offlineModeBtn = document.getElementById('offline-mode');
-    const onlineDivination = document.getElementById('online-divination');
-    const offlineDivination = document.getElementById('offline-divination');
-    const generateHexagramBtn = document.getElementById('generate-hexagram');
-    const clearInputsBtn = document.getElementById('clear-inputs');
-    const yaoInputs = document.querySelectorAll('.yao-input');
-    const yaoResultDisplays = document.querySelectorAll('.yao-result-display');
-    
-    // 初始化
-    initEventListeners();
-    
-    function initEventListeners() {
-        // 模式切换
-        onlineModeBtn.addEventListener('click', () => switchMode('online'));
-        offlineModeBtn.addEventListener('click', () => switchMode('offline'));
-        
-        // 在线模式事件
-        startBtn.addEventListener('click', startOnlineDivination);
-        throwBtn.addEventListener('click', throwCoins);
-        resetBtn.addEventListener('click', resetTool);
-        
-        // 线下模式事件
-        generateHexagramBtn.addEventListener('click', generateHexagramFromInput);
-        clearInputsBtn.addEventListener('click', clearOfflineInputs);
-        
-        // 爻输入实时预览
-        yaoInputs.forEach((input, index) => {
-            input.addEventListener('input', (e) => updateYaoDisplay(e.target, index));
-        });
-    }
-    
-    // 模式切换
-    function switchMode(mode) {
-        currentMode = mode;
-        
-        if (mode === 'online') {
-            onlineModeBtn.classList.add('active');
-            offlineModeBtn.classList.remove('active');
-            onlineDivination.style.display = 'block';
-            offlineDivination.style.display = 'none';
-        } else {
-            onlineModeBtn.classList.remove('active');
-            offlineModeBtn.classList.add('active');
-            onlineDivination.style.display = 'none';
-            offlineDivination.style.display = 'block';
-        }
-        
-        // 重置状态
-        resetDisplays();
-    }
-    
-    // 重置显示
-    function resetDisplays() {
-        hexagramDisplay.style.display = 'none';
-        interpretation.style.display = 'none';
-        document.getElementById('change-hexagram').style.display = 'none';
-    }
-    
-    // 菊花数量转换为爻类型
-    function flowerCountToYaoType(count) {
-        switch (count) {
-            case 0: return { type: 'old_yin', symbol: '⚋', name: '老阴（变）', changing: true };
-            case 1: return { type: 'young_yang', symbol: '⚊', name: '少阳', changing: false };
-            case 2: return { type: 'young_yin', symbol: '⚋', name: '少阴', changing: false };
-            case 3: return { type: 'old_yang', symbol: '⚊', name: '老阳（变）', changing: true };
-            default: return null;
-        }
-    }
-    
-    // 更新爻显示
-    function updateYaoDisplay(input, index) {
-        const value = parseInt(input.value);
-        const display = yaoResultDisplays[index];
-        
-        if (isNaN(value) || value < 0 || value > 3) {
-            display.textContent = '';
-            display.style.display = 'none';
-            return;
-        }
-        
-        const yaoInfo = flowerCountToYaoType(value);
-        if (yaoInfo) {
-            display.textContent = `${yaoInfo.symbol} ${yaoInfo.name}`;
-            display.style.display = 'inline-block';
-            display.style.color = yaoInfo.changing ? '#e74c3c' : '#1976d2';
-        }
-    }
-    
-    // 从输入生成卦象
-    function generateHexagramFromInput() {
-        question = questionInput.value.trim();
-        if (!question) {
-            alert('请先输入您要占问的问题！');
-            return;
-        }
-        
-        // 收集所有输入值
-        const inputs = [];
-        let hasEmptyInput = false;
-        
-        yaoInputs.forEach((input) => {
-            const value = parseInt(input.value);
-            if (isNaN(value) || value < 0 || value > 3) {
-                hasEmptyInput = true;
-                return;
-            }
-            inputs[parseInt(input.dataset.yao)] = value;
-        });
-        
-        if (hasEmptyInput || inputs.length !== 6) {
-            alert('请填写完整的六次投掷结果（每个都要输入0-3的数字）！');
-            return;
-        }
-        
-        // 构建hexagramLines数组（按从下到上的顺序：初爻到上爻）
-        hexagramLines = [];
-        for (let i = 0; i < 6; i++) {
-            const flowerCount = inputs[i];
-            const yaoInfo = flowerCountToYaoType(flowerCount);
-            
-            hexagramLines.push({
-                type: yaoInfo.type,
-                symbol: yaoInfo.symbol,
-                name: yaoInfo.name,
-                flowerCount: flowerCount,
-                changing: yaoInfo.changing
-            });
-        }
-        
-        // 生成并显示卦象
-        processHexagramResult();
-    }
-    
-    // 清空线下输入
-    function clearOfflineInputs() {
-        yaoInputs.forEach(input => {
-            input.value = '';
-        });
-        yaoResultDisplays.forEach(display => {
-            display.textContent = '';
-            display.style.display = 'none';
-        });
-        resetDisplays();
-    }
-    
-    // 开始在线占卜
-    function startOnlineDivination() {
-        question = questionInput.value.trim();
-        if (!question) {
-            alert('请先输入您要占问的问题！');
-            return;
-        }
-        
-        startBtn.style.display = 'none';
-        throwBtn.style.display = 'inline-block';
-        resetBtn.style.display = 'inline-block';
-        throwingArea.style.display = 'block';
-        
-        currentThrow = 0;
-        hexagramLines = [];
-        updateThrowInfo();
-    }
-    
-    // 投掷硬币
-    function throwCoins() {
-        if (currentThrow >= 6) return;
-        
-        // 模拟投掷三枚硬币
-        const coins = [
-            Math.random() < 0.5 ? 1 : 2, // 菊花=1, 数字=2
-            Math.random() < 0.5 ? 1 : 2,
-            Math.random() < 0.5 ? 1 : 2
-        ];
-        
-        // 显示硬币动画
-        animateCoins(coins);
-        
-        // 计算结果
-        const flowerCount = coins.filter(c => c === 1).length;
-        const yaoInfo = flowerCountToYaoType(flowerCount);
-        
-        hexagramLines.push({
-            type: yaoInfo.type,
-            symbol: yaoInfo.symbol,
-            name: yaoInfo.name,
-            coins: coins,
-            flowerCount: flowerCount,
-            changing: yaoInfo.changing
-        });
-        
-        // 显示结果
-        setTimeout(() => {
-            displayThrowResult(coins, flowerCount, yaoInfo.name);
-            
-            currentThrow++;
-            if (currentThrow < 6) {
-                updateThrowInfo();
-            } else {
-                processHexagramResult();
-            }
-        }, 1000);
-    }
-    
-    // 处理卦象结果（通用函数）
-    function processHexagramResult() {
-        if (currentMode === 'online') {
-            throwBtn.style.display = 'none';
-        }
-        
-        // 生成卦象代码
-        const hexagramCode = HexagramDatabase.generateHexagramCode(hexagramLines);
-        
-        // 分析上下卦
-        const lowerTrigram = hexagramCode.substring(0, 3);
-        const upperTrigram = hexagramCode.substring(3, 6);
-        
-        const lowerTrigramInfo = HexagramDatabase.getTrigram(lowerTrigram);
-        const upperTrigramInfo = HexagramDatabase.getTrigram(upperTrigram);
-        
-        // 查找六十四卦
-        const hexagramInfo = HexagramDatabase.getHexagram(hexagramCode);
-        
-        // 显示卦象
-        displayHexagram(hexagramInfo, upperTrigramInfo, lowerTrigramInfo);
-        
-        // 显示详细解释
-        displayDetailedInterpretation(hexagramInfo);
-    }
-    
-    // 重新开始
-    function resetTool() {
-        if (currentMode === 'online') {
-            startBtn.style.display = 'inline-block';
-            throwBtn.style.display = 'none';
-            resetBtn.style.display = 'none';
-            throwingArea.style.display = 'none';
-        } else {
-            clearOfflineInputs();
-        }
-        
-        resetDisplays();
-        currentThrow = 0;
-        hexagramLines = [];
-        questionInput.value = '';
-    }
-    
-    // 更新投掷信息
-    function updateThrowInfo() {
-        document.getElementById('throw-count').textContent = `第 ${currentThrow + 1} 次投掷`;
-        document.getElementById('yao-position').textContent = `（${yaoPositions[currentThrow]}）`;
-    }
-    
-    // 硬币动画
-    function animateCoins(coins) {
-        const coinElements = [
-            document.getElementById('coin1'),
-            document.getElementById('coin2'),
-            document.getElementById('coin3')
-        ];
-        
-        coinElements.forEach((coin, index) => {
-            coin.style.animation = 'none';
-            coin.offsetHeight; // 触发重绘
-            coin.style.animation = 'flip 0.6s ease-in-out';
-            
-            setTimeout(() => {
-                coin.textContent = coins[index] === 1 ? '🌸' : '🔢';
-            }, 300);
-        });
-    }
-    
-    // 显示投掷结果
-    function displayThrowResult(coins, flowerCount, yaoName) {
-        const details = `硬币结果：${coins.map(c => c === 1 ? '菊' : '数').join('-')} | 菊花${flowerCount}个`;
-        document.getElementById('throw-details').textContent = details;
-        document.getElementById('yao-result').textContent = `→ ${yaoName}`;
-    }
-    
-    // 显示卦象
-    function displayHexagram(hexagramInfo, upperTrigram, lowerTrigram) {
-        const hexagramLinesElement = document.getElementById('hexagram-lines');
-        hexagramLinesElement.innerHTML = '';
-        
-        // 从上到下显示爻（与投掷顺序相反）
-        for (let i = 5; i >= 0; i--) {
-            const line = document.createElement('div');
-            line.textContent = hexagramLines[i].symbol;
-            if (hexagramLines[i].changing) {
-                line.style.color = '#e74c3c';
-                line.style.fontWeight = 'bold';
-                line.title = hexagramLines[i].name;
-            }
-            hexagramLinesElement.appendChild(line);
-        }
-        
-        document.getElementById('hexagram-name').textContent = hexagramInfo.name;
-        document.getElementById('upper-trigram').textContent = `${upperTrigram.symbol} ${upperTrigram.name}`;
-        document.getElementById('lower-trigram').textContent = `${lowerTrigram.symbol} ${lowerTrigram.name}`;
-        
-        hexagramDisplay.style.display = 'block';
-    }
-    
-    // 显示详细解释
-    function displayDetailedInterpretation(hexagramInfo) {
-        const content = `
-            <div class="interpretation-section">
-                <h6>🤔 您的问题</h6>
-                <p>${question}</p>
-            </div>
-            
-            <div class="interpretation-section">
-                <h6>📖 卦象含义</h6>
-                <p>${hexagramInfo.description}</p>
-            </div>
-            
-            <div class="detailed-interpretation">
-                <div class="interpretation-section">
-                    <h6>🎯 总体判断</h6>
-                    <p>${hexagramInfo.judgment}</p>
-                </div>
-                
-                <div class="interpretation-section">
-                    <h6>💼 事业财运</h6>
-                    <p>${hexagramInfo.business}</p>
-                </div>
-                
-                <div class="interpretation-section">
-                    <h6>💕 感情婚姻</h6>
-                    <p>${hexagramInfo.love}</p>
-                </div>
-                
-                <div class="interpretation-section">
-                    <h6>🏥 健康状况</h6>
-                    <p>${hexagramInfo.health}</p>
-                </div>
-                
-                <div class="interpretation-section">
-                    <h6>💡 行动建议</h6>
-                    <p>${hexagramInfo.advice}</p>
-                </div>
-            </div>
-        `;
-        
-        document.getElementById('interpretation-content').innerHTML = content;
-        interpretation.style.display = 'block';
-        
-        // 检查是否有变卦
-        const changingLines = hexagramLines.filter(line => line.changing);
-        
-        if (changingLines.length > 0) {
-            displayChangeHexagram(changingLines);
-        }
-    }
-    
-    // 显示变卦
-    function displayChangeHexagram(changingLines) {
-        const changeHexagram = HexagramDatabase.getChangeHexagram(hexagramLines);
-        
-        const changeInfo = `
-            <p><strong>变爻分析：</strong>您的卦象中有 ${changingLines.length} 个变爻，表示事情会发生变化。</p>
-            <p><strong>变卦：</strong>${changeHexagram.name}</p>
-            <p><strong>变化趋势：</strong>${changeHexagram.description}</p>
-            <p><strong>发展建议：</strong>老阴转阳，老阳转阴，预示着事物的发展会有新的转机。要顺应变化，把握时机。</p>
-        `;
-        
-        document.getElementById('change-info').innerHTML = changeInfo;
-        document.getElementById('change-hexagram').style.display = 'block';
-    }
-}
 </script> 

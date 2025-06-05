@@ -149,8 +149,8 @@ comments: false
 
 **项目简介**: 基于Hexo构建的现代化技术博客，融合AI技术与传统文化的探索。
 
-- **🌐 在线地址**: [ai-xuanxue.github.io](https://ai-xuanxue.github.io)
-- **💻 源码地址**: [本项目GitHub链接]
+- **🌐 在线地址**: [ai-xuanxue.vercel.com](https://ai-xuanxue.vercel.com)
+- **💻 源码地址**: [本项目GitHub链接](https://ai-xuanxue.github.com/youngzs/ai-xuanxue)
 
 #### 项目特色
 

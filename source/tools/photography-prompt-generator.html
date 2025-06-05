@@ -1,530 +1,542 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>专业人像摄影提示生成器</title>
-    <style>
-        :root {
-            /* 知乎风格浅色主题配色 */
-            --primary: #0084ff;
-            --primary-light: #4da6ff;
-            --primary-dark: #0066cc;
-            --secondary: #f6f6f6;
-            --background: #ffffff;
-            --card-background: #ffffff;
-            --text: #1a1a1a;
-            --text-secondary: #8590a6;
-            --border: #ebebeb;
-            --success: #52c41a;
-            --warning: #faad14;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        
-        html {
-            background-color: #f6f6f6;
-        }
-        
-        body {
-            background-color: #f6f6f6;
-            color: var(--text);
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            min-height: 100vh;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 30px 20px 20px;
-            background: var(--background);
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(26,26,26,0.1);
-        }
-        
-        h1 {
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-weight: 700;
-            font-size: 2rem;
-        }
-        
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
-            }
-        }
-        
-        .options-panel {
-            flex: 1;
-            background: var(--card-background);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(26,26,26,0.1);
-            border: 1px solid var(--border);
-        }
-        
-        .result-panel {
-            flex: 1;
-            background: var(--card-background);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(26,26,26,0.1);
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .form-group {
-            margin-bottom: 16px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text);
-            font-size: 0.95rem;
-        }
-        
-        select, input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.95rem;
-            background-color: var(--background);
-            color: var(--text);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            font-weight: 500;
-        }
-        
-        select:focus, input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 132, 255, 0.1);
-        }
-        
-        select option {
-            color: var(--text);
-            background-color: var(--background);
-            font-weight: 500;
-        }
-        
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-        
-        @media (min-width: 576px) {
-            .options-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            margin-top: 10px;
-        }
-        
-        button:hover {
-            background-color: var(--primary-light);
-            transform: translateY(-1px);
-        }
-        
-        button:active {
-            transform: scale(0.98);
-        }
-        
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .button-secondary {
-            background-color: var(--text-secondary);
-        }
-        
-        .button-secondary:hover {
-            background-color: #6c7682;
-        }
-        
-        .button-success {
-            background-color: var(--success);
-        }
-        
-        .button-success:hover {
-            background-color: #73d13d;
-        }
-        
-        .prompt-result {
-            flex-grow: 1;
-            margin-bottom: 20px;
-            padding: 18px;
-            background-color: var(--background);
-            border-radius: 8px;
-            border: 2px solid var(--border);
-            white-space: pre-wrap;
-            min-height: 140px;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: var(--text);
-            box-shadow: 0 2px 8px rgba(26,26,26,0.06);
-        }
-        
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: var(--secondary);
-            border-radius: 6px;
-            border: 1px solid var(--border);
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text);
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--primary);
-        }
-        
-        .tab-container {
-            margin-bottom: 20px;
-        }
-        
-        .tab-buttons {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            overflow-x: auto;
-            flex-wrap: wrap;
-        }
-        
-        .tab-button {
-            padding: 12px 20px;
-            background-color: transparent;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text);
-            margin-right: 10px;
-            transition: color 0.3s ease, border-color 0.3s ease;
-            font-size: 0.95rem;
-        }
-        
-        .tab-button.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-        
-        .tab-button:hover {
-            color: var(--primary);
-        }
-        
-        .tab-content {
-            padding: 15px 0;
-        }
-        
-        .tab-pane {
-            display: none;
-        }
-        
-        .tab-pane.active {
-            display: block;
-        }
-        
-        .multi-image-num {
-            display: flex;
-            flex-direction: row;
-            margin-top: 15px;
-            align-items: center;
-        }
-        
-        .multi-image-num label {
-            margin-bottom: 0;
-            margin-right: 15px;
-            white-space: nowrap;
-        }
-        
-        .number-picker {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        
-        .number-picker button {
-            margin: 0;
-            padding: 5px 12px;
-            border-radius: 0;
-            font-size: 16px;
-            background-color: var(--secondary);
-            color: var(--text);
-        }
-        
-        .number-picker button:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .number-picker input {
-            width: 50px;
-            border: none;
-            text-align: center;
-            padding: 5px 0;
-            font-size: 16px;
-        }
-        
-        .tag-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        
-        .tag {
-            background-color: var(--secondary);
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-        
-        .tag:hover {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .remove-tag {
-            margin-left: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .switch-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-            margin-right: 10px;
-        }
-        
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider {
-            background-color: var(--primary);
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-        
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            margin-left: 5px;
-            cursor: help;
-        }
-        
-        .tooltip-icon {
-            width: 18px;
-            height: 18px;
-            background-color: var(--primary-light);
-            color: white;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .tooltip-text {
-            visibility: hidden;
-            width: 220px;
-            background-color: var(--text);
-            color: var(--background);
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -110px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.85rem;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(26,26,26,0.2);
-        }
-        
-        .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: var(--text) transparent transparent transparent;
-        }
-        
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        .tip-box {
-            background-color: var(--background);
-            border-left: 4px solid var(--primary);
-            padding: 16px;
-            margin-top: 20px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(26,26,26,0.1);
-        }
-        
-        .tip-box h3 {
-            color: var(--text);
-            margin-bottom: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-        
-        .tip-item {
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: var(--text);
-            line-height: 1.5;
-        }
-        
-        .copy-temp {
-            position: absolute;
-            left: -9999px;
-            height: 0;
-            opacity: 0;
-        }
-        
-        .history-container {
-            margin-top: 20px;
-        }
-        
-        .history-item {
-            padding: 10px;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: background-color 0.2s;
-            color: var(--text);
-        }
-        
-        .history-item:hover {
-            background-color: var(--secondary);
-        }
-    </style>
-</head>
-<body>
+---
+layout: page
+title: 专业人像摄影提示生成器
+---
+
+<style>
+/* 摄影提示生成器页面特定样式 - 继承主题样式 */
+.photography-tool-page {
+    padding: 0;
+}
+
+.tool-description {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f6f6f6;
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+}
+
+.tool-description p {
+    margin: 0;
+    color: #8590a6;
+    font-size: 1rem;
+}
+
+.tool-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+    .tool-container {
+        flex-direction: row;
+    }
+}
+
+.options-panel, .result-panel {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(26,26,26,0.1);
+    border: 1px solid #ebebeb;
+}
+
+.result-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* 美化表单标签 */
+label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+}
+
+/* 美化表单元素 */
+select, input, textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+select:hover, input:hover, textarea:hover {
+    border-color: #c1c7cd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+select:focus, input:focus, textarea:focus {
+    outline: none;
+    border-color: #0084ff;
+    box-shadow: 0 0 0 4px rgba(0, 132, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+/* 美化下拉框 */
+select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    appearance: none;
+}
+
+select:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%230084ff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+}
+
+select option {
+    color: #1a1a1a;
+    background-color: #ffffff;
+    font-weight: 500;
+    padding: 0.5rem;
+}
+
+/* 美化按钮 */
+button {
+    background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%);
+    color: white;
+    border: none;
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 132, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 132, 255, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 132, 255, 0.3);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.button-secondary {
+    background: linear-gradient(135deg, #8590a6 0%, #6c7682 100%);
+    box-shadow: 0 2px 6px rgba(133, 144, 166, 0.3);
+}
+
+.button-secondary:hover {
+    box-shadow: 0 4px 12px rgba(133, 144, 166, 0.4);
+}
+
+.button-success {
+    background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+    box-shadow: 0 2px 6px rgba(82, 196, 26, 0.3);
+}
+
+.button-success:hover {
+    box-shadow: 0 4px 12px rgba(82, 196, 26, 0.4);
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 576px) {
+    .options-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.multi-image-num {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.multi-image-num label {
+    margin-right: 1rem;
+    margin-bottom: 0;
+}
+
+.number-picker {
+    display: flex;
+    align-items: center;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+}
+
+.number-picker button {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+    background: linear-gradient(135deg, #f6f6f6 0%, #e9ecef 100%);
+    color: #1a1a1a;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.number-picker button:hover {
+    background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%);
+    color: white;
+    transform: scale(1.05);
+}
+
+.number-picker button::before {
+    display: none;
+}
+
+.number-picker input {
+    width: 60px;
+    border: none;
+    text-align: center;
+    padding: 0.75rem 0;
+    background: transparent;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: none;
+    transform: none;
+}
+
+.number-picker input:focus {
+    box-shadow: none;
+    transform: none;
+    border: none;
+}
+
+.prompt-result {
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    border: 2px solid #e1e5e9;
+    white-space: pre-wrap;
+    min-height: 160px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #2d3748;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.prompt-result:hover {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.tab-container {
+    margin-bottom: 2rem;
+}
+
+.tab-buttons {
+    display: flex;
+    border-bottom: 2px solid #e1e5e9;
+    overflow-x: auto;
+    flex-wrap: wrap;
+    background: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab-button {
+    padding: 0.875rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #6c757d;
+    margin-right: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.tab-button::before {
+    display: none;
+}
+
+.tab-button.active {
+    color: #0084ff;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 2px 8px rgba(0, 132, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.tab-button:hover:not(.active) {
+    color: #0084ff;
+    background: rgba(0, 132, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.tab-content {
+    padding: 1rem 0;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #0084ff;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tag {
+    background: linear-gradient(135deg, #f6f6f6 0%, #e9ecef 100%);
+    color: #495057;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.tag:hover {
+    background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 132, 255, 0.3);
+}
+
+.remove-tag {
+    margin-left: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.switch-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin-right: 1rem;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 24px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+input:checked + .slider {
+    background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 132, 255, 0.3);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.5rem;
+    cursor: help;
+}
+
+.tooltip-icon {
+    width: 18px;
+    height: 18px;
+    background-color: #0084ff;
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 220px;
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 0.75rem;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 12px rgba(26,26,26,0.2);
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tip-box {
+    background-color: #ffffff;
+    border-left: 4px solid #0084ff;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #ebebeb;
+    box-shadow: 0 1px 3px rgba(26,26,26,0.1);
+}
+
+.tip-box h3 {
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.tip-item {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    line-height: 1.5;
+}
+
+.copy-temp {
+    position: absolute;
+    left: -9999px;
+    height: 0;
+    opacity: 0;
+}
+
+.history-container {
+    margin-top: 1.5rem;
+}
+
+.history-item {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ebebeb;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: #1a1a1a;
+}
+
+.history-item:hover {
+    background-color: #f6f6f6;
+}
+</style>
+
+<!-- 摄影提示生成器工具页面 -->
+<div class="photography-tool-page">
     <!-- 复制临时元素 -->
     <textarea id="copy-textarea" class="copy-temp" readonly></textarea>
-
-    <header>
-        <h1>专业人像摄影提示生成器</h1>
-        <p class="subtitle">生成精准的人像摄影提示语，用于创建高质量的专业人像图像</p>
-    </header>
     
-    <div class="container">
+    <!-- 工具说明 -->
+    <div class="tool-description">
+        <p>📸 生成精准的人像摄影提示语，用于创建高质量的专业人像图像</p>
+    </div>
+    
+    <div class="tool-container">
         <div class="options-panel">
             <div class="tab-container">
                 <div class="tab-buttons">
@@ -820,8 +832,9 @@
             </div>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', function() {
             // 获取DOM元素
             const portraitStyle = document.getElementById('portrait-style');
@@ -1057,6 +1070,4 @@
                 }
             });
         });
-    </script>
-</body>
-</html> 
+</script> 

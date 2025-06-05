@@ -1,9 +1,17 @@
 {
-  "name": "three-coin-divination",
+  "name": "ai-xuanxue-blog",
   "version": "1.0.0",
-  "description": "传统三币占卜工具，支持在线投掷和线下输入，包含完整的64卦数据库",
-  "main": "index.html",
+  "description": "AI与玄学研究院 - 现代化Hexo博客",
+  "private": true,
   "scripts": {
+    "dev": "hexo server",
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "deploy": "hexo deploy",
+    "server": "hexo server",
+    "start": "npm run clean && npm run build && npm run server",
+    "new": "hexo new post",
+    "publish": "npm run clean && npm run build",
     "extract": "node scripts/extract-hexagram-data.js",
     "batch": "node scripts/batch-manager.js",
     "build-db": "node scripts/batch-manager.js build",
@@ -11,37 +19,39 @@
     "merge-data": "node scripts/batch-manager.js merge",
     "validate-data": "node scripts/batch-manager.js validate",
     "recover-data": "node scripts/batch-manager.js recover",
-    "cleanup": "node scripts/batch-manager.js cleanup",
-    "dev": "python -m http.server 8080",
-    "start": "npm run dev",
-    "build": "echo 'Static site - no build needed'",
-    "test": "echo 'No tests specified'"
+    "cleanup": "node scripts/batch-manager.js cleanup"
   },
   "keywords": [
+    "hexo",
+    "blog",
+    "ai",
+    "xuanxue",
+    "tech",
     "易经",
     "三币占卜",
     "64卦",
     "I-Ching",
-    "divination",
-    "hexagram",
-    "数据抓取",
-    "批量处理"
+    "divination"
   ],
-  "author": "Your Name",
+  "author": "yanteruo",
   "license": "MIT",
+  "hexo": {
+    "version": "7.3.0"
+  },
+  "dependencies": {
+    "hexo": "^7.3.0",
+    "hexo-generator-archive": "^2.0.0",
+    "hexo-generator-category": "^2.0.0",
+    "hexo-generator-index": "^4.0.0",
+    "hexo-generator-tag": "^2.0.0",
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-marked": "^7.0.0",
+    "hexo-renderer-stylus": "^3.0.1",
+    "hexo-server": "^3.0.0",
+    "hexo-theme-landscape": "^1.0.0"
+  },
   "devDependencies": {
     "axios": "^1.6.0",
     "cheerio": "^1.0.0-rc.12"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/your-username/three-coin-divination.git"
-  },
-  "bugs": {
-    "url": "https://github.com/your-username/three-coin-divination/issues"
-  },
-  "homepage": "https://github.com/your-username/three-coin-divination#readme",
-  "engines": {
-    "node": ">=14.0.0"
   }
 }

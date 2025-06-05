@@ -48,15 +48,17 @@
 
 .page-header {
     padding: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: #ffffff;
+    color: #495057;
     text-align: center;
+    border-bottom: 1px solid #dee2e6;
 }
 
 .page-title {
     margin: 0 0 1rem 0;
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 600;
+    color: #495057;
 }
 
 .page-meta {
@@ -71,7 +73,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
-    opacity: 0.9;
+    color: #6c757d;
 }
 
 .page-content {
@@ -172,96 +174,7 @@
     font-style: italic;
 }
 
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-    .page {
-        background: #1a202c;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    }
-    
-    .page-content {
-        background: #1a202c;
-        color: #e2e8f0;
-    }
-    
-    .page-content h1,
-    .page-content h2,
-    .page-content h3,
-    .page-content h4,
-    .page-content h5,
-    .page-content h6 {
-        color: #63b3ed;
-    }
-    
-    .page-content h1 {
-        border-bottom-color: #63b3ed;
-    }
-    
-    .page-content p,
-    .page-content li,
-    .page-content span,
-    .page-content div {
-        color: #e2e8f0;
-    }
-    
-    .page-content a {
-        color: #63b3ed;
-    }
-    
-    .page-content a:hover {
-        border-bottom-color: #63b3ed;
-    }
-    
-    .page-content code {
-        background: #2d3748;
-        color: #e2e8f0;
-    }
-    
-    .page-content pre {
-        background: #2d3748;
-        color: #e2e8f0;
-    }
-    
-    .page-content th,
-    .page-content td {
-        border-color: #4a5568;
-    }
-    
-    .page-content th {
-        background: #2d3748;
-        color: #e2e8f0;
-    }
-    
-    .page-content blockquote {
-        background: #2d3748;
-        border-left-color: #63b3ed;
-        color: #e2e8f0;
-    }
-    
-    /* 修复tools和about页面中的特殊样式 */
-    .page-content .example-gallery {
-        background: #2d3748 !important;
-        border-color: #4a5568 !important;
-    }
-    
-    .page-content .career-progression {
-        background: #2d3748 !important;
-    }
-    
-    .page-content .career-step {
-        background: #374151 !important;
-        color: #e2e8f0 !important;
-    }
-    
-    .page-content .step-number {
-        background: #63b3ed !important;
-        color: #1a202c !important;
-    }
-    
-    .page-content strong {
-        color: #90cdf4 !important;
-    }
-}
+/* 浅色主题统一样式 */
 
 /* 响应式设计 */
 @media (max-width: 768px) {
