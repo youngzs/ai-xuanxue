@@ -1878,4 +1878,323 @@
         padding: 1rem;
         margin: 15px 0;
     }
+}
+
+/* ==============
+   五行相生相克图表样式
+   ============== */
+.wuxing-container {
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #f8fffe 0%, #f3f7ff 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+.wuxing-diagram-new {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(231, 76, 60, 0.1) 0%, transparent 50%),
+        radial-gradient(circle, #ffffff 20%, #f8f9fa 100%);
+    box-shadow: 
+        0 0 0 1px rgba(255,255,255,0.8),
+        0 20px 40px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+}
+
+.wuxing-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.wuxing-element-new {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 20px rgba(0,0,0,0.15),
+        0 1px 3px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    z-index: 2;
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+}
+
+.wuxing-element-new:hover {
+    transform: scale(1.15) translateZ(0);
+    box-shadow: 
+        0 8px 32px rgba(0,0,0,0.25),
+        0 4px 8px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    z-index: 10;
+}
+
+.wuxing-element-new::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.wuxing-element-new:hover::before {
+    opacity: 1;
+}
+
+.element-name-new {
+    font-size: 18px;
+    margin-bottom: 2px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    font-family: 'Noto Sans SC', sans-serif;
+}
+
+.element-nature-new {
+    font-size: 9px;
+    opacity: 0.9;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    font-weight: 500;
+}
+
+/* 五行元素位置和渐变 */
+.wood-new {
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 50%, #58d68d 100%);
+}
+
+.fire-new {
+    top: 100px;
+    right: 25px;
+    background: linear-gradient(135deg, #e74c3c 0%, #ec7063 50%, #f1948a 100%);
+}
+
+.earth-new {
+    bottom: 65px;
+    right: 65px;
+    background: linear-gradient(135deg, #f39c12 0%, #f4d03f 50%, #f7dc6f 100%);
+}
+
+.metal-new {
+    bottom: 65px;
+    left: 65px;
+    background: linear-gradient(135deg, #95a5a6 0%, #aab7b8 50%, #d5dbdb 100%);
+}
+
+.water-new {
+    top: 100px;
+    left: 25px;
+    background: linear-gradient(135deg, #3498db 0%, #5dade2 50%, #85c1e9 100%);
+}
+
+.wuxing-center-new {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 6px 24px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,0.2);
+    z-index: 3;
+}
+
+.wuxing-title-new {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.wuxing-subtitle-new {
+    font-size: 10px;
+    opacity: 0.9;
+    font-weight: 500;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+
+/* 图例样式 */
+.wuxing-legend-new {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.legend-item-new {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.legend-line {
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.sheng-line {
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+}
+
+.ke-line {
+    background: linear-gradient(90deg, #e74c3c, #ec7063);
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        rgba(255,255,255,0.3) 4px,
+        rgba(255,255,255,0.3) 6px
+    );
+}
+
+/* 详细说明样式 */
+.wuxing-explanation {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    text-align: left;
+}
+
+.explanation-section {
+    background: rgba(255,255,255,0.7);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+.explanation-section h4 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.relation-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.relation-item {
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #34495e;
+    border: 1px solid rgba(52, 152, 219, 0.1);
+    transition: all 0.3s ease;
+}
+
+.relation-item:hover {
+    background: rgba(52, 152, 219, 0.1);
+    transform: translateX(4px);
+}
+
+/* 改进SVG箭头样式 */
+.wuxing-svg path {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+
+.wuxing-svg marker polygon {
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .wuxing-container {
+        margin: 20px auto;
+        padding: 20px 15px;
+    }
+    
+    .wuxing-diagram-new {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .wuxing-element-new {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .element-name-new {
+        font-size: 16px;
+    }
+    
+    .element-nature-new {
+        font-size: 8px;
+    }
+    
+    .wuxing-center-new {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .wuxing-title-new {
+        font-size: 18px;
+    }
+    
+    .wuxing-subtitle-new {
+        font-size: 9px;
+    }
+    
+    .wuxing-explanation {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .wuxing-legend-new {
+        gap: 20px;
+    }
+    
+    .legend-item-new {
+        font-size: 13px;
+    }
 } 

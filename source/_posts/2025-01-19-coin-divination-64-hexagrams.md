@@ -9,7 +9,7 @@ tags:
   - 六十四卦
   - 玄学预测
   - 传统文化
-cover: /images/xuanxue/bagua-cover.webp
+cover: /images/xuanxue/64gua.webp
 ---
 
 # 三币占卜：最简单的六十四卦预测法

@@ -3,7 +3,7 @@ title: Mermaid：用文字画图的神奇工具 - 初级程序员必知的图表
 date: 2025-01-20 10:00:00
 categories: 
   - 技术工具
-cover: /images/poe-gen/mermaid.png
+cover: /images/poe-gen/mermaid.webp
 tags:
   - Mermaid
   - 图表

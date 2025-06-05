@@ -365,28 +365,113 @@ excerpt: 深度解析《易经》八卦理论，从乾坤坎离到六十四卦�
       <div class="element-name-new">水</div>
       <div class="element-nature-new">滋润</div>
     </div>
-    <!-- 相生箭头 (外圈，绿色) -->
-    <svg class="wuxing-svg" viewBox="0 0 300 300">
+    <!-- 相生相克关系图 -->
+    <svg class="wuxing-svg" viewBox="0 0 340 340">
       <defs>
-        <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-          <polygon points="0,0 0,6 9,3" fill="#27ae60" />
+        <!-- 渐变定义 -->
+        <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#27ae60;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#2ecc71;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#ec7063;stop-opacity:1" />
+        </linearGradient>        
+        <!-- 改进的箭头标记 -->
+        <marker id="arrowhead-green" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0,0 0,8 10,4" fill="url(#greenGradient)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
         </marker>
-        <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-          <polygon points="0,0 0,6 9,3" fill="#e74c3c" />
-        </marker>
-      </defs>
+        <marker id="arrowhead-red" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0,0 0,8 10,4" fill="url(#redGradient)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+        </marker>        
+        <!-- 发光效果滤镜 -->
+        <filter id="glow-green">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge> 
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id="glow-red">
+          <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+          <feMerge> 
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>      
       <!-- 相生箭头 (外圈) 木→火→土→金→水→木 -->
-      <path d="M 150 40 A 80 80 0 0 1 235 120" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#arrowhead-green)" />
-      <path d="M 235 120 A 80 80 0 0 1 185 220" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#arrowhead-green)" />
-      <path d="M 185 220 A 80 80 0 0 1 115 220" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#arrowhead-green)" />
-      <path d="M 115 220 A 80 80 0 0 1 65 120" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#arrowhead-green)" />
-      <path d="M 65 120 A 80 80 0 0 1 150 40" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#arrowhead-green)" />
-      <!-- 相克箭头 (内圈) 木克土、土克水、水克火、火克金、金克木 -->
-      <path d="M 150 55 L 170 205" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead-red)" />
-      <path d="M 170 205 L 80 135" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead-red)" />
-      <path d="M 80 135 L 220 135" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead-red)" />
-      <path d="M 220 135 L 130 205" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead-red)" />
-      <path d="M 130 205 L 150 55" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead-red)" />
+      <path d="M 170 45 A 90 90 0 0 1 265 135" 
+            stroke="url(#greenGradient)" 
+            stroke-width="4" 
+            fill="none" 
+            marker-end="url(#arrowhead-green)"
+            filter="url(#glow-green)"
+            opacity="0.9" />
+      <path d="M 265 135 A 90 90 0 0 1 210 245" 
+            stroke="url(#greenGradient)" 
+            stroke-width="4" 
+            fill="none" 
+            marker-end="url(#arrowhead-green)"
+            filter="url(#glow-green)"
+            opacity="0.9" />
+      <path d="M 210 245 A 90 90 0 0 1 130 245" 
+            stroke="url(#greenGradient)" 
+            stroke-width="4" 
+            fill="none" 
+            marker-end="url(#arrowhead-green)"
+            filter="url(#glow-green)"
+            opacity="0.9" />
+      <path d="M 130 245 A 90 90 0 0 1 75 135" 
+            stroke="url(#greenGradient)" 
+            stroke-width="4" 
+            fill="none" 
+            marker-end="url(#arrowhead-green)"
+            filter="url(#glow-green)"
+            opacity="0.9" />
+      <path d="M 75 135 A 90 90 0 0 1 170 45" 
+            stroke="url(#greenGradient)" 
+            stroke-width="4" 
+            fill="none" 
+            marker-end="url(#arrowhead-green)"
+            filter="url(#glow-green)"
+            opacity="0.9" />      
+      <!-- 相克箭头 (内圈五角星) 木克土、土克水、水克火、火克金、金克木 -->
+      <path d="M 170 65 L 190 225" 
+            stroke="url(#redGradient)" 
+            stroke-width="3" 
+            stroke-dasharray="8,4" 
+            marker-end="url(#arrowhead-red)"
+            filter="url(#glow-red)"
+            opacity="0.8" />
+      <path d="M 190 225 L 95 150" 
+            stroke="url(#redGradient)" 
+            stroke-width="3" 
+            stroke-dasharray="8,4" 
+            marker-end="url(#arrowhead-red)"
+            filter="url(#glow-red)"
+            opacity="0.8" />
+      <path d="M 95 150 L 245 150" 
+            stroke="url(#redGradient)" 
+            stroke-width="3" 
+            stroke-dasharray="8,4" 
+            marker-end="url(#arrowhead-red)"
+            filter="url(#glow-red)"
+            opacity="0.8" />
+      <path d="M 245 150 L 150 225" 
+            stroke="url(#redGradient)" 
+            stroke-width="3" 
+            stroke-dasharray="8,4" 
+            marker-end="url(#arrowhead-red)"
+            filter="url(#glow-red)"
+            opacity="0.8" />
+      <path d="M 150 225 L 170 65" 
+            stroke="url(#redGradient)" 
+            stroke-width="3" 
+            stroke-dasharray="8,4" 
+            marker-end="url(#arrowhead-red)"
+            filter="url(#glow-red)"
+            opacity="0.8" />
     </svg>
     <!-- 中心标题 -->
     <div class="wuxing-center-new">
