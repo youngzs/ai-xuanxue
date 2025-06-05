@@ -68,6 +68,32 @@
         <i class="fas fa-chevron-up"></i>
     </div>
     
+    <!-- Mermaid Support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Sans SC, sans-serif',
+            themeVariables: {
+                primaryColor: '#f6f6f6',
+                primaryTextColor: '#1a1a1a',
+                primaryBorderColor: '#0084ff',
+                lineColor: '#0084ff',
+                sectionBkgColor: '#ffffff',
+                altSectionBkgColor: '#f6f6f6',
+                gridColor: '#ebebeb',
+                secondaryColor: '#ffffff',
+                tertiaryColor: '#f6f6f6',
+                background: '#ffffff',
+                mainBkg: '#f6f6f6',
+                secondBkg: '#ffffff',
+                tertiaryBkg: '#f6f6f6'
+            }
+        });
+    </script>
+    
     <!-- JavaScript -->
     <%- js('js/main') %>
 </body>

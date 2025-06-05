@@ -98,6 +98,12 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: myblog
 
+# Mermaid 配置
+mermaid:
+  enable: true
+  version: "8.14.0"
+  options:
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
