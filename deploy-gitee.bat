@@ -1,36 +1,37 @@
 @echo off
+chcp 65001 >nul 2>&1
 echo ===========================================
-echo     AI与玄学研究院 - Gitee Pages 部署脚本
+echo     AI Blog - Gitee Pages Deploy Script
 echo ===========================================
 echo.
 
-echo 正在清理缓存...
+echo Cleaning cache...
 call npm run clean
 if errorlevel 1 (
-    echo 清理失败！
+    echo Clean failed!
     pause
     exit /b 1
 )
 
-echo 正在构建静态文件...
+echo Building static files...
 call npm run build
 if errorlevel 1 (
-    echo 构建失败！
+    echo Build failed!
     pause
     exit /b 1
 )
 
-echo 正在部署到Gitee...
+echo Deploying to Gitee...
 call hexo deploy
 if errorlevel 1 (
-    echo 部署失败！
+    echo Deploy failed!
     pause
     exit /b 1
 )
 
 echo.
 echo ===========================================
-echo     部署完成！
-echo     访问地址: https://youngzs.gitee.io/ai-xuanxue-blog/
+echo     Deploy completed!
+echo     URL: https://youngzs.gitee.io/ai-xuanxue-blog/
 echo ===========================================
 pause 
