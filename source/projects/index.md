@@ -145,28 +145,6 @@ comments: false
 
 ---
 
-### 🤖 AI与玄学研究院博客
-
-**项目简介**: 基于Hexo构建的现代化技术博客，融合AI技术与传统文化的探索。
-
-- **🌐 在线地址**: [ai-xuanxue.vercel.com](https://ai-xuanxue.vercel.com)
-- **💻 源码地址**: [本项目GitHub链接](https://ai-xuanxue.github.com/youngzs/ai-xuanxue)
-
-#### 项目特色
-
-- **🎨 现代化设计**: 渐变色彩 + 卡片式布局
-- **📱 完美适配**: 响应式设计，支持各种设备
-- **🔧 AI工具集成**: 专业摄影提示生成器等
-- **📊 丰富组件**: 侧边栏、搜索、分类标签等
-
-#### 技术实现
-
-- **🏗️ 构建工具**: Hexo + 自定义主题
-- **🎨 前端技术**: HTML5 + CSS3 + JavaScript
-- **🚀 部署方式**: GitHub Pages + 自动化部署
-- **📝 内容管理**: Markdown + Git版本控制
-
----
 
 ## 🤝 参与贡献
 
