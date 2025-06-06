@@ -1,0 +1,441 @@
+/* 三圣妙观 - 浅色模式样式 */
+
+:root {
+    --primary-color: #8B5CF6;
+    --secondary-color: #6D28D9;
+    --text-color: #1F2937;
+    --bg-color: #F9FAFB;
+    --card-bg: #FFFFFF;
+    --border-color: #E5E7EB;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --card-hover-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+/* 介绍横幅样式 */
+.intro-banner {
+    background: linear-gradient(to right, #F3E8FF, #E0E7FF);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.intro-banner h2 {
+    color: #6D28D9;
+    font-size: 1.875rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.intro-banner p {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.quote-divider {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.quote-divider::before,
+.quote-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #C4B5FD;
+}
+
+.quote-divider span {
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    color: #7C3AED;
+    font-style: italic;
+}
+
+/* 导航网格 */
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.nav-item:hover {
+    background-color: #F3F4F6;
+    transform: translateY(-2px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.nav-item i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+/* 佛陀卡片网格 */
+.buddha-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.buddha-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.buddha-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.card-image {
+    height: 200px;
+    background-color: #F3F4F6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.buddha-card:hover .card-image {
+    transform: scale(1.05);
+}
+
+.card-image i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.card-image span {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-content h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+}
+
+.card-content p {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    color: #6B7280;
+}
+
+/* 特性列表 */
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.feature-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.feature-list i {
+    margin-right: 0.75rem;
+    margin-top: 0.125rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+/* 按钮样式 */
+.view-details {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-details:hover {
+    background-color: var(--secondary-color);
+}
+
+/* 对比表格 */
+.comparison-container {
+    overflow-x: auto;
+    margin: 2rem 0;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.comparison-table tr:hover td {
+    background-color: rgba(139, 92, 246, 0.05);
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 章节标题 */
+h1, h2 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.875rem;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+h2:hover::after {
+    transform: scaleX(1);
+}
+
+h3 {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+/* 模态框样式 */
+.details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.details-modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    max-width: 48rem;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--card-hover-shadow);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6B7280;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--text-color);
+}
+
+/* 页脚样式 */
+.footer-note {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    color: #6B7280;
+}
+
+.footer-note p {
+    margin: 0.5rem 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .intro-banner {
+        padding: 1.5rem;
+    }
+    
+    .intro-banner h2 {
+        font-size: 1.5rem;
+    }
+    
+    .intro-banner p {
+        font-size: 1rem;
+    }
+    
+    .buddha-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .nav-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-table {
+        font-size: 0.875rem;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }
+
+/* 滚动动画 */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 链接样式 */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* 列表样式 */
+ul, ol {
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* 图标颜色 */
+.text-yellow-500 { color: #F59E0B; }
+.text-blue-500 { color: #3B82F6; }
+.text-red-500 { color: #EF4444; }
+.text-pink-500 { color: #EC4899; }
+.text-green-500 { color: #10B981; }
+.text-purple-500 { color: #8B5CF6; }
+.text-indigo-500 { color: #6366F1; }
+.text-orange-500 { color: #F97316; }
+.text-teal-500 { color: #14B8A6; }
+.text-gray-500 { color: #6B7280; } 

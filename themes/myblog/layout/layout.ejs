@@ -69,27 +69,31 @@
     </div>
     
     <!-- Mermaid Support -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js"></script>
     <script>
         mermaid.initialize({
             startOnLoad: true,
             theme: 'base',
             securityLevel: 'loose',
             fontFamily: 'Noto Sans SC, sans-serif',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            },
             themeVariables: {
-                primaryColor: '#f6f6f6',
-                primaryTextColor: '#1a1a1a',
-                primaryBorderColor: '#0084ff',
-                lineColor: '#0084ff',
+                primaryColor: '#8B5CF6',
+                primaryTextColor: '#1F2937',
+                primaryBorderColor: '#6D28D9',
+                lineColor: '#6D28D9',
                 sectionBkgColor: '#ffffff',
-                altSectionBkgColor: '#f6f6f6',
-                gridColor: '#ebebeb',
+                altSectionBkgColor: '#F9FAFB',
+                gridColor: '#E5E7EB',
                 secondaryColor: '#ffffff',
-                tertiaryColor: '#f6f6f6',
+                tertiaryColor: '#F9FAFB',
                 background: '#ffffff',
-                mainBkg: '#f6f6f6',
+                mainBkg: '#F9FAFB',
                 secondBkg: '#ffffff',
-                tertiaryBkg: '#f6f6f6'
+                tertiaryBkg: '#F9FAFB'
             }
         });
     </script>

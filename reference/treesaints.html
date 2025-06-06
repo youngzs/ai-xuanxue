@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三圣妙观 - 佛教圣者图解</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B5CF6;
+            --secondary-color: #6D28D9;
+            --text-color: #1F2937;
+            --bg-color: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --border-color: #E5E7EB;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --card-hover-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .dark {
+            --primary-color: #A78BFA;
+            --secondary-color: #8B5CF6;
+            --text-color: #F3F4F6;
+            --bg-color: #111827;
+            --card-bg: #1F2937;
+            --border-color: #374151;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --card-hover-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .buddha-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .buddha-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .card-image {
+            height: 220px;
+            overflow: hidden;
+            background-color: #F3F4F6;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: transform 0.5s;
+        }
+        
+        .dark .card-image {
+            background-color: #2D3748;
+        }
+        
+        .buddha-card:hover .card-image {
+            transform: scale(1.05);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .section-title:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .nav-pill {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .nav-pill:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s, transform 0.5s;
+            display: none;
+        }
+        
+        .tab-content.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+        .animate-delay-5 { animation-delay: 0.5s; }
+        
+        /* Placeholder for Buddha images */
+        .placeholder-buddha {
+            position: relative;
+            background-color: #F3F4F6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .dark .placeholder-buddha {
+            background-color: #2D3748;
+        }
+        
+        .placeholder-buddha i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            opacity: 0.8;
+        }
+        
+        .dark .placeholder-buddha i {
+            opacity: 0.9;
+        }
+        
+        .placeholder-buddha span {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+        
+        .dark .placeholder-buddha span {
+            opacity: 0.9;
+        }
+        
+        /* Mode Toggle */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: var(--primary-color);
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--primary-color);
+        }
+        
+        /* Buddha Groups Comparison */
+        .comparison-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .dark .comparison-table th {
+            background-color: #4C1D95;
+        }
+        
+        .comparison-table tr:hover td {
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+        
+        .dark .comparison-table tr:hover td {
+            background-color: rgba(167, 139, 250, 0.15);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background-color: var(--primary-color);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-point {
+            position: absolute;
+            left: 50%;
+            top: 1.25rem;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            z-index: 10;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .timeline-item:hover .timeline-point {
+            transform: translateX(-50%) scale(1.3);
+            background-color: var(--secondary-color);
+        }
+        
+        .timeline-content {
+            width: 45%;
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: scale(1.03);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dashed var(--primary-color);
+            cursor: help;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Scroll Animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Dark mode icon colors enhancement */
+        .dark .text-yellow-500 {
+            color: #FBBF24; /* Brighter yellow */
+        }
+        
+        .dark .text-blue-500,
+        .dark .text-blue-400 {
+            color: #60A5FA; /* Brighter blue */
+        }
+        
+        .dark .text-red-500 {
+            color: #F87171; /* Brighter red */
+        }
+        
+        .dark .text-pink-500 {
+            color: #F472B6; /* Brighter pink */
+        }
+        
+        .dark .text-green-500 {
+            color: #34D399; /* Brighter green */
+        }
+        
+        .dark .text-purple-500 {
+            color: #A78BFA; /* Brighter purple */
+        }
+        
+        .dark .text-indigo-500 {
+            color: #818CF8; /* Brighter indigo */
+        }
+        
+        .dark .text-orange-500 {
+            color: #FB923C; /* Brighter orange */
+        }
+        
+        .dark .text-teal-500 {
+            color: #2DD4BF; /* Brighter teal */
+        }
+        
+        /* Introduction banner for dark mode */
+        .dark .from-purple-50,
+        .dark .to-indigo-50 {
+            background: linear-gradient(to right, rgba(91, 33, 182, 0.2), rgba(79, 70, 229, 0.2));
+        }
+        
+        /* FAQ cards in dark mode */
+        .dark .bg-white {
+            background-color: #1F2937;
+            border: 1px solid #374151;
+        }
+        
+        /* 修复横竖三世佛卡片在暗色模式下的背景色 */
+        .dark .big-card,
+        .dark .bg-gray-50 {
+            background-color: #1F2937;
+            border: 1px solid #374151;
+        }
+        
+        /* 修复页脚区域在暗色模式下的背景色 */
+        .dark .bg-gray-50 {
+            background-color: #111827;
+            color: #F9FAFB;
+        }
+        
+        /* 确保页脚中的文字在暗色模式下可见 */
+        .dark .text-gray-700 {
+            color: #D1D5DB;
+        }
+        
+        /* 修复Twitter图标颜色 */
+        .dark .text-gray-500 {
+            color: #9CA3AF;
+        }
+        
+        .dark .text-gray-500:hover {
+            color: #A78BFA;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="py-4 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 bg-white dark:bg-gray-900 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-purple-600 dark:text-purple-400 flex items-center">
+                <i class="fas fa-dharma mr-2"></i>
+                <span>三圣妙观</span>
+            </h1>
+            
+            <div class="flex items-center">
+                <nav class="hidden md:flex space-x-6 mr-6">
+                    <a href="#east" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">东方三圣</a>
+                    <a href="#west" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">西方三圣</a>
+                    <a href="#huayan" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">华严三圣</a>
+                    <a href="#suopo" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">娑婆三圣</a>
+                    <a href="#others" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">其他组合</a>
+                    <a href="#timeline" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">佛教时间线</a>
+                </nav>
+                
+                <!-- Dark Mode Toggle -->
+                <div class="relative inline-block w-10 mr-2 align-middle">
+                    <input type="checkbox" id="toggleDarkMode" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none transition-all duration-300 ease-in-out" style="top: 0; left: 0;">
+                    <label for="toggleDarkMode" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-all duration-300 ease-in-out"></label>
+                </div>
+                <label for="toggleDarkMode" class="text-xs text-gray-700 dark:text-gray-300">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </label>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden ml-4 text-gray-600 dark:text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden container mx-auto px-4 pt-2 pb-4">
+            <div class="flex flex-col space-y-2">
+                <a href="#east" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">东方三圣</a>
+                <a href="#west" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">西方三圣</a>
+                <a href="#huayan" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">华严三圣</a>
+                <a href="#suopo" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">娑婆三圣</a>
+                <a href="#others" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">其他组合</a>
+                <a href="#timeline" class="nav-pill px-3 py-2 rounded-md text-sm font-medium hover:text-white">佛教时间线</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section class="mb-16 animate-fadeIn animate-delay-1">
+            <h2 class="text-3xl font-bold mb-6 section-title">佛教圣者概览</h2>
+            
+            <div class="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900 dark:to-indigo-900 dark:bg-opacity-20 p-6 rounded-lg mb-10 animate-fadeIn">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-purple-700 dark:text-purple-300">「三圣妙观」佛教圣者图解</h2>
+                <p class="text-lg mb-4 leading-relaxed">
+                    走进佛教的神圣世界，探索东方三圣与西方三圣的奥妙。本作品集通过现代视觉语言，将千年智慧以直观方式呈现，帮助您理解佛教中药师佛、阿弥陀佛等主尊与其胁侍菩萨的深刻关系与象征意义。
+                </p>
+                <p class="text-lg mb-4 leading-relaxed">
+                    无论您是初识佛法的求知者，还是寺庙导游、文化研究者，「三圣妙观」都能为您揭示不同佛国世界的核心特质——从东方琉璃光世界的治愈之力，到西方极乐净土的解脱之境。通过互动式展示与对比解析，复杂的佛教体系变得清晰易懂。
+                </p>
+                <div class="flex items-center mt-6">
+                    <div class="h-px flex-grow bg-purple-200 dark:bg-purple-700"></div>
+                    <span class="px-4 text-sm text-purple-600 dark:text-purple-400 italic">
+                        "一佛二菩萨，三位一体间，慈悲与智慧，尽在方寸现"
+                    </span>
+                    <div class="h-px flex-grow bg-purple-200 dark:bg-purple-700"></div>
+                </div>
+            </div>
+            
+            <p class="mb-6 text-lg">佛教中的圣者体系包括佛、菩萨、罗汉等不同层次，其中佛教常见的组合形式有东方三圣、西方三圣等。这些组合在寺庙中常见，每组有其独特的象征意义和职能。</p>
+            
+            <div class="bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 p-4 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-2 text-purple-700 dark:text-purple-300">快速导航</h3>
+                <div class="flex flex-wrap gap-2">
+                    <a href="#east" class="px-4 py-2 bg-white dark:bg-gray-800 rounded-md shadow-sm hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors">
+                        <i class="fas fa-sun mr-1 text-yellow-500"></i> 东方三圣
+                    </a>
+                    <a href="#west" class="px-4 py-2 bg-white dark:bg-gray-800 rounded-md shadow-sm hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors">
+                        <i class="fas fa-moon mr-1 text-blue-500"></i> 西方三圣
+                    </a>
+                    <a href="#huayan" class="px-4 py-2 bg-white dark:bg-gray-800 rounded-md shadow-sm hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors">
+                        <i class="fas fa-crown mr-1 text-indigo-500"></i> 华严三圣
+                    </a>
+                    <a href="#suopo" class="px-4 py-2 bg-white dark:bg-gray-800 rounded-md shadow-sm hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors">
+                        <i class="fas fa-globe-asia mr-1 text-orange-500"></i> 娑婆三圣
+                    </a>
+                    <a href="#comparison" class="px-4 py-2 bg-white dark:bg-gray-800 rounded-md shadow-sm hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors">
+                        <i class="fas fa-balance-scale mr-1 text-purple-500"></i> 组合对比
+                    </a>
+                    <a href="#others" class="px-4 py-2 bg-white dark:bg-gray-800 rounded-md shadow-sm hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors">
+                        <i class="fas fa-users mr-1 text-green-500"></i> 其他组合
+                    </a>
+                    <a href="#qa" class="px-4 py-2 bg-white dark:bg-gray-800 rounded-md shadow-sm hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors">
+                        <i class="fas fa-question-circle mr-1 text-red-500"></i> 常见问题
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 东方三圣 -->
+        <section id="east" class="mb-16 scroll-animate">
+            <h2 class="text-3xl font-bold mb-8 section-title">东方三圣</h2>
+            <p class="mb-6 text-lg">东方三圣是以<span class="tooltip">药师佛<span class="tooltip-text">又称药师琉璃光如来、大医王佛等，是东方琉璃世界的教主</span></span>为中心，<span class="tooltip">日光菩萨<span class="tooltip-text">药师佛的左胁侍，名号寓意"日放千光，遍照天下，普破冥暗"</span></span>和<span class="tooltip">月光菩萨<span class="tooltip-text">药师佛的右胁侍，以温柔的月光之慈，抚慰众生心灵</span></span>为胁侍的组合，代表着东方琉璃光世界的三位主要圣者。</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                <!-- 药师佛 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-1">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-spa"></i>
+                        <span>药师佛</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-purple-600 dark:text-purple-400">药师佛</h3>
+                        <p class="text-sm mb-3">又称药师琉璃光如来、大医王佛等，是东方琉璃世界的教主。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-hand-holding-medical mt-1 mr-2 text-blue-500"></i>
+                                <span>左手持钵，内盛甘露，右手持药丸</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-scroll mt-1 mr-2 text-blue-500"></i>
+                                <span>曾发十二大愿，愿为众生解除疾苦</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-gem mt-1 mr-2 text-blue-500"></i>
+                                <span>主管东方琉璃世界，象征光明与治愈</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="drug-buddha-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 日光菩萨 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-2">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-sun"></i>
+                        <span>日光菩萨</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-yellow-600 dark:text-yellow-400">日光菩萨</h3>
+                        <p class="text-sm mb-3">药师佛的左胁侍，名号寓意"日放千光，遍照天下，普破冥暗"。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-sun mt-1 mr-2 text-yellow-500"></i>
+                                <span>持慈悲本愿，普施三昧</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-radiation mt-1 mr-2 text-yellow-500"></i>
+                                <span>象征光明与智慧</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-door-open mt-1 mr-2 text-yellow-500"></i>
+                                <span>照法界俗尘，摧破生死之暗冥</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="sunlight-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 月光菩萨 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-3">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-moon"></i>
+                        <span>月光菩萨</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-blue-600 dark:text-blue-400">月光菩萨</h3>
+                        <p class="text-sm mb-3">药师佛的右胁侍，以温柔的月光之慈，抚慰众生心灵。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-moon mt-1 mr-2 text-blue-400"></i>
+                                <span>给予清凉与安慰</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-heart mt-1 mr-2 text-blue-400"></i>
+                                <span>使人心神安定</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt mt-1 mr-2 text-blue-400"></i>
+                                <span>远离恐怖与忧恼</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="moonlight-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 详情模态框 -->
+            <div id="drug-buddha-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-purple-600 dark:text-purple-400">药师佛详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-spa text-5xl"></i>
+                                <span>药师佛</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">十二大愿</h4>
+                        <ol class="list-decimal list-inside space-y-2 pl-4">
+                            <li>愿我来世得菩提时，自身光明照耀无量世界</li>
+                            <li>愿我来世得菩提时，身如琉璃，内外明彻</li>
+                            <li>愿我来世得菩提时，以无量智慧方便，令诸有情皆得无尽资具</li>
+                            <li>愿我来世得菩提时，令诸有情安住大乘</li>
+                            <li>愿我来世得菩提时，令无量有情，皆得清净无缺的戒品</li>
+                            <li>愿我来世得菩提时，令有情众生，身有疾病皆得痊愈</li>
+                            <li>愿我来世得菩提时，令诸病苦有情，速得良药</li>
+                            <li>愿我来世得菩提时，令无依无怙的有情，脱离众苦</li>
+                            <li>愿我来世得菩提时，令堕于邪道的有情，安住正见</li>
+                            <li>愿我来世得菩提时，令被囚禁、受刑的有情，解脱获安</li>
+                            <li>愿我来世得菩提时，令饥渴众生，得美食饮用</li>
+                            <li>愿我来世得菩提时，令贫穷裸露的有情，得上妙衣服</li>
+                        </ol>
+                        <h4 class="text-xl font-semibold">象征意义</h4>
+                        <p>药师佛象征着治疗身心疾病的力量，他在佛教中被视为"大医王"，能够治愈众生的各种疾患，包括身体上的疾病和精神上的烦恼。</p>
+                        <h4 class="text-xl font-semibold">琉璃光世界</h4>
+                        <p>药师佛的净土被称为"琉璃光世界"，位于东方，以琉璃为地，清净光明，没有痛苦和烦恼，众生在那里寿命无量，智慧广大。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="sunlight-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">日光菩萨详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-sun text-5xl"></i>
+                                <span>日光菩萨</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">名号含义</h4>
+                        <p>日光菩萨的名号意为"日放千光，遍照天下，普破冥暗"，象征着智慧之光能够照破无明黑暗。</p>
+                        <h4 class="text-xl font-semibold">功德与职责</h4>
+                        <p>日光菩萨以慈悲本愿，普施三昧，照耀法界俗尘，帮助众生驱散无明黑暗，获得智慧之光。他负责协助药师佛实施治疗身心疾病的行愿。</p>
+                        <h4 class="text-xl font-semibold">象征意义</h4>
+                        <p>在佛教中，日光象征着智慧和活力，日光菩萨代表着明亮、积极、向上的力量，能够帮助众生看清事物本质，破除迷惑。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="moonlight-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-400">月光菩萨详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-moon text-5xl"></i>
+                                <span>月光菩萨</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">菩萨特质</h4>
+                        <p>月光菩萨以温柔的月光之慈，抚慰众生心灵，给予清凉与安慰，使人心神安定，远离恐怖与忧恼。</p>
+                        <h4 class="text-xl font-semibold">功德与职责</h4>
+                        <p>月光菩萨在东方琉璃光世界中，负责安抚众生情绪，平息烦恼，促进心灵的宁静与和平。与日光菩萨一起协助药师佛实现救度众生的大愿。</p>
+                        <h4 class="text-xl font-semibold">象征意义</h4>
+                        <p>在佛教中，月光象征着冷静、理性和宁静，月光菩萨代表着平和、安宁的力量，能够帮助众生平息内心的躁动和苦恼，获得心灵的宁静。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 西方三圣 -->
+        <section id="west" class="mb-16 scroll-animate">
+            <h2 class="text-3xl font-bold mb-8 section-title">西方三圣</h2>
+            <p class="mb-6 text-lg">西方三圣是以<span class="tooltip">阿弥陀佛<span class="tooltip-text">又称无量寿佛，是西方极乐世界的教主和创造者</span></span>为中心，<span class="tooltip">观世音菩萨<span class="tooltip-text">阿弥陀佛的左胁侍，代表着慈悲和智慧</span></span>和<span class="tooltip">大势至菩萨<span class="tooltip-text">阿弥陀佛的右胁侍，代表着喜舍</span></span>为胁侍的组合，代表着西方极乐世界的三位主要圣者。</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                <!-- 阿弥陀佛 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-1">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-lotus"></i>
+                        <span>阿弥陀佛</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-red-600 dark:text-red-400">阿弥陀佛</h3>
+                        <p class="text-sm mb-3">又称无量寿佛，是西方极乐世界的教主和创造者。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-infinity mt-1 mr-2 text-red-500"></i>
+                                <span>代表无量光明</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-hourglass-half mt-1 mr-2 text-red-500"></i>
+                                <span>代表无量寿命</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-hands-helping mt-1 mr-2 text-red-500"></i>
+                                <span>接引众生往生西方极乐世界</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="amitabha-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 观世音菩萨 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-2">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-hands"></i>
+                        <span>观世音菩萨</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-pink-600 dark:text-pink-400">观世音菩萨</h3>
+                        <p class="text-sm mb-3">阿弥陀佛的左胁侍，代表着慈悲和智慧。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-eye mt-1 mr-2 text-pink-500"></i>
+                                <span>能观察诸法，自由自在</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-heart mt-1 mr-2 text-pink-500"></i>
+                                <span>给一切功德与一切众生</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-water mt-1 mr-2 text-pink-500"></i>
+                                <span>使众生脱离苦海，得到快乐</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="avalokitesvara-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 大势至菩萨 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-3">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>大势至菩萨</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-green-600 dark:text-green-400">大势至菩萨</h3>
+                        <p class="text-sm mb-3">阿弥陀佛的右胁侍，代表着喜舍。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-brain mt-1 mr-2 text-green-500"></i>
+                                <span>以独特的智慧光照众生</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-sun mt-1 mr-2 text-green-500"></i>
+                                <span>能普照一切众生</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-door-open mt-1 mr-2 text-green-500"></i>
+                                <span>永离三途八难之苦</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="mahasthamaprapta-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 详情模态框 -->
+            <div id="amitabha-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-red-600 dark:text-red-400">阿弥陀佛详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-lotus text-5xl"></i>
+                                <span>阿弥陀佛</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">四十八大愿</h4>
+                        <p>阿弥陀佛在修行时曾发下四十八大愿，其中最为著名的是第十八愿：若有众生，听闻我名，至心信乐，愿生我国，乃至十念，若不生者，不取正觉。这是往生极乐世界的根本保证。</p>
+                        <h4 class="text-xl font-semibold">西方极乐世界</h4>
+                        <p>阿弥陀佛的净土被称为"极乐世界"，位于西方，以黄金为地，七宝为池，莲花化生，没有痛苦和烦恼，众生在那里修行容易成就，不会再堕入轮回。</p>
+                        <h4 class="text-xl font-semibold">名号含义</h4>
+                        <p>阿弥陀意为"无量光明"和"无量寿命"，象征着无限的光明和永恒的生命，也代表着无量的智慧和功德。</p>
+                        <h4 class="text-xl font-semibold">净土法门</h4>
+                        <p>以念佛为主要修行方法，通过称念"南无阿弥陀佛"的名号，获得阿弥陀佛的接引，往生西方极乐世界，是末法时代最为简便易行的修行方法。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="avalokitesvara-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-pink-600 dark:text-pink-400">观世音菩萨详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-hands text-5xl"></i>
+                                <span>观世音菩萨</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">三十二应化身</h4>
+                        <p>观世音菩萨能随众生需要，示现各种身相来救度众生，共有三十二种应化身，如比丘身、长者身、妇女身等。</p>
+                        <h4 class="text-xl font-semibold">大悲咒与大悲水</h4>
+                        <p>《大悲咒》是观世音菩萨的咒语，念诵此咒能够消灾免难。大悲水是用《大悲咒》加持过的水，具有特殊的加持力。</p>
+                        <h4 class="text-xl font-semibold">常见形象</h4>
+                        <p>观世音菩萨有多种形象，包括千手千眼观音、白衣观音、杨柳观音等，每种形象都有特定的象征意义和救度功能。</p>
+                        <h4 class="text-xl font-semibold">名号含义</h4>
+                        <p>"观世音"意为"观察世间的声音"，象征着菩萨能听闻众生的呼救声，并予以救助。"观自在"则表示菩萨能观察一切法，自由自在。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="mahasthamaprapta-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-green-600 dark:text-green-400">大势至菩萨详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-lightbulb text-5xl"></i>
+                                <span>大势至菩萨</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">名号含义</h4>
+                        <p>"大势至"意为"大势力到达"，象征着菩萨的智慧光明有大威德力，能普照一切众生，使其离苦得乐。</p>
+                        <h4 class="text-xl font-semibold">念佛圆通</h4>
+                        <p>大势至菩萨是念佛法门的倡导者，他在《楞严经》中阐述了"都摄六根，净念相继"的念佛法门，被称为"念佛圆通"。</p>
+                        <h4 class="text-xl font-semibold">功德与职责</h4>
+                        <p>大势至菩萨在西方极乐世界中，辅助阿弥陀佛接引众生，尤其负责帮助那些精进念佛的众生，增强他们的正念和定力，使其顺利往生。</p>
+                        <h4 class="text-xl font-semibold">象征意义</h4>
+                        <p>在佛教中，大势至菩萨象征着喜舍和智慧的力量，通过念佛法门引导众生获得解脱，远离轮回苦海。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 华严三圣 -->
+        <section id="huayan" class="mb-16 scroll-animate">
+            <h2 class="text-3xl font-bold mb-8 section-title">华严三圣</h2>
+            <p class="mb-6 text-lg">华严三圣是以<span class="tooltip">毗卢遮那佛<span class="tooltip-text">华严经中的主尊，代表法身佛，象征宇宙的本体</span></span>为中心，<span class="tooltip">文殊菩萨<span class="tooltip-text">代表智慧，是毗卢遮那佛的左胁侍</span></span>和<span class="tooltip">普贤菩萨<span class="tooltip-text">代表行愿，是毗卢遮那佛的右胁侍</span></span>为胁侍的组合，代表着华藏世界的三位主要圣者。</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                <!-- 毗卢遮那佛 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-1">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-dharmachakra"></i>
+                        <span>毗卢遮那佛</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-indigo-600 dark:text-indigo-400">毗卢遮那佛</h3>
+                        <p class="text-sm mb-3">又称大日如来，是华严经中的主尊，代表法身佛。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-globe mt-1 mr-2 text-indigo-500"></i>
+                                <span>象征宇宙的本体与法界体性</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-sun mt-1 mr-2 text-indigo-500"></i>
+                                <span>如同太阳普照万物，无处不在</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-dharmachakra mt-1 mr-2 text-indigo-500"></i>
+                                <span>结法界定印，表示坚固不动的智慧</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="vairocana-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 文殊菩萨 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-2">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-book"></i>
+                        <span>文殊菩萨</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-purple-600 dark:text-purple-400">文殊菩萨</h3>
+                        <p class="text-sm mb-3">智慧第一，毗卢遮那佛的左胁侍，象征般若智慧。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-sword mt-1 mr-2 text-purple-500"></i>
+                                <span>手持智慧宝剑，斩断一切烦恼</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-book-open mt-1 mr-2 text-purple-500"></i>
+                                <span>持经书，代表深奥的智慧</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-cat mt-1 mr-2 text-purple-500"></i>
+                                <span>骑乘狮子，象征智慧勇猛无畏</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="manjushri-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 普贤菩萨 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-3">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-route"></i>
+                        <span>普贤菩萨</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-orange-600 dark:text-orange-400">普贤菩萨</h3>
+                        <p class="text-sm mb-3">毗卢遮那佛的右胁侍，象征菩萨行愿与实践。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-elephant mt-1 mr-2 text-orange-500"></i>
+                                <span>乘坐六牙白象，象征六度波罗蜜</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-hands mt-1 mr-2 text-orange-500"></i>
+                                <span>十大愿王引导众生修行</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-road mt-1 mr-2 text-orange-500"></i>
+                                <span>注重菩萨道的实际行持</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="samantabhadra-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 详情模态框 -->
+            <div id="vairocana-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">毗卢遮那佛详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-dharmachakra text-5xl"></i>
+                                <span>毗卢遮那佛</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">法身佛</h4>
+                        <p>毗卢遮那佛是法身佛，代表佛的法身，是一切诸佛的本源体性。法身是永恒不变的，没有形相，无处不在，是宇宙万有的本源。</p>
+                        <h4 class="text-xl font-semibold">名号含义</h4>
+                        <p>"毗卢遮那"意为"大日"或"遍一切处"，象征着如同太阳一般普照万物，无所不在的光明智慧。这也是为什么他又被称为"大日如来"的原因。</p>
+                        <h4 class="text-xl font-semibold">华藏世界</h4>
+                        <p>毗卢遮那佛的净土被称为"华藏世界"，是一个由无量世界组成的庞大宇宙体系，如同莲花包藏众多宝藏。这个世界的结构在《华严经》中有详细描述。</p>
+                        <h4 class="text-xl font-semibold">法界定印</h4>
+                        <p>毗卢遮那佛经常结"法界定印"，即右手握拳，左手食指入右手中，象征着坚固不动的智慧和法界体性的合一。</p>
+                        <h4 class="text-xl font-semibold">华严思想</h4>
+                        <p>毗卢遮那佛代表华严宗的核心思想："法界缘起"和"一即一切，一切即一"，表明宇宙万有都是相互依存、圆融无碍的。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="manjushri-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-purple-600 dark:text-purple-400">文殊菩萨详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-book text-5xl"></i>
+                                <span>文殊菩萨</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">名号含义</h4>
+                        <p>"文殊师利"意为"妙吉祥"，象征着殊胜的智慧和吉祥的德行。在佛教中，文殊菩萨被尊为"智慧第一"。</p>
+                        <h4 class="text-xl font-semibold">智慧宝剑</h4>
+                        <p>文殊菩萨手持智慧宝剑，象征着能斩断一切烦恼和妄想的锐利智慧。这把剑代表着般若智慧能够切断无明，直达真理。</p>
+                        <h4 class="text-xl font-semibold">狮子坐骑</h4>
+                        <p>文殊菩萨通常骑乘狮子，狮子象征着智慧的威猛和无畏。狮子王吼能使百兽震惧，同样，智慧的力量能使一切邪见退散。</p>
+                        <h4 class="text-xl font-semibold">五台山道场</h4>
+                        <p>在中国，文殊菩萨的道场被认为是山西五台山。每年都有众多信众前往朝拜，希望能够获得文殊菩萨的智慧加持。</p>
+                        <h4 class="text-xl font-semibold">在华严三圣中的作用</h4>
+                        <p>在华严三圣中，文殊菩萨代表"解"，即对佛法的理解和智慧的开发。他与普贤菩萨分别代表了修行的两个方面：理解与实践，共同辅助毗卢遮那佛引导众生。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="samantabhadra-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-orange-600 dark:text-orange-400">普贤菩萨详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-route text-5xl"></i>
+                                <span>普贤菩萨</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">名号含义</h4>
+                        <p>"普贤"意为"普遍贤善"，象征着菩萨行愿的普遍和圆满，以及修行行为的广大和平等。</p>
+                        <h4 class="text-xl font-semibold">十大愿王</h4>
+                        <ol class="list-decimal list-inside space-y-2 pl-4">
+                            <li>礼敬诸佛</li>
+                            <li>称赞如来</li>
+                            <li>广修供养</li>
+                            <li>忏悔业障</li>
+                            <li>随喜功德</li>
+                            <li>请转法轮</li>
+                            <li>请佛住世</li>
+                            <li>常随佛学</li>
+                            <li>恒顺众生</li>
+                            <li>普皆回向</li>
+                        </ol>
+                        <p>这十大愿王是普贤菩萨修行的精髓，也是他引导众生修行的核心指导。</p>
+                        <h4 class="text-xl font-semibold">六牙白象</h4>
+                        <p>普贤菩萨通常乘坐六牙白象，象征着六波罗蜜（布施、持戒、忍辱、精进、禅定、般若）。白象代表着纯净和力量，能够负重前行，象征着普贤行愿的宏大和持久。</p>
+                        <h4 class="text-xl font-semibold">在华严三圣中的作用</h4>
+                        <p>在华严三圣中，普贤菩萨代表"行"，即佛法的实践和落实。他与文殊菩萨分别代表了修行的两个方面：实践与理解，共同辅助毗卢遮那佛引导众生。普贤强调的是将佛法付诸行动，通过具体的行为来完成修行。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 娑婆三圣 -->
+        <section id="suopo" class="mb-16 scroll-animate">
+            <h2 class="text-3xl font-bold mb-8 section-title">娑婆三圣</h2>
+            <p class="mb-6 text-lg">娑婆三圣是以<span class="tooltip">释迦牟尼佛<span class="tooltip-text">历史上的佛陀，佛教的创始人</span></span>为中心，<span class="tooltip">观世音菩萨<span class="tooltip-text">代表慈悲，救苦救难</span></span>和<span class="tooltip">地藏菩萨<span class="tooltip-text">发下"地狱不空，誓不成佛"的大愿</span></span>为胁侍的组合，代表着娑婆世界的三位主要圣者。</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                <!-- 释迦牟尼佛 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-1">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-user"></i>
+                        <span>释迦牟尼佛</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-yellow-600 dark:text-yellow-400">释迦牟尼佛</h3>
+                        <p class="text-sm mb-3">佛教创始人，被尊称为"世尊"，在娑婆世界教化众生。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-history mt-1 mr-2 text-yellow-500"></i>
+                                <span>历史上的王子，舍弃王位追求真理</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-tree mt-1 mr-2 text-yellow-500"></i>
+                                <span>菩提树下证悟成佛</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-dharmachakra mt-1 mr-2 text-yellow-500"></i>
+                                <span>四十九年弘法，开示四谛、八正道等</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="shakyamuni-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 观世音菩萨（娑婆世界） -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-2">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-hands"></i>
+                        <span>观世音菩萨</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-pink-600 dark:text-pink-400">观世音菩萨</h3>
+                        <p class="text-sm mb-3">在娑婆世界尤其侧重于救苦救难，是现世的慈悲象征。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-heartbeat mt-1 mr-2 text-pink-500"></i>
+                                <span>寻声救苦，有求必应</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-water mt-1 mr-2 text-pink-500"></i>
+                                <span>尤其救护水难和危难中的众生</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-dove mt-1 mr-2 text-pink-500"></i>
+                                <span>在中国民间被视为送子观音等多种形象</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="avalokitesvara-suopo-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 地藏菩萨 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-3">
+                    <div class="card-image placeholder-buddha">
+                        <i class="fas fa-mountain"></i>
+                        <span>地藏菩萨</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-gray-600 dark:text-gray-400">地藏菩萨</h3>
+                        <p class="text-sm mb-3">发下"地狱不空，誓不成佛"的大愿，专门救度地狱众生。</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-fire-alt mt-1 mr-2 text-gray-500"></i>
+                                <span>勇入地狱度化受苦众生</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-scroll mt-1 mr-2 text-gray-500"></i>
+                                <span>持锡杖开地狱门，持宝珠照亮黑暗</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-calendar-alt mt-1 mr-2 text-gray-500"></i>
+                                <span>农历七月被视为地藏菩萨圣诞</span>
+                            </li>
+                        </ul>
+                        <button class="view-details bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded transition-colors w-full" data-target="ksitigarbha-details">
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 详情模态框 -->
+            <div id="shakyamuni-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">释迦牟尼佛详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-user text-5xl"></i>
+                                <span>释迦牟尼佛</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">历史与生平</h4>
+                        <p>释迦牟尼佛，原名悉达多·乔达摩，是古印度迦毗罗卫国净饭王的太子。在29岁时，他离开王宫，开始了六年的苦行探索。后在菩提树下证悟成佛，创立了佛教，一生致力于教化众生，79岁时入灭于拘尸那迦。</p>
+                        <h4 class="text-xl font-semibold">四圣谛</h4>
+                        <p>释迦牟尼佛的核心教义是四圣谛：苦谛（承认人生有苦）、集谛（苦有原因）、灭谛（苦可以消除）、道谛（消除苦的方法）。这是佛陀在鹿野苑初转法轮时所宣说的根本教义。</p>
+                        <h4 class="text-xl font-semibold">八正道</h4>
+                        <p>八正道是释迦牟尼佛教导的修行方法，包括正见、正思维、正语、正业、正命、正精进、正念、正定。这是修行者达到解脱的具体路径。</p>
+                        <h4 class="text-xl font-semibold">在娑婆三圣中的意义</h4>
+                        <p>在娑婆三圣中，释迦牟尼佛是娑婆世界的教主，代表着智慧和觉悟，他宣说的法教直接指引众生如何在这个充满苦难的世界中获得解脱。作为历史上的佛陀，他的教法更具有人间性和实用性，针对的是众生在现实生活中遇到的问题。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="avalokitesvara-suopo-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-pink-600 dark:text-pink-400">观世音菩萨在娑婆世界的特殊角色</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-hands text-5xl"></i>
+                                <span>观世音菩萨</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">现世救度</h4>
+                        <p>在娑婆世界中，观世音菩萨尤其侧重于现世的救度工作。《妙法莲华经·观世音菩萨普门品》中提到，若有众生遭遇七难（火难、水难、风难、刀兵难、罗刹难、枷锁难、怨贼难），只要诚心称念观世音菩萨名号，就能得到解救。</p>
+                        <h4 class="text-xl font-semibold">中国特色</h4>
+                        <p>在中国民间信仰中，观世音菩萨有多种形象和职能：如送子观音（负责保佑生育）、鱼篮观音（救度渔民）、白衣观音（保佑妇女）等。这些形象反映了中国文化对观音信仰的本土化改造。</p>
+                        <h4 class="text-xl font-semibold">观音法门</h4>
+                        <p>观世音菩萨的修行法门强调"耳根圆通"，通过听音声而悟入圆通，这是一种适合娑婆世界众生的修行方法。在《楞严经》中，观世音菩萨详细阐述了这一修行法门。</p>
+                        <h4 class="text-xl font-semibold">在娑婆三圣中的角色</h4>
+                        <p>在娑婆三圣中，观世音菩萨代表慈悲的力量，专门负责救度现世苦难中的众生。他与释迦牟尼佛的智慧教化和地藏菩萨的大愿力形成互补，共同为娑婆世界的众生提供全方位的救度。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="ksitigarbha-details" class="details-modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-gray-600 dark:text-gray-400">地藏菩萨详解</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center">
+                            <div class="placeholder-buddha h-64 w-64 rounded-full">
+                                <i class="fas fa-mountain text-5xl"></i>
+                                <span>地藏菩萨</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-semibold">大愿</h4>
+                        <p>地藏菩萨最著名的誓愿是："地狱不空，誓不成佛；众生度尽，方证菩提。"这一大愿表明他愿意无限期推迟自己成佛，直到所有地狱众生都得到救度。</p>
+                        <h4 class="text-xl font-semibold">名号含义</h4>
+                        <p>"地藏"有两层含义：一是菩萨的愿力像大地一样能承载一切；二是菩萨的智慧像宝藏一样能满足众生一切需求。这个名号象征着菩萨坚固的愿力和丰富的德行。</p>
+                        <h4 class="text-xl font-semibold">表法器物</h4>
+                        <p>地藏菩萨通常手持锡杖和宝珠。锡杖用来开启地狱之门，使受苦众生得以解脱；宝珠则象征着能够照亮黑暗、满足众生愿望的智慧光明。</p>
+                        <h4 class="text-xl font-semibold">孝道精神</h4>
+                        <p>《地藏菩萨本愿经》中记载，地藏菩萨过去世为婆罗门女和光目女，为了救度已故母亲而发大愿修行。因此，地藏信仰与孝道精神密切相关，在中国传统中尤为重要。</p>
+                        <h4 class="text-xl font-semibold">在娑婆三圣中的角色</h4>
+                        <p>在娑婆三圣中，地藏菩萨专门负责救度最苦难的众生，特别是堕入地狱的亡者。他与释迦牟尼佛的教化和观世音菩萨的现世救度形成互补，确保所有众生都能得到关怀，无论生前死后。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 组合对比 -->
+        <section id="comparison" class="mb-16 scroll-animate">
+            <h2 class="text-3xl font-bold mb-8 section-title">三圣组合对比</h2>
+            <div class="overflow-x-auto">
+                <table class="comparison-table w-full min-w-full">
+                    <thead>
+                        <tr>
+                            <th class="py-3 px-4 text-left">组合</th>
+                            <th class="py-3 px-4 text-left">主尊</th>
+                            <th class="py-3 px-4 text-left">左胁侍</th>
+                            <th class="py-3 px-4 text-left">右胁侍</th>
+                            <th class="py-3 px-4 text-left">世界</th>
+                            <th class="py-3 px-4 text-left">象征</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-3 px-4 font-medium">东方三圣</td>
+                            <td class="py-3 px-4">药师佛</td>
+                            <td class="py-3 px-4">日光菩萨</td>
+                            <td class="py-3 px-4">月光菩萨</td>
+                            <td class="py-3 px-4">琉璃光世界</td>
+                            <td class="py-3 px-4">消除疾病，获得健康</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-medium">西方三圣</td>
+                            <td class="py-3 px-4">阿弥陀佛</td>
+                            <td class="py-3 px-4">观世音菩萨</td>
+                            <td class="py-3 px-4">大势至菩萨</td>
+                            <td class="py-3 px-4">极乐世界</td>
+                            <td class="py-3 px-4">往生净土，脱离轮回</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-medium">华严三圣</td>
+                            <td class="py-3 px-4">毗卢遮那佛</td>
+                            <td class="py-3 px-4">文殊菩萨</td>
+                            <td class="py-3 px-4">普贤菩萨</td>
+                            <td class="py-3 px-4">华藏世界</td>
+                            <td class="py-3 px-4">宇宙真理，智慧与实践</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-medium">娑婆三圣</td>
+                            <td class="py-3 px-4">释迦牟尼佛</td>
+                            <td class="py-3 px-4">观世音菩萨</td>
+                            <td class="py-3 px-4">地藏菩萨</td>
+                            <td class="py-3 px-4">娑婆世界</td>
+                            <td class="py-3 px-4">现世救度，缓解苦难</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 其他组合 -->
+        <section id="others" class="mb-16 scroll-animate">
+            <h2 class="text-3xl font-bold mb-8 section-title">其他常见佛教组合</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                <!-- 三大士 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-3">
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-teal-600 dark:text-teal-400 flex items-center">
+                            <i class="fas fa-star mr-2"></i>
+                            三大士
+                        </h3>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-brain mt-1 mr-2 text-teal-500"></i>
+                                <div>
+                                    <span class="font-semibold">观音菩萨：</span>
+                                    <span>以慈悲救度众生为主要特征，能现众多妙相，根据众生的不同需求和因缘，以各种化身来度化。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-lightbulb mt-1 mr-2 text-teal-500"></i>
+                                <div>
+                                    <span class="font-semibold">文殊菩萨：</span>
+                                    <span>着重于开启众生的智慧，让众生能够明辨是非善恶，在修行道路上不致迷失方向。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-hands-helping mt-1 mr-2 text-teal-500"></i>
+                                <div>
+                                    <span class="font-semibold">普贤菩萨：</span>
+                                    <span>强调实践和行愿，引导众生将佛法的教义落实到实际行动中，通过具体的行为来积累功德。</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="text-sm italic text-gray-600 dark:text-gray-400">三大士代表了佛教修行的三大要素：慈悲、智慧和实践。</p>
+                    </div>
+                </div>
+                
+                <!-- 寺庙设置依据 -->
+                <div class="buddha-card rounded-lg overflow-hidden shadow-md animate-fadeIn animate-delay-4">
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-blue-600 dark:text-blue-400 flex items-center">
+                            <i class="fas fa-temple mr-2"></i>
+                            寺庙设置依据
+                        </h3>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-book-open mt-1 mr-2 text-blue-500"></i>
+                                <div>
+                                    <span class="font-semibold">经典依据：</span>
+                                    <span>不同的三圣组合源自不同的经典，如西方三圣源自《阿弥陀经》，东方三圣源自《药师经》。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-pray mt-1 mr-2 text-blue-500"></i>
+                                <div>
+                                    <span class="font-semibold">修行目标：</span>
+                                    <span>寺庙可能根据自身的修行侧重点选择特定的三圣组合，如专修净土法门的寺庙会供奉西方三圣。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-compass mt-1 mr-2 text-blue-500"></i>
+                                <div>
+                                    <span class="font-semibold">空间布局：</span>
+                                    <span>大雄宝殿通常供奉释迦牟尼佛，而东西配殿则可能分别供奉东方三圣和西方三圣。</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="text-sm italic text-gray-600 dark:text-gray-400">寺庙设置各种三圣组合，旨在全面满足不同众生的修行需求。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 佛教时间线 -->
+        <section id="timeline" class="mb-16 scroll-animate">
+            <h2 class="text-3xl font-bold mb-8 section-title">佛教时间线与三世佛</h2>
+            
+            <div class="timeline py-6">
+                <div class="timeline-item">
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-indigo-600 dark:text-indigo-400">过去佛</h3>
+                        <p class="mb-2"><strong>燃灯古佛</strong>：过去无量劫前的佛陀，为释迦牟尼授记。</p>
+                        <p>燃灯佛在过去世时曾经预言释迦牟尼未来将成佛，这一事件被称为"燃灯授记"。在佛教传统中，燃灯佛代表着过去的智慧传承。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-indigo-600 dark:text-indigo-400">现在佛</h3>
+                        <p class="mb-2"><strong>释迦牟尼佛</strong>：我们这个世界的教主，历史上的佛陀。</p>
+                        <p>释迦牟尼佛出生于古印度，原为净饭王太子，后来出家修行，在菩提树下证悟成佛，开创了佛教。他在世时广传佛法，为众生指明了解脱之道。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-indigo-600 dark:text-indigo-400">未来佛</h3>
+                        <p class="mb-2"><strong>弥勒菩萨</strong>：未来将成佛的菩萨，现居兜率天。</p>
+                        <p>弥勒菩萨将在未来56亿7千万年后降生人间成佛，现在他居住在兜率天内院，等待因缘成熟。汉地佛教中，布袋和尚常被视为弥勒菩萨的化身。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 big-card bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4 text-purple-700 dark:text-purple-300">横三世佛与竖三世佛</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-2 text-purple-600 dark:text-purple-400">横三世佛（空间维度）</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right mt-1 mr-2 text-purple-500"></i>
+                                <span><strong>东方药师佛</strong>：主管琉璃光世界</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right mt-1 mr-2 text-purple-500"></i>
+                                <span><strong>中央释迦牟尼佛</strong>：主管娑婆世界</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right mt-1 mr-2 text-purple-500"></i>
+                                <span><strong>西方阿弥陀佛</strong>：主管极乐世界</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-2 text-purple-600 dark:text-purple-400">竖三世佛（时间维度）</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right mt-1 mr-2 text-purple-500"></i>
+                                <span><strong>过去燃灯佛</strong>：代表过去的智慧传承</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right mt-1 mr-2 text-purple-500"></i>
+                                <span><strong>现在释迦牟尼佛</strong>：代表当前的教化</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right mt-1 mr-2 text-purple-500"></i>
+                                <span><strong>未来弥勒佛</strong>：代表未来的希望</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见问题 -->
+        <section id="qa" class="mb-16 scroll-animate">
+            <h2 class="text-3xl font-bold mb-8 section-title">常见问题解答</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 transform transition-transform hover:scale-[1.01]">
+                    <h3 class="text-xl font-semibold mb-2 text-purple-600 dark:text-purple-400">寺庙中常见的三个一组的菩萨组合有哪些？</h3>
+                    <p>除了东方三圣、西方三圣外，还有华严三圣（毗卢遮那佛、文殊菩萨、普贤菩萨）、娑婆三圣（释迦牟尼佛、观世音菩萨、地藏菩萨）以及三大士（观音菩萨、文殊菩萨、普贤菩萨）。</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 transform transition-transform hover:scale-[1.01]">
+                    <h3 class="text-xl font-semibold mb-2 text-purple-600 dark:text-purple-400">为什么佛教中会有三圣组合的形式？</h3>
+                    <p>三圣组合通常包括一尊佛和两位胁侍菩萨，象征着佛法的圆满性。佛代表觉悟的本体，两位菩萨则分别代表智慧和慈悲（或其他互补的修行特质），共同构成修行的完整体系。</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 transform transition-transform hover:scale-[1.01]">
+                    <h3 class="text-xl font-semibold mb-2 text-purple-600 dark:text-purple-400">如何区分不同的三圣组合？</h3>
+                    <p>可以通过观察佛像的手印、持物以及菩萨的特征来区分。例如，药师佛通常左手持钵、右手持药丸；阿弥陀佛常结手印；观音菩萨常有慈悲的形象，文殊菩萨则常手持宝剑。</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 transform transition-transform hover:scale-[1.01]">
+                    <h3 class="text-xl font-semibold mb-2 text-purple-600 dark:text-purple-400">佛像中左右胁侍的意义是什么？</h3>
+                    <p>左右胁侍通常代表佛陀教法的两个方面，例如智慧与慈悲、解脱与度他、方便与智慧等互补特质。在佛教造像中，左边通常代表智慧或方便，右边通常代表慈悲或智慧，形成圆满的修行体系。</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 transform transition-transform hover:scale-[1.01]">
+                    <h3 class="text-xl font-semibold mb-2 text-purple-600 dark:text-purple-400">不同佛教流派对三圣组合的理解有何差异？</h3>
+                    <p>汉传佛教常见东方三圣、西方三圣等多种组合；藏传佛教有本尊、空行、护法等三位一体的修法；南传佛教较少使用三圣组合的形式，更多强调历史上的释迦牟尼佛。各流派根据其修行侧重点和文化背景形成了不同的组合形式。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-50 dark:bg-gray-900 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold text-purple-600 dark:text-purple-400">三圣妙观</h3>
+                    <p class="text-gray-700 dark:text-gray-300">探索佛教中的东方三圣、西方三圣及其他组合的象征意义与修行指导。</p>
+                </div>
+                
+                <a href="https://x.com/YZhaosheng" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                    <i class="fab fa-twitter text-2xl"></i>
+                </a>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center text-gray-700 dark:text-gray-300 text-sm">
+                <p>© 2025 yanteruo. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 深色模式切换
+        const toggleDarkMode = document.getElementById('toggleDarkMode');
+        const htmlElement = document.documentElement;
+        
+        // 检查系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+            toggleDarkMode.checked = true;
+        }
+        
+        // 切换事件
+        toggleDarkMode.addEventListener('change', () => {
+            htmlElement.classList.toggle('dark');
+        });
+        
+        // 移动菜单
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 详情模态框
+        const modalButtons = document.querySelectorAll('.view-details');
+        const modals = document.querySelectorAll('.details-modal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+        
+        modalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetModal = document.getElementById(button.dataset.target);
+                targetModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = button.closest('.details-modal');
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+        
+        // 滚动动画
+        const scrollElements = document.querySelectorAll('.scroll-animate');
+        
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+        
+        const displayScrollElement = (element) => {
+            element.classList.add('visible');
+        };
+        
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+        
+        // 初始检查
+        handleScrollAnimation();
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // 如果是移动菜单的链接，点击后关闭菜单
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

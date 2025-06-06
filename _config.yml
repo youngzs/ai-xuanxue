@@ -101,7 +101,7 @@ theme: myblog
 # Mermaid 配置
 mermaid:
   enable: true
-  version: "8.14.0"
+  version: "11.4.0"
   options:
 
 # Deployment
