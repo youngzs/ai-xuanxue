@@ -81,8 +81,7 @@ sequenceDiagram
     participant 用户
     participant 前端
     participant 后端
-    participant 数据库
-    
+    participant 数据库    
     用户->>前端: 提交登录信息
     前端->>后端: 发送登录请求
     后端->>数据库: 查询用户信息
@@ -267,28 +266,23 @@ graph TB
         A[Web浏览器]
         B[移动APP]
         C[管理后台]
-    end
-    
+    end    
     subgraph "API网关"
         D[Nginx/API Gateway]
-    end
-    
+    end    
     subgraph "应用层"
         E[Node.js服务]
         F[用户服务]
         G[订单服务]
-    end
-    
+    end    
     subgraph "缓存层"
         H[Redis缓存]
-    end
-    
+    end    
     subgraph "数据层"
         I[MySQL主库]
         J[MySQL从库]
         K[MongoDB]
-    end
-    
+    end    
     A --> D
     B --> D
     C --> D
